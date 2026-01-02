@@ -48,7 +48,7 @@ export const Services: React.FC = () => {
                      <div className="flex items-center gap-2 text-cc-gold font-bold uppercase text-xs tracking-widest mb-3">
                          <Calculator size={16} /> Instant Estimator
                      </div>
-                     <h2 className="font-display text-3xl font-bold text-cc-primary mb-4">Freight Calculator</h2>
+                     <h2 className="font-display text-3xl font-bold text-cc-primary mb-4">CC Group Logistics</h2>
                      <p className="text-gray-500 text-sm leading-relaxed">
                          Get an indicative spot rate for FCL shipments between major trade lanes. Rates are subject to seasonal bunker adjustment factors (BAF).
                      </p>

@@ -62,16 +62,16 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
                </span>
-               <span className="text-xs font-mono font-bold text-gray-100 uppercase tracking-widest text-shadow-sm">CC Food Stuff Trading Board</span>
+               <span className="text-xs font-mono font-bold text-gray-100 uppercase tracking-widest text-shadow-sm">CC Food Stuff Trading Desk</span>
             </div>
             
             <h1 className="font-display text-5xl md:text-7xl font-bold text-white mb-6 leading-[1.1] tracking-tight drop-shadow-lg">
                 CC FOOD STUFF <br/>
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-cc-gold to-yellow-200">Global Supply</span> Chain
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-cc-gold to-yellow-200">Import-Export & Wholesale</span>
             </h1>
             <p className="font-sans text-xl text-gray-200 mb-10 max-w-3xl mx-auto font-medium leading-relaxed drop-shadow-md">
-                <strong className="text-white">CC Food Stuff</strong>, a strategic division of <strong className="text-white">CC Group of Companies</strong>. 
-                Connecting origin farmers to industrial consumers with integrity and scale.
+                Premier <strong>B2B Foodstuff Import-Export & Wholesale Trading</strong>. We buy, stock, and deliver global food commodities directly to you.
+                <br/><span className="text-sm opacity-80 mt-2 block font-light">A Strategic Division of CC Group of Companies.</span>
             </p>
             
             {/* Search Bar */}
@@ -83,21 +83,21 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
                     type="text"
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    placeholder="Search our catalog (e.g. 'Sugar IC45', 'Basmati Rice', 'Frozen Chicken')..."
+                    placeholder="Search our stock (e.g. 'Sugar IC45', 'Basmati Rice', 'Frozen Chicken')..."
                     className="block w-full pl-20 pr-40 py-7 rounded-sm text-lg text-cc-primary bg-white shadow-[0_10px_50px_rgba(0,0,0,0.5)] focus:ring-4 focus:ring-cc-gold/30 focus:outline-none transition-all placeholder:text-gray-400 font-medium"
                 />
                 <button 
                     onClick={() => onNavigate('products')}
                     className="absolute right-3 top-3 bottom-3 bg-cc-primary hover:bg-cc-secondary text-white font-bold uppercase tracking-widest text-sm px-10 rounded-sm transition-all duration-300 shadow-lg"
                 >
-                    View Catalog
+                    View Our Stock
                 </button>
             </div>
             
             <div className="flex flex-wrap justify-center gap-6 md:gap-12 mt-12 text-gray-300 text-xs font-mono uppercase tracking-widest">
-                <span className="flex items-center gap-2 hover:text-white transition-colors cursor-default drop-shadow-sm"><CheckCircle2 size={16} className="text-cc-gold"/> CC Group Verified</span>
-                <span className="flex items-center gap-2 hover:text-white transition-colors cursor-default drop-shadow-sm"><Lock size={16} className="text-cc-gold"/> Trade Finance</span>
-                <span className="flex items-center gap-2 hover:text-white transition-colors cursor-default drop-shadow-sm"><ShieldCheck size={16} className="text-cc-gold"/> SGS Inspection</span>
+                <span className="flex items-center gap-2 hover:text-white transition-colors cursor-default drop-shadow-sm"><CheckCircle2 size={16} className="text-cc-gold"/> Direct Importers</span>
+                <span className="flex items-center gap-2 hover:text-white transition-colors cursor-default drop-shadow-sm"><Lock size={16} className="text-cc-gold"/> Own Warehousing</span>
+                <span className="flex items-center gap-2 hover:text-white transition-colors cursor-default drop-shadow-sm"><ShieldCheck size={16} className="text-cc-gold"/> Global Exports</span>
             </div>
         </div>
       </section>
@@ -106,7 +106,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
       <section className="bg-gray-50 py-20 border-b border-gray-200">
          <div className="max-w-[1600px] mx-auto px-6 md:px-12">
             <h3 className="text-cc-primary font-bold text-sm uppercase tracking-widest mb-10 flex items-center gap-2">
-                <Package className="text-cc-gold" size={18}/> Browse Foodstuff Categories
+                <Package className="text-cc-gold" size={18}/> Our Trading Categories
             </h3>
             <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-4">
                 {CATEGORIES.map((cat) => (
@@ -134,10 +134,10 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
                           <BarChart3 size={16} /> Market Intelligence
                      </div>
                      <h2 className="font-display text-4xl font-bold text-cc-primary mb-6 leading-tight">
-                         CC Group <br/> Commodity Analytics
+                         CC Group <br/> Trading Positions
                      </h2>
                      <p className="text-gray-500 mb-8 leading-relaxed">
-                         Make data-driven procurement decisions. Our platform aggregates pricing data from major exchanges (CBOT, MDEX) and FOB port indices to give you real-time visibility.
+                         We take significant positions in key commodities. Our pricing reflects real-time market movements and direct origin access, cutting out the middleman.
                      </p>
                      
                      <div className="space-y-2">
@@ -166,8 +166,8 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
                      <h3 className="text-lg font-bold text-cc-primary mb-2 font-display">{activeChart} Price Trend (USD/MT)</h3>
                      <p className="text-xs text-gray-500 mb-8 font-mono">6-Month FOB Average • Source: CC Group Analytics</p>
                      
-                     <div className="h-[350px] w-full">
-                        <ResponsiveContainer width="99%" height="100%" minWidth={0} debounce={1}>
+                     <div className="w-full" style={{ height: 350 }}>
+                        <ResponsiveContainer width="100%" height="100%">
                             <AreaChart data={CHART_DATA}>
                                 <defs>
                                     <linearGradient id="colorValue" x1="0" y1="0" x2="0" y2="1">
@@ -205,13 +205,13 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
               <div className="flex flex-col md:flex-row justify-between items-end mb-12">
                   <div>
                       <div className="flex items-center gap-2 text-cc-secondary font-bold uppercase text-xs tracking-widest mb-3">
-                          <Globe size={14} /> Global Sourcing
+                          <Globe size={14} /> Global Procurement
                       </div>
-                      <h2 className="font-display text-4xl font-bold text-cc-primary">Active Buying Requests</h2>
-                      <p className="text-gray-500 mt-2 font-light text-lg">Verified buyers in the CC Group network looking for supply.</p>
+                      <h2 className="font-display text-4xl font-bold text-cc-primary">CC Group Procurement Needs</h2>
+                      <p className="text-gray-500 mt-2 font-light text-lg">We are actively buying the following commodities for our stock.</p>
                   </div>
                   <button onClick={() => onNavigate('contact')} className="bg-white border border-cc-border text-cc-primary px-8 py-4 rounded-sm font-bold uppercase tracking-widest text-xs hover:bg-cc-primary hover:text-white transition-all shadow-sm">
-                      Post Your Requirement
+                      Offer to CC Group
                   </button>
               </div>
 
@@ -221,11 +221,11 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
                           <div className="flex justify-between items-start mb-6">
                               <div>
                                   <h3 className="font-display font-bold text-xl text-cc-primary group-hover:text-cc-secondary transition-colors mb-2">
-                                    WANTED: {req.commodity}
+                                    WE BUY: {req.commodity}
                                   </h3>
                                   <div className="flex items-center gap-6 text-xs text-gray-500 font-mono">
                                       <span className="flex items-center gap-2"><Clock size={14} className="text-cc-gold"/> {req.postedDate}</span>
-                                      <span className="flex items-center gap-2"><MapPin size={14} className="text-cc-gold"/> {req.destination}</span>
+                                      <span className="flex items-center gap-2"><MapPin size={14} className="text-cc-gold"/> Dest: {req.destination}</span>
                                   </div>
                               </div>
                               <span className={`px-4 py-1.5 text-[10px] font-bold uppercase tracking-widest rounded-full border ${
@@ -238,10 +238,10 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
                           <div className="flex items-center justify-between border-t border-gray-100 pt-6">
                                 <div className="flex items-center gap-3">
                                     <Anchor size={18} className="text-gray-300" />
-                                    <span className="text-sm font-bold text-gray-700">Volume: <span className="text-cc-primary">{req.volume}</span></span>
+                                    <span className="text-sm font-bold text-gray-700">Required Vol: <span className="text-cc-primary">{req.volume}</span></span>
                                 </div>
                                 <button onClick={() => onNavigate('contact')} className="text-cc-secondary font-bold text-xs uppercase tracking-widest hover:text-cc-dark flex items-center gap-2 group-hover:gap-4 transition-all">
-                                    Submit Quote <ArrowRight size={14}/>
+                                    Submit Offer <ArrowRight size={14}/>
                                 </button>
                           </div>
                       </div>
@@ -258,10 +258,11 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
                       <div className="flex items-center gap-2 text-red-600 font-bold uppercase text-xs tracking-widest mb-3 animate-pulse">
                           <TrendingUp size={14} /> Spot Market Live
                       </div>
-                      <h2 className="font-display text-4xl font-bold text-cc-primary">CC Group Wholesale Offers</h2>
+                      <h2 className="font-display text-4xl font-bold text-cc-primary">Our Available Inventory</h2>
+                      <p className="text-gray-500 mt-2 font-light text-lg">Direct sales from CC Group stock. Ready for immediate loading.</p>
                   </div>
                   <button onClick={() => onNavigate('products')} className="text-cc-secondary font-bold text-sm hover:underline flex items-center gap-1">
-                      View All Offers <ArrowRight size={16} />
+                      View All Stock <ArrowRight size={16} />
                   </button>
               </div>
 
@@ -279,7 +280,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
                               <h3 className="font-display font-bold text-lg text-cc-primary mb-4 leading-snug h-12 overflow-hidden line-clamp-2">{product.name}</h3>
                               <div className="flex items-center justify-between border-t border-gray-100 pt-6">
                                   <div>
-                                      <span className="block text-[10px] text-gray-400 uppercase font-bold mb-1">Indicative Price</span>
+                                      <span className="block text-[10px] text-gray-400 uppercase font-bold mb-1">Our Offer Price</span>
                                       <span className="text-xl font-bold text-cc-primary font-display">{product.price}</span>
                                   </div>
                                   <button onClick={() => onNavigate('products')} className="bg-gray-100 text-gray-400 hover:bg-cc-primary hover:text-white p-3 rounded-full transition-colors">
@@ -296,21 +297,21 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
       {/* 6. SUPPLIER CTA (DUAL SIDE) */}
       <section className="grid grid-cols-1 md:grid-cols-2">
           <div className="bg-cc-primary text-white py-24 px-12 md:px-24 flex flex-col justify-center border-r border-white/10">
-              <h3 className="font-display text-3xl font-bold mb-4">Join CC Group Network</h3>
+              <h3 className="font-display text-3xl font-bold mb-4">Sell to CC Group</h3>
               <p className="text-gray-400 mb-8 text-lg leading-relaxed">
-                  Expand your export reach. List your commodities on CC Group and access 5,000+ verified buyers globally.
+                  We are cash buyers for bulk commodities. If you are a producer or factory, sell directly to us.
               </p>
               <button onClick={() => onNavigate('contact')} className="self-start px-8 py-4 border border-white/20 hover:bg-white hover:text-cc-primary transition-colors font-bold uppercase tracking-widest text-sm rounded-sm">
                   Register as Supplier
               </button>
           </div>
           <div className="bg-cc-dark text-white py-24 px-12 md:px-24 flex flex-col justify-center">
-              <h3 className="font-display text-3xl font-bold mb-4">Source with CC Food Stuff</h3>
+              <h3 className="font-display text-3xl font-bold mb-4">Buy from CC Group</h3>
               <p className="text-gray-400 mb-8 text-lg leading-relaxed">
-                  Procure with confidence. Post your buying requirements and get competitive quotes with trade finance support.
+                  Source from our owned inventory. We handle logistics, finance, and delivery to your port.
               </p>
               <button onClick={() => onNavigate('contact')} className="self-start px-8 py-4 bg-cc-gold text-white hover:bg-white hover:text-cc-primary transition-colors font-bold uppercase tracking-widest text-sm rounded-sm">
-                  Post Buying Request
+                  Request Stock List
               </button>
           </div>
       </section>

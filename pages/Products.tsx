@@ -40,8 +40,8 @@ export const Products: React.FC = () => {
         {/* Header */}
         <div className="flex flex-col md:flex-row justify-between items-end mb-8 pb-8 border-b border-gray-200">
             <div>
-                <h1 className="font-display text-3xl md:text-4xl font-bold text-cc-primary mb-2">CC Food Stuff Global Catalog</h1>
-                <p className="text-gray-500 text-sm">Showing {filteredProducts.length} verified listings available for export.</p>
+                <h1 className="font-display text-3xl md:text-4xl font-bold text-cc-primary mb-2">CC Group Owned Inventory</h1>
+                <p className="text-gray-500 text-sm">Showing {filteredProducts.length} lots available for immediate export.</p>
             </div>
             <div className="flex gap-3 mt-4 md:mt-0">
                  <button className="flex items-center gap-2 px-6 py-3 bg-white border border-gray-300 text-gray-700 font-bold text-xs uppercase tracking-wide rounded-sm hover:bg-gray-50 transition-colors">
@@ -149,7 +149,7 @@ export const Products: React.FC = () => {
                             <div className="p-6 flex-1 flex flex-col">
                                 <div className="flex items-start justify-between mb-2">
                                     <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">{product.category}</span>
-                                    <span className="text-[10px] px-2 py-0.5 bg-green-50 text-green-700 rounded-full font-bold uppercase tracking-wide">Available</span>
+                                    <span className="text-[10px] px-2 py-0.5 bg-green-50 text-green-700 rounded-full font-bold uppercase tracking-wide">In Stock</span>
                                 </div>
                                 
                                 <h3 
@@ -188,7 +188,7 @@ export const Products: React.FC = () => {
                                         onClick={() => handleInquire(product)}
                                         className="bg-cc-primary text-white px-4 py-2 rounded-sm text-xs font-bold uppercase tracking-wide hover:bg-cc-secondary transition-colors"
                                     >
-                                        Add to List
+                                        Add to Quote
                                     </button>
                                 </div>
                             </div>

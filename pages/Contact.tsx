@@ -22,12 +22,12 @@ export const Contact: React.FC = () => {
         <div className="lg:col-span-4">
            <span className="font-mono text-xs text-cc-secondary uppercase tracking-[0.3em] mb-4 block">CC Group Trade Desk</span>
            <h1 className="font-display text-5xl md:text-6xl font-bold mb-8">
-               {userType === 'buyer' ? 'Start Sourcing.' : 'Start Selling.'}
+               {userType === 'buyer' ? 'Buy Direct.' : 'Sell Direct.'}
            </h1>
            <p className="font-sans text-lg font-light text-gray-400 leading-relaxed mb-12">
              {userType === 'buyer' 
-                ? "Access 5,000+ verified suppliers. Post your buying requirements and receive competitive quotes within 24 hours." 
-                : "Join our network of certified producers. List your commodities on the global marketplace and reach buyers in 50+ countries."
+                ? "Direct purchase from CC Group inventory. No intermediaries. We are the principal seller and shipper for all our contracts." 
+                : "Sell your harvest or production directly to CC Group. We are cash buyers looking for long-term supply partnerships."
              }
            </p>
 
@@ -53,13 +53,13 @@ export const Contact: React.FC = () => {
                   onClick={() => setUserType('buyer')}
                   className={`flex-1 flex items-center justify-center gap-2 py-3 text-xs font-bold uppercase tracking-widest rounded-sm transition-all ${userType === 'buyer' ? 'bg-cc-secondary text-white shadow-lg' : 'text-gray-400 hover:text-white'}`}
                >
-                   <ShoppingCart size={14} /> I am a Buyer
+                   <ShoppingCart size={14} /> Buy from CC
                </button>
                <button 
                   onClick={() => setUserType('supplier')}
                   className={`flex-1 flex items-center justify-center gap-2 py-3 text-xs font-bold uppercase tracking-widest rounded-sm transition-all ${userType === 'supplier' ? 'bg-cc-gold text-white shadow-lg' : 'text-gray-400 hover:text-white'}`}
                >
-                   <Briefcase size={14} /> I am a Supplier
+                   <Briefcase size={14} /> Sell to CC
                </button>
            </div>
 
@@ -150,7 +150,7 @@ export const Contact: React.FC = () => {
                             disabled={formState === 'submitting'} 
                             className={`w-full font-bold uppercase tracking-[0.25em] text-xs py-5 transition-all disabled:opacity-50 flex items-center justify-center gap-4 rounded-sm hover:scale-[1.01] ${userType === 'buyer' ? 'bg-cc-secondary text-white hover:bg-blue-500' : 'bg-cc-gold text-white hover:bg-yellow-600'}`}
                         >
-                          {formState === 'submitting' ? "Processing..." : <>{userType === 'buyer' ? 'Submit Buying Request' : 'Register Supplier Profile'} <Send size={16} /></>}
+                          {formState === 'submitting' ? "Processing..." : <>{userType === 'buyer' ? 'Request Quote from CC' : 'Send Offer to CC'} <Send size={16} /></>}
                        </button>
                     </div>
 

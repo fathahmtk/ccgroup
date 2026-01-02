@@ -37,7 +37,7 @@ export const ProductDetailsModal: React.FC<ProductDetailsModalProps> = ({ produc
            />
            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-8">
               <span className="inline-block px-3 py-1 bg-cc-gold text-white text-[10px] font-bold uppercase tracking-widest rounded-sm mb-2">
-                  Verified Supplier
+                  CC Group Stock
               </span>
               <div className="flex items-center gap-2 text-white">
                   <ShieldCheck size={16} className="text-green-400" />
@@ -105,7 +105,7 @@ export const ProductDetailsModal: React.FC<ProductDetailsModalProps> = ({ produc
                   onClick={() => onInquire(product)}
                   className="w-full bg-cc-primary text-white py-4 rounded-sm font-bold uppercase tracking-widest text-sm hover:bg-cc-secondary transition-colors shadow-lg flex items-center justify-center gap-2"
                >
-                   Contact Supplier <Truck size={18} />
+                   Contact Sales Desk <Truck size={18} />
                </button>
                <button className="w-full bg-white border border-gray-300 text-gray-600 py-3 rounded-sm font-bold uppercase tracking-widest text-xs hover:bg-gray-50 transition-colors">
                    Download Spec Sheet (PDF)
