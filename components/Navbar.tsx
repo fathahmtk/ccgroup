@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, User, FlaskConical, Search, ShoppingBag } from 'lucide-react';
+import { Menu, X, User, Search, ShoppingBag } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 
 interface NavbarProps {
@@ -21,7 +21,6 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
   const navItems = [
     { name: 'Foodstuff Catalog', value: 'products' },
     { name: 'Logistics Services', value: 'services' },
-    { name: 'Culinary R&D', value: 'rd-lab', icon: <FlaskConical size={14} className="mr-1 text-cc-gold" /> },
   ];
 
   return (
@@ -56,7 +55,6 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
                         : 'text-gray-500 hover:text-cc-primary hover:bg-gray-50'
                     }`}
                   >
-                    {item.icon && item.icon}
                     {item.name}
                   </button>
                 ))}
@@ -117,7 +115,6 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
                         onClick={() => { onNavigate(item.value); setIsOpen(false); }}
                         className="flex items-center text-left py-4 border-b border-gray-100 font-display text-xl font-bold text-cc-primary"
                     >
-                        {item.icon && <span className="mr-3">{item.icon}</span>}
                         {item.name}
                     </button>
                 ))}

@@ -1,14 +1,54 @@
 import { Product, Testimonial, BuyingRequest } from './types';
 
 export const CATEGORIES = [
-  { id: 'grains', name: 'Grains & Cereals', icon: '🌾' },
-  { id: 'meat', name: 'Meat & Poultry', icon: '🥩' },
-  { id: 'seafood', name: 'Seafood', icon: '🐟' },
-  { id: 'oils', name: 'Edible Oils', icon: '🌻' },
-  { id: 'dairy', name: 'Dairy & Eggs', icon: '🥛' },
-  { id: 'spices', name: 'Spices & Herbs', icon: '🌶️' },
-  { id: 'sugar', name: 'Sugar & Sweeteners', icon: '🍬' },
-  { id: 'processed', name: 'Processed Food', icon: '🥫' },
+  { 
+    id: 'grains', 
+    name: 'Grains & Cereals', 
+    icon: '🌾',
+    image: 'https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?q=80&w=400&auto=format&fit=crop'
+  },
+  { 
+    id: 'meat', 
+    name: 'Meat & Poultry', 
+    icon: '🥩',
+    image: 'https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?q=80&w=400&auto=format&fit=crop'
+  },
+  { 
+    id: 'seafood', 
+    name: 'Seafood', 
+    icon: '🐟',
+    image: 'https://images.unsplash.com/photo-1534942082298-54b3952f4479?q=80&w=400&auto=format&fit=crop'
+  },
+  { 
+    id: 'oils', 
+    name: 'Edible Oils', 
+    icon: '🌻',
+    image: 'https://images.unsplash.com/photo-1474979266404-7eaacbcdccef?q=80&w=400&auto=format&fit=crop'
+  },
+  { 
+    id: 'dairy', 
+    name: 'Dairy & Eggs', 
+    icon: '🥛',
+    image: 'https://images.unsplash.com/photo-1628088062854-d1870b4553da?q=80&w=400&auto=format&fit=crop'
+  },
+  { 
+    id: 'spices', 
+    name: 'Spices & Herbs', 
+    icon: '🌶️',
+    image: 'https://images.unsplash.com/photo-1596040033229-a9821ebd058d?q=80&w=400&auto=format&fit=crop'
+  },
+  { 
+    id: 'sugar', 
+    name: 'Sugar & Sweeteners', 
+    icon: '🍬',
+    image: 'https://images.unsplash.com/photo-1581441304386-ea63ad5387d0?q=80&w=400&auto=format&fit=crop'
+  },
+  { 
+    id: 'processed', 
+    name: 'Processed Food', 
+    icon: '🥫',
+    image: 'https://images.unsplash.com/photo-1584263347416-85a696b4ecd4?q=80&w=400&auto=format&fit=crop'
+  },
 ];
 
 export const PRODUCTS: Product[] = [

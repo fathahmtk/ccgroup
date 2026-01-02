@@ -17,10 +17,10 @@ const CHART_DATA = [
 ];
 
 const HERO_IMAGES = [
-  "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?q=80&w=2670&auto=format&fit=crop", // Vibrant Spices & Grains
-  "https://images.unsplash.com/photo-1615485290382-441e4d049cb5?q=80&w=2670&auto=format&fit=crop", // Bulk Sacks Warehouse
-  "https://images.unsplash.com/photo-1509358271058-acd22cc93898?q=80&w=2670&auto=format&fit=crop", // Market Display
-  "https://images.unsplash.com/photo-1586201375761-83865001e31c?q=80&w=2670&auto=format&fit=crop"  // Rice Texture
+  "https://images.unsplash.com/photo-1548171915-e79a380a2a4b?q=80&w=2670&auto=format&fit=crop", // Wide angle port
+  "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=2670&auto=format&fit=crop", // Logistics
+  "https://images.unsplash.com/photo-1605745341112-85968b19335b?q=80&w=2670&auto=format&fit=crop", // Cargo Ship
+  "https://images.unsplash.com/photo-1580674684081-7617fbf3d745?q=80&w=2670&auto=format&fit=crop"  // Stacked Containers
 ];
 
 export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
@@ -103,21 +103,35 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
       </section>
 
       {/* 2. CATEGORY BROWSER */}
-      <section className="bg-gray-50 py-20 border-b border-gray-200">
+      <section className="bg-gray-50 py-24 border-b border-gray-200">
          <div className="max-w-[1600px] mx-auto px-6 md:px-12">
-            <h3 className="text-cc-primary font-bold text-sm uppercase tracking-widest mb-10 flex items-center gap-2">
-                <Package className="text-cc-gold" size={18}/> Our Trading Categories
+            <h3 className="text-cc-primary font-bold text-sm uppercase tracking-widest mb-12 flex items-center gap-2">
+                <Package className="text-cc-gold" size={18}/> Product Portfolio
             </h3>
-            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-4">
+            
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
                 {CATEGORIES.map((cat) => (
                     <div 
                         key={cat.id} 
                         onClick={() => onNavigate('products')}
-                        className="bg-white border border-gray-200 p-8 rounded-sm hover:shadow-xl hover:border-cc-gold/50 cursor-pointer transition-all duration-300 flex flex-col items-center justify-center text-center group relative overflow-hidden"
+                        className="group cursor-pointer"
                     >
-                        <div className="absolute inset-0 bg-gradient-to-br from-gray-50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                        <span className="text-4xl mb-6 group-hover:scale-110 transition-transform block filter grayscale group-hover:grayscale-0 relative z-10">{cat.icon}</span>
-                        <span className="text-xs font-bold text-gray-600 group-hover:text-cc-primary uppercase tracking-wide leading-tight relative z-10">{cat.name}</span>
+                        <div className="bg-white border border-gray-100 rounded-lg p-8 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 flex flex-col items-center text-center h-full hover:border-cc-gold/20 relative overflow-hidden">
+                            {/* Decorative background gradient on hover */}
+                            <div className="absolute inset-0 bg-gradient-to-b from-gray-50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+                            
+                            {/* Photographic Icon */}
+                            <div className="relative z-10 w-24 h-24 rounded-full overflow-hidden mb-6 border-4 border-gray-50 group-hover:border-cc-gold/30 transition-all shadow-inner">
+                                <img 
+                                    src={cat.image} 
+                                    alt={cat.name} 
+                                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 filter saturate-[0.85] group-hover:saturate-100" 
+                                />
+                            </div>
+                            
+                            <h3 className="relative z-10 font-display font-bold text-cc-primary text-xl group-hover:text-cc-gold transition-colors leading-tight mb-2">{cat.name}</h3>
+                            <span className="relative z-10 text-[10px] font-bold text-gray-400 uppercase tracking-widest group-hover:text-cc-secondary transition-colors">View Catalog</span>
+                        </div>
                     </div>
                 ))}
             </div>

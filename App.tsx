@@ -6,7 +6,6 @@ import { Home } from './pages/Home';
 import { Products } from './pages/Products';
 import { Contact } from './pages/Contact';
 import { Services } from './pages/Services';
-import { AiChef } from './pages/AiChef';
 import { CartProvider } from './context/CartContext';
 import { CartDrawer } from './components/CartDrawer';
 import { MessageCircle } from 'lucide-react';
@@ -22,8 +21,6 @@ function App() {
         return <Products />;
       case 'services':
         return <Services />;
-      case 'rd-lab':
-        return <AiChef />;
       case 'contact':
         return <Contact />;
       default:

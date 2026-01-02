@@ -35,17 +35,6 @@ export interface Testimonial {
   quote: string;
 }
 
-export interface GeneratedRecipe {
-  title: string;
-  conceptDescription: string;
-  targetSegment: string;
-  servingYield: string;
-  ingredients: string[];
-  instructions: string[];
-  operationalTips: string[];
-  estimatedCost: string;
-}
-
 export interface BuyingRequest {
   id: string;
   commodity: string;
