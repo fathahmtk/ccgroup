@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Search, ShoppingBag } from 'lucide-react';
+import { Menu, X, Search, ShoppingBag, ChevronRight, Globe, User } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 
 interface NavbarProps {
@@ -29,8 +29,9 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
   }, [isOpen]);
 
   const navItems = [
+    { name: 'Our Divisions', value: 'services' },
     { name: 'Foodstuff Catalog', value: 'products' },
-    { name: 'Global Operations', value: 'services' },
+    { name: 'Group News', value: 'home' },
   ];
 
   // Determine navbar style based on page and scroll state
@@ -44,12 +45,14 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
   const textClasses = isTransparent ? 'text-white' : 'text-cc-primary';
   const subTextClasses = isTransparent ? 'text-gray-300' : 'text-gray-400';
   const logoBgClasses = isTransparent ? 'bg-white text-cc-primary' : 'bg-cc-primary text-white';
+  
   const navItemClasses = (active: boolean) => {
       if (active) return 'bg-cc-primary text-white shadow-md';
       return isTransparent 
         ? 'text-white/80 hover:text-white hover:bg-white/10' 
         : 'text-gray-600 hover:text-cc-primary hover:bg-gray-50';
   };
+  
   const iconClasses = isTransparent ? 'text-white hover:bg-white/10' : 'text-gray-600 hover:bg-gray-50 hover:text-cc-primary';
 
   return (
@@ -131,7 +134,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
              <button
                 onClick={() => setIsOpen(!isOpen)}
                 className={`md:hidden p-2 rounded-sm relative z-50 ${iconClasses}`}
-             >
+              >
                 {isOpen ? <X size={24} className="text-cc-primary" /> : <Menu size={24} />}
              </button>
           </div>
@@ -143,28 +146,38 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
         <>
           {/* Backdrop - dims the content behind */}
           <div 
-            className="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm transition-opacity duration-300"
+            className="fixed inset-0 z-[45] bg-black/40 backdrop-blur-sm transition-opacity duration-300"
             onClick={() => setIsOpen(false)}
           />
           
           {/* Menu Drawer */}
-          <div className="fixed inset-x-0 top-0 z-40 bg-white shadow-2xl transition-transform duration-300 ease-out transform pt-28 pb-8 px-6 rounded-b-2xl">
-              <div className="flex flex-col space-y-4">
-                  {navItems.map((item) => (
-                      <button
-                          key={item.name}
-                          onClick={() => { onNavigate(item.value); setIsOpen(false); }}
-                          className="flex items-center text-left py-4 border-b border-gray-100 font-display text-xl font-bold text-cc-primary hover:text-cc-gold transition-colors"
-                      >
-                          {item.name}
-                      </button>
-                  ))}
-                   <button
-                      onClick={() => { onNavigate('contact'); setIsOpen(false); }}
-                      className="mt-6 w-full py-5 bg-cc-primary text-white font-bold uppercase tracking-widest text-sm rounded-sm shadow-xl hover:bg-cc-dark transition-colors"
-                  >
-                      Request Quote
-                  </button>
+          <div className="fixed inset-x-0 top-0 z-[45] bg-white shadow-2xl transition-transform duration-300 ease-out transform pt-24 pb-8 px-6 rounded-b-3xl border-b border-gray-100">
+              <div className="flex flex-col space-y-2">
+                  <div className="pb-4 mb-4 border-b border-gray-100">
+                     <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">Navigation</p>
+                     {navItems.map((item) => (
+                        <button
+                            key={item.name}
+                            onClick={() => { onNavigate(item.value); setIsOpen(false); }}
+                            className="flex items-center justify-between w-full text-left py-4 group"
+                        >
+                            <span className="font-display text-xl font-bold text-cc-primary group-hover:text-cc-gold transition-colors">{item.name}</span>
+                            <ChevronRight size={18} className="text-gray-300 group-hover:text-cc-gold" />
+                        </button>
+                     ))}
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-4">
+                     <button className="flex items-center justify-center gap-2 py-4 bg-gray-50 rounded-sm text-cc-primary font-bold text-sm hover:bg-gray-100">
+                        <User size={16} /> Partner Login
+                     </button>
+                     <button 
+                        onClick={() => { onNavigate('contact'); setIsOpen(false); }}
+                        className="flex items-center justify-center gap-2 py-4 bg-cc-primary text-white rounded-sm font-bold text-sm hover:bg-cc-dark"
+                     >
+                        Request Quote
+                     </button>
+                  </div>
               </div>
           </div>
         </>

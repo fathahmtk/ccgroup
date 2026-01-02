@@ -33,21 +33,52 @@ export const Products: React.FC = () => {
       setViewProduct(null);
   };
 
+  // Logic for Dynamic Header Image
+  const activeCategoryData = CATEGORIES.find(c => c.name === selectedCategory);
+  const heroImage = activeCategoryData 
+    ? activeCategoryData.image 
+    : "https://images.unsplash.com/photo-1577239339305-1129543c8b7f?q=80&w=2574&auto=format&fit=crop"; // Fallback/All image (Port scene)
+
   return (
-    <div className="bg-gray-50 min-h-screen pt-24 pb-20">
-      <div className="max-w-[1800px] mx-auto px-6 md:px-8">
+    <div className="bg-gray-50 min-h-screen">
+      
+      {/* Dynamic Header Banner */}
+      <div className="relative h-[400px] w-full overflow-hidden bg-cc-primary pt-20">
+         <div className="absolute inset-0 z-0">
+            <img 
+              src={heroImage} 
+              alt={selectedCategory} 
+              className="w-full h-full object-cover opacity-50 transition-all duration-700"
+            />
+            {/* Gradient Overlays for text readability */}
+            <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/20 to-transparent"></div>
+            <div className="absolute inset-0 bg-gradient-to-r from-gray-900/80 to-transparent"></div>
+         </div>
+         
+         <div className="relative z-10 max-w-[1800px] mx-auto px-6 md:px-8 h-full flex flex-col justify-end pb-12">
+             <span className="text-cc-gold font-bold uppercase tracking-widest text-xs mb-3 flex items-center gap-2 animate-fade-up">
+                <Package size={14}/> {selectedCategory === 'All' ? 'Global Catalog' : 'Product Category'}
+             </span>
+             <h1 className="font-display text-4xl md:text-6xl font-bold text-white mb-4 animate-fade-up">
+                {selectedCategory === 'All' ? 'Commodity Inventory' : selectedCategory}
+             </h1>
+             <p className="text-gray-300 text-lg max-w-xl font-light leading-relaxed animate-fade-up">
+                 {selectedCategory === 'All' 
+                    ? `Access our real-time spot market inventory. Showing ${filteredProducts.length} wholesale lots available for immediate export.`
+                    : `Premium ${activeCategoryData?.name.toLowerCase()} sourced directly from origin. Verified quality for industrial processing.`
+                 }
+             </p>
+         </div>
+      </div>
+
+      <div className="max-w-[1800px] mx-auto px-6 md:px-8 py-12">
         
-        {/* Header */}
-        <div className="flex flex-col md:flex-row justify-between items-end mb-8 pb-8 border-b border-gray-200">
-            <div>
-                <h1 className="font-display text-3xl md:text-4xl font-bold text-cc-primary mb-2">Commodity Inventory</h1>
-                <p className="text-gray-500 text-sm">Showing {filteredProducts.length} wholesale lots available for export.</p>
-            </div>
-            <div className="flex gap-3 mt-4 md:mt-0">
-                 <button className="flex items-center gap-2 px-6 py-3 bg-white border border-gray-300 text-gray-700 font-bold text-xs uppercase tracking-wide rounded-sm hover:bg-gray-50 transition-colors">
-                     <Download size={16} /> Export Catalog (PDF)
-                 </button>
-            </div>
+        {/* Top Controls */}
+        <div className="flex justify-between items-center mb-8">
+            <p className="text-gray-500 text-sm font-medium">Found <span className="text-cc-primary font-bold">{filteredProducts.length}</span> results</p>
+            <button className="flex items-center gap-2 px-6 py-3 bg-white border border-gray-300 text-gray-700 font-bold text-xs uppercase tracking-wide rounded-sm hover:bg-gray-50 transition-colors shadow-sm">
+                 <Download size={16} /> Export Catalog
+             </button>
         </div>
 
         <div className="flex flex-col lg:flex-row gap-8">
@@ -66,32 +97,41 @@ export const Products: React.FC = () => {
                     />
                 </div>
 
-                {/* Categories */}
+                {/* Categories with Images */}
                 <div className="bg-white p-6 rounded-sm border border-gray-200 shadow-sm">
-                    <h3 className="font-bold text-cc-primary mb-4 flex items-center gap-2 text-sm uppercase tracking-widest">
+                    <h3 className="font-bold text-cc-primary mb-6 flex items-center gap-2 text-sm uppercase tracking-widest">
                         <Filter size={14} /> Trade Sector
                     </h3>
-                    <div className="space-y-2">
-                        <label className="flex items-center gap-3 cursor-pointer group hover:bg-gray-50 p-1 rounded-sm -mx-1 transition-colors">
+                    <div className="space-y-3">
+                        <label className={`flex items-center gap-3 cursor-pointer group p-2 rounded-md transition-all border ${selectedCategory === 'All' ? 'bg-gray-50 border-gray-200' : 'border-transparent hover:bg-gray-50'}`}>
                             <input 
                                 type="radio" 
                                 name="category" 
                                 checked={selectedCategory === 'All'}
                                 onChange={() => setSelectedCategory('All')}
-                                className="accent-cc-secondary"
+                                className="hidden"
                             />
-                            <span className={`text-sm ${selectedCategory === 'All' ? 'text-cc-secondary font-bold' : 'text-gray-600 group-hover:text-gray-900'}`}>All Sectors</span>
+                            <div className={`w-10 h-10 rounded-md flex items-center justify-center border border-gray-100 ${selectedCategory === 'All' ? 'bg-cc-primary text-white' : 'bg-gray-100 text-gray-400'}`}>
+                                <Globe size={20} />
+                            </div>
+                            <span className={`text-sm ${selectedCategory === 'All' ? 'text-cc-primary font-bold' : 'text-gray-600 group-hover:text-gray-900'}`}>All Sectors</span>
                         </label>
+                        
                         {CATEGORIES.map(cat => (
-                            <label key={cat.id} className="flex items-center gap-3 cursor-pointer group hover:bg-gray-50 p-1 rounded-sm -mx-1 transition-colors">
+                            <label key={cat.id} className={`flex items-center gap-3 cursor-pointer group p-2 rounded-md transition-all border ${selectedCategory === cat.name ? 'bg-gray-50 border-gray-200' : 'border-transparent hover:bg-gray-50'}`}>
                                 <input 
                                     type="radio" 
                                     name="category"
                                     checked={selectedCategory === cat.name}
                                     onChange={() => setSelectedCategory(cat.name)}
-                                    className="accent-cc-secondary"
+                                    className="hidden"
                                 />
-                                <span className={`text-sm ${selectedCategory === cat.name ? 'text-cc-secondary font-bold' : 'text-gray-600 group-hover:text-gray-900'}`}>
+                                <img 
+                                    src={cat.image} 
+                                    alt={cat.name} 
+                                    className={`w-10 h-10 rounded-md object-cover transition-opacity border border-gray-100 ${selectedCategory === cat.name ? 'opacity-100 shadow-sm' : 'opacity-70 group-hover:opacity-100'}`} 
+                                />
+                                <span className={`text-sm ${selectedCategory === cat.name ? 'text-cc-primary font-bold' : 'text-gray-600 group-hover:text-gray-900'}`}>
                                     {cat.name}
                                 </span>
                             </label>

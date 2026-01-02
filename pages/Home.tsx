@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ArrowRight, Search, CheckCircle2, TrendingUp, ShieldCheck, MapPin, Package, Clock, Anchor, Lock, Globe, FileCheck, Truck, BarChart3 } from 'lucide-react';
+import { ArrowRight, Search, CheckCircle2, TrendingUp, ShieldCheck, MapPin, Package, Clock, Anchor, Lock, Globe, FileCheck, Truck, BarChart3, Sprout, Building2 } from 'lucide-react';
 import { CATEGORIES, PRODUCTS, BUYING_REQUESTS } from '../constants';
 
 interface HomeProps {
@@ -7,10 +7,10 @@ interface HomeProps {
 }
 
 const HERO_IMAGES = [
-  "https://images.unsplash.com/photo-1548171915-e79a380a2a4b?q=80&w=2670&auto=format&fit=crop", // Wide angle port
-  "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=2670&auto=format&fit=crop", // Logistics
-  "https://images.unsplash.com/photo-1605745341112-85968b19335b?q=80&w=2670&auto=format&fit=crop", // Cargo Ship
-  "https://images.unsplash.com/photo-1580674684081-7617fbf3d745?q=80&w=2670&auto=format&fit=crop"  // Stacked Containers
+  "https://images.unsplash.com/photo-1577239339305-1129543c8b7f?q=80&w=2574&auto=format&fit=crop", // Cinematic Port/Ship Aerial (Dark & Moody)
+  "https://images.unsplash.com/photo-1625246333195-031238803120?q=80&w=2574&auto=format&fit=crop", // Golden Wheat Harvest (Origin/Farming)
+  "https://images.unsplash.com/photo-1516937941348-c09645f31e3d?q=80&w=2574&auto=format&fit=crop", // Industrial Shipping (Scale)
+  "https://images.unsplash.com/photo-1559297434-fae8a1916a79?q=80&w=2670&auto=format&fit=crop"  // Bow of Ship at Sea (Transit)
 ];
 
 export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
@@ -21,7 +21,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentHeroIndex((prev) => (prev + 1) % HERO_IMAGES.length);
-    }, 6000);
+    }, 8000); // Slower, more majestic transition
     return () => clearInterval(interval);
   }, []);
 
@@ -35,16 +35,19 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
              {HERO_IMAGES.map((img, index) => (
                 <div 
                     key={img}
-                    className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${index === currentHeroIndex ? 'opacity-100' : 'opacity-0'}`}
+                    className={`absolute inset-0 transition-opacity duration-1500 ease-in-out ${index === currentHeroIndex ? 'opacity-100' : 'opacity-0'}`}
                 >
                     <img 
                         src={img} 
-                        className={`w-full h-full object-cover transition-transform duration-[10000ms] ease-linear ${index === currentHeroIndex ? 'scale-110' : 'scale-100'}`}
+                        className={`w-full h-full object-cover transition-transform duration-[20000ms] ease-linear ${index === currentHeroIndex ? 'scale-110' : 'scale-100'}`}
                         alt="Global Trade Background"
                     />
-                    {/* Gradients to ensure text readability on the left and bottom */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent"></div>
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent"></div>
+                    {/* Sophisticated Gradient Layering for Text Contrast */}
+                    <div className="absolute inset-0 bg-cc-primary/20 mix-blend-multiply"></div>
+                    {/* Left shadow for text legibility */}
+                    <div className="absolute inset-y-0 left-0 w-3/4 bg-gradient-to-r from-black/80 via-black/40 to-transparent"></div>
+                    {/* Bottom shadow for low content */}
+                    <div className="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-black/90 via-black/50 to-transparent"></div>
                 </div>
              ))}
         </div>
@@ -57,30 +60,30 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
                 {/* Left: Text Content */}
                 <div className="flex-1 max-w-3xl animate-fade-up">
                     {/* Badge */}
-                    <div className="inline-flex items-center gap-2 px-3 py-1.5 border border-white/20 rounded-full bg-black/20 backdrop-blur-md mb-6">
-                        <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></div>
+                    <div className="inline-flex items-center gap-2 px-3 py-1.5 border border-white/20 rounded-full bg-black/30 backdrop-blur-md mb-6 shadow-lg">
+                        <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></div>
                         <span className="text-[10px] font-mono font-bold text-white/90 uppercase tracking-widest">Global Trading Desk • Live</span>
                     </div>
 
-                    <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-[1.1] tracking-tight">
+                    <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-[1.1] tracking-tight drop-shadow-xl">
                         SOURCING THE <br/>
-                        <span className="text-cc-gold">WORLD'S HARVEST</span>
+                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-cc-gold via-yellow-200 to-cc-gold">WORLD'S HARVEST</span>
                     </h1>
                     
-                    <p className="font-sans text-lg text-gray-200 mb-8 max-w-xl font-light leading-relaxed">
+                    <p className="font-sans text-lg text-gray-200 mb-8 max-w-xl font-light leading-relaxed drop-shadow-md">
                         Connecting origin farmers to industrial consumers. B2B foodstuff trading with precision logistics.
                     </p>
                     
                     <div className="flex gap-4">
                         <button 
                             onClick={() => onNavigate('products')}
-                            className="bg-white text-cc-primary px-8 py-3 rounded-sm font-bold uppercase tracking-widest text-xs hover:bg-gray-100 transition-colors shadow-lg"
+                            className="bg-white text-cc-primary px-8 py-3 rounded-sm font-bold uppercase tracking-widest text-xs hover:bg-gray-100 transition-all shadow-xl hover:shadow-2xl hover:-translate-y-0.5"
                         >
                             View Catalog
                         </button>
                         <button 
                             onClick={() => onNavigate('contact')}
-                            className="border border-white/30 text-white px-8 py-3 rounded-sm font-bold uppercase tracking-widest text-xs hover:bg-white/10 transition-colors"
+                            className="border border-white/40 bg-black/20 backdrop-blur-sm text-white px-8 py-3 rounded-sm font-bold uppercase tracking-widest text-xs hover:bg-white/10 transition-colors"
                         >
                             Contact Us
                         </button>
@@ -89,18 +92,18 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
 
                 {/* Right: Menu Tab Widget */}
                 <div className="w-full max-w-md animate-fade-up delay-100">
-                    <div className="bg-white rounded-sm shadow-2xl overflow-hidden">
+                    <div className="bg-white/95 backdrop-blur-sm rounded-sm shadow-2xl overflow-hidden border border-white/20">
                         {/* Tabs */}
                         <div className="flex border-b border-gray-100">
                             <button 
                                 onClick={() => setHeroTab('buy')}
-                                className={`flex-1 py-4 text-xs font-bold uppercase tracking-widest text-center transition-colors ${heroTab === 'buy' ? 'bg-white text-cc-primary border-b-2 border-cc-primary' : 'bg-gray-50 text-gray-400 hover:bg-gray-100'}`}
+                                className={`flex-1 py-4 text-xs font-bold uppercase tracking-widest text-center transition-colors ${heroTab === 'buy' ? 'bg-white text-cc-primary border-b-2 border-cc-primary' : 'bg-gray-50/50 text-gray-400 hover:bg-gray-100/50'}`}
                             >
                                 Find Stock
                             </button>
                             <button 
                                 onClick={() => setHeroTab('track')}
-                                className={`flex-1 py-4 text-xs font-bold uppercase tracking-widest text-center transition-colors ${heroTab === 'track' ? 'bg-white text-cc-primary border-b-2 border-cc-primary' : 'bg-gray-50 text-gray-400 hover:bg-gray-100'}`}
+                                className={`flex-1 py-4 text-xs font-bold uppercase tracking-widest text-center transition-colors ${heroTab === 'track' ? 'bg-white text-cc-primary border-b-2 border-cc-primary' : 'bg-gray-50/50 text-gray-400 hover:bg-gray-100/50'}`}
                             >
                                 Track Logistics
                             </button>
@@ -117,12 +120,12 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
                                             value={searchTerm}
                                             onChange={(e) => setSearchTerm(e.target.value)}
                                             placeholder="Commodity (e.g. Rice, Sugar)..."
-                                            className="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-sm text-sm focus:outline-none focus:border-cc-primary transition-all"
+                                            className="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-sm text-sm focus:outline-none focus:border-cc-primary transition-all placeholder:text-gray-400"
                                         />
                                     </div>
                                     <button 
                                         onClick={() => onNavigate('products')}
-                                        className="w-full bg-cc-primary text-white py-3 font-bold uppercase tracking-widest text-xs rounded-sm hover:bg-cc-dark transition-colors flex items-center justify-center gap-2"
+                                        className="w-full bg-cc-primary text-white py-3 font-bold uppercase tracking-widest text-xs rounded-sm hover:bg-cc-dark transition-colors flex items-center justify-center gap-2 shadow-md"
                                     >
                                         Search Inventory <ArrowRight size={14} />
                                     </button>
@@ -134,10 +137,10 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
                                         <input 
                                             type="text"
                                             placeholder="Container / BL Number"
-                                            className="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-sm text-sm focus:outline-none focus:border-cc-primary transition-all"
+                                            className="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-sm text-sm focus:outline-none focus:border-cc-primary transition-all placeholder:text-gray-400"
                                         />
                                     </div>
-                                    <button className="w-full bg-cc-gold text-white py-3 font-bold uppercase tracking-widest text-xs rounded-sm hover:bg-yellow-600 transition-colors flex items-center justify-center gap-2">
+                                    <button className="w-full bg-cc-gold text-white py-3 font-bold uppercase tracking-widest text-xs rounded-sm hover:bg-yellow-600 transition-colors flex items-center justify-center gap-2 shadow-md">
                                         Track Shipment <Globe size={14} />
                                     </button>
                                 </div>
@@ -150,48 +153,104 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
         </div>
       </section>
 
-      {/* 2. THE CC ADVANTAGE (Value Props) */}
-      <section className="py-20 bg-white border-b border-gray-100">
-         <div className="max-w-7xl mx-auto px-6">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-               {/* Prop 1 */}
-               <div className="flex flex-col items-start p-6 rounded-2xl hover:bg-gray-50 transition-colors duration-300">
-                  <div className="w-14 h-14 bg-cc-primary text-white rounded-xl flex items-center justify-center mb-6 shadow-lg shadow-cc-primary/20">
-                     <Anchor size={28} />
+      {/* 2. CORPORATE INTRO - "GROUP OF COMPANIES" */}
+      <section className="py-24 bg-white">
+          <div className="max-w-7xl mx-auto px-6 md:px-12 flex flex-col md:flex-row items-center gap-16">
+              <div className="flex-1">
+                  <div className="flex items-center gap-2 text-cc-gold font-bold uppercase tracking-widest text-xs mb-4">
+                      <Building2 size={16} />
+                      CC Group of Companies
                   </div>
-                  <h3 className="font-display text-xl font-bold text-cc-primary mb-3">Direct Origin Access</h3>
-                  <p className="text-gray-500 leading-relaxed text-sm">
-                     We bypass intermediaries by maintaining direct contracts with mills and refineries in Brazil, India, Thailand, and Vietnam. This ensures competitive FOB/CIF pricing.
+                  <h2 className="font-display text-4xl md:text-5xl font-bold text-cc-primary mb-6">Feeding the Future.</h2>
+                  <p className="text-gray-500 text-lg leading-relaxed mb-8 font-light">
+                      As a leading global foodstuff conglomerate, CC Group integrates the supply chain from farm to fork. 
+                      Our family of companies specializes in agricultural production, wholesale trading, and last-mile logistics.
                   </p>
-               </div>
-               
-               {/* Prop 2 */}
-               <div className="flex flex-col items-start p-6 rounded-2xl hover:bg-gray-50 transition-colors duration-300">
-                  <div className="w-14 h-14 bg-cc-gold text-white rounded-xl flex items-center justify-center mb-6 shadow-lg shadow-cc-gold/20">
-                     <ShieldCheck size={28} />
+                  <div className="flex gap-12 border-t border-gray-100 pt-8">
+                      <div className="flex flex-col">
+                          <span className="font-display text-4xl font-bold text-cc-primary">12+</span>
+                          <span className="text-[10px] text-gray-400 uppercase tracking-widest mt-1 font-bold">Countries</span>
+                      </div>
+                      <div className="flex flex-col">
+                          <span className="font-display text-4xl font-bold text-cc-primary">450k</span>
+                          <span className="text-[10px] text-gray-400 uppercase tracking-widest mt-1 font-bold">Metric Tonnes/Yr</span>
+                      </div>
+                      <div className="flex flex-col">
+                          <span className="font-display text-4xl font-bold text-cc-primary">24/7</span>
+                          <span className="text-[10px] text-gray-400 uppercase tracking-widest mt-1 font-bold">Port Operations</span>
+                      </div>
                   </div>
-                  <h3 className="font-display text-xl font-bold text-cc-primary mb-3">Quality Assurance</h3>
-                  <p className="text-gray-500 leading-relaxed text-sm">
-                     Every shipment is inspected by SGS, Bureau Veritas, or Cotecna prior to loading. We guarantee specifications match the contract, protecting your production line.
-                  </p>
-               </div>
-
-               {/* Prop 3 */}
-               <div className="flex flex-col items-start p-6 rounded-2xl hover:bg-gray-50 transition-colors duration-300">
-                  <div className="w-14 h-14 bg-cc-secondary text-white rounded-xl flex items-center justify-center mb-6 shadow-lg shadow-cc-secondary/20">
-                     <Truck size={28} />
+              </div>
+              <div className="flex-1 relative w-full">
+                  <div className="aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl relative z-10">
+                       <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=1600&auto=format&fit=crop" className="w-full h-full object-cover" alt="Group Headquarters" />
                   </div>
-                  <h3 className="font-display text-xl font-bold text-cc-primary mb-3">Logistics Mastery</h3>
-                  <p className="text-gray-500 leading-relaxed text-sm">
-                     Our in-house logistics team manages multimodal transport—vessel chartering, container booking, and customs clearance—ensuring on-time delivery to your port.
-                  </p>
-               </div>
-            </div>
-         </div>
+                  {/* Decorative Elements */}
+                  <div className="absolute -top-6 -right-6 w-32 h-32 bg-gray-100 rounded-full z-0 opacity-50"></div>
+                  <div className="absolute -bottom-6 -left-6 bg-white p-6 rounded-lg shadow-xl max-w-xs border-l-4 border-cc-gold hidden md:block z-20">
+                      <p className="font-display text-cc-primary font-bold text-lg">"Quality is not an act, it is a habit."</p>
+                      <p className="text-gray-400 text-xs mt-2 uppercase tracking-widest">Chairman's Message</p>
+                  </div>
+              </div>
+          </div>
       </section>
 
-      {/* 3. CATEGORY BROWSER */}
-      <section className="bg-gray-50 py-24">
+      {/* 3. OUR DIVISIONS (Replaces old 'Advantage' section) */}
+      <section className="py-24 bg-gray-50 border-y border-gray-200">
+          <div className="max-w-7xl mx-auto px-6">
+              <div className="text-center mb-16">
+                   <h2 className="font-display text-3xl font-bold text-cc-primary mb-4">Our Divisions</h2>
+                   <p className="text-gray-500 max-w-2xl mx-auto">The specialized entities powering our global network, delivering excellence at every stage of the supply chain.</p>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                  {/* Card 1: CC Agri */}
+                  <div className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 group cursor-pointer" onClick={() => onNavigate('services')}>
+                      <div className="h-56 overflow-hidden relative">
+                          <img src="https://images.unsplash.com/photo-1625246333195-031238803120?q=80&w=800&auto=format&fit=crop" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="Agriculture"/>
+                          <div className="absolute top-4 left-4 bg-white/90 backdrop-blur px-3 py-1 rounded-sm text-[10px] font-bold uppercase tracking-widest text-green-700 flex items-center gap-1">
+                             <Sprout size={12}/> Production
+                          </div>
+                      </div>
+                      <div className="p-8">
+                          <h3 className="font-display text-xl font-bold text-cc-primary mb-2 group-hover:text-cc-gold transition-colors">CC Agriculture</h3>
+                          <p className="text-gray-500 text-sm leading-relaxed mb-6">Direct farming operations and contract growing in Brazil and India ensuring origin traceability.</p>
+                          <span className="text-cc-primary text-xs font-bold uppercase tracking-widest flex items-center gap-2 group-hover:gap-3 transition-all">Learn More <ArrowRight size={12}/></span>
+                      </div>
+                  </div>
+                   {/* Card 2: CC Trade */}
+                  <div className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 group cursor-pointer" onClick={() => onNavigate('products')}>
+                      <div className="h-56 overflow-hidden relative">
+                          <img src="https://images.unsplash.com/photo-1577239339305-1129543c8b7f?q=80&w=800&auto=format&fit=crop" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="Trading"/>
+                          <div className="absolute top-4 left-4 bg-white/90 backdrop-blur px-3 py-1 rounded-sm text-[10px] font-bold uppercase tracking-widest text-blue-700 flex items-center gap-1">
+                             <Globe size={12}/> Global Trade
+                          </div>
+                      </div>
+                      <div className="p-8">
+                          <h3 className="font-display text-xl font-bold text-cc-primary mb-2 group-hover:text-cc-gold transition-colors">CC Food Stuff</h3>
+                          <p className="text-gray-500 text-sm leading-relaxed mb-6">Our flagship bulk commodity trading desk handling Rice, Sugar, and Oilseeds for wholesale markets.</p>
+                          <span className="text-cc-primary text-xs font-bold uppercase tracking-widest flex items-center gap-2 group-hover:gap-3 transition-all">View Catalog <ArrowRight size={12}/></span>
+                      </div>
+                  </div>
+                   {/* Card 3: CC Logistics */}
+                  <div className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 group cursor-pointer" onClick={() => onNavigate('services')}>
+                      <div className="h-56 overflow-hidden relative">
+                          <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=800&auto=format&fit=crop" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="Logistics"/>
+                          <div className="absolute top-4 left-4 bg-white/90 backdrop-blur px-3 py-1 rounded-sm text-[10px] font-bold uppercase tracking-widest text-orange-700 flex items-center gap-1">
+                             <Truck size={12}/> Logistics
+                          </div>
+                      </div>
+                      <div className="p-8">
+                          <h3 className="font-display text-xl font-bold text-cc-primary mb-2 group-hover:text-cc-gold transition-colors">CC Logistics</h3>
+                          <p className="text-gray-500 text-sm leading-relaxed mb-6">Freight forwarding, customs brokerage, and last-mile delivery infrastructure.</p>
+                          <span className="text-cc-primary text-xs font-bold uppercase tracking-widest flex items-center gap-2 group-hover:gap-3 transition-all">Learn More <ArrowRight size={12}/></span>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </section>
+
+      {/* 4. CATEGORY BROWSER */}
+      <section className="bg-white py-24">
          <div className="max-w-[1600px] mx-auto px-6 md:px-12">
             <div className="flex justify-between items-end mb-12">
                <div>
@@ -227,7 +286,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
          </div>
       </section>
 
-      {/* 4. PROCUREMENT BOARD (Dark Mode) */}
+      {/* 5. PROCUREMENT BOARD (Dark Mode) */}
       <section className="py-24 bg-cc-primary text-white border-y border-white/5 relative overflow-hidden">
           {/* Subtle grid pattern */}
           <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-5 pointer-events-none"></div>
@@ -292,7 +351,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
           </div>
       </section>
 
-      {/* 5. SPOT MARKET HIGHLIGHTS */}
+      {/* 6. SPOT MARKET HIGHLIGHTS */}
       <section className="py-24 bg-white">
           <div className="max-w-[1600px] mx-auto px-6 md:px-12">
               <div className="flex justify-between items-end mb-12">
@@ -345,7 +404,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
           </div>
       </section>
 
-      {/* 6. CTA SECTION */}
+      {/* 7. CTA SECTION */}
       <section className="py-20 bg-gray-50 border-t border-gray-200">
           <div className="max-w-5xl mx-auto px-6 text-center">
                <h2 className="font-display text-3xl md:text-5xl font-bold text-cc-primary mb-6">Ready to trade?</h2>
