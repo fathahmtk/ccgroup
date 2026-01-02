@@ -19,9 +19,9 @@ export const Services: React.FC = () => {
           <div className="absolute inset-0">
               <div className="absolute inset-0 bg-gradient-to-r from-cc-primary via-cc-primary/80 to-transparent z-10"></div>
               <img 
-                  src="https://images.unsplash.com/photo-1578575437130-527eed3abbec?q=80&w=2670&auto=format&fit=crop" 
-                  className="w-full h-full object-cover grayscale opacity-40" 
-                  alt="Port Logistics"
+                  src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=2670&auto=format&fit=crop" 
+                  className="w-full h-full object-cover grayscale opacity-50" 
+                  alt="Warehouse Logistics"
               />
           </div>
           <div className="relative z-20 max-w-[1600px] mx-auto px-6 md:px-12 w-full pt-20">

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ArrowRight, Search, Globe, CheckCircle2, ShoppingCart, TrendingUp, ShieldCheck, MapPin, Package, Clock, Anchor, BarChart3, Lock } from 'lucide-react';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { CATEGORIES, PRODUCTS, BUYING_REQUESTS } from '../constants';
@@ -16,46 +16,66 @@ const CHART_DATA = [
   { month: 'Jun', Rice: 480, Sugar: 620, Oil: 960 },
 ];
 
+const HERO_IMAGES = [
+  "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?q=80&w=2670&auto=format&fit=crop", // Vibrant Spices & Grains
+  "https://images.unsplash.com/photo-1615485290382-441e4d049cb5?q=80&w=2670&auto=format&fit=crop", // Bulk Sacks Warehouse
+  "https://images.unsplash.com/photo-1509358271058-acd22cc93898?q=80&w=2670&auto=format&fit=crop", // Market Display
+  "https://images.unsplash.com/photo-1586201375761-83865001e31c?q=80&w=2670&auto=format&fit=crop"  // Rice Texture
+];
+
 export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [activeChart, setActiveChart] = useState<'Rice' | 'Sugar' | 'Oil'>('Rice');
+  const [currentHeroIndex, setCurrentHeroIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentHeroIndex((prev) => (prev + 1) % HERO_IMAGES.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <div className="bg-white">
       
       {/* 1. HERO - SEARCH CENTRIC */}
       <section className="relative h-[700px] w-full flex flex-col items-center justify-center bg-cc-primary overflow-hidden">
-        {/* Background */}
+        {/* Background Slideshow */}
         <div className="absolute inset-0 z-0">
-             <img 
-                src="https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?q=80&w=2670&auto=format&fit=crop" 
-                className="w-full h-full object-cover opacity-20 mix-blend-overlay"
-                alt="Food Logistics"
-            />
-             <div className="absolute inset-0 bg-gradient-to-t from-cc-primary via-cc-primary/90 to-transparent"></div>
-             <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-20"></div>
+             {HERO_IMAGES.map((img, index) => (
+                <img 
+                    key={img}
+                    src={img} 
+                    className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out ${index === currentHeroIndex ? 'opacity-50' : 'opacity-0'}`}
+                    alt="Food Commodity Background"
+                />
+             ))}
+             {/* Gradient Overlays for Readability */}
+             <div className="absolute inset-0 bg-gradient-to-t from-cc-primary via-cc-primary/80 to-transparent"></div>
+             <div className="absolute inset-0 bg-gradient-to-r from-cc-primary/50 to-transparent"></div>
+             <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10"></div>
         </div>
 
         <div className="relative z-20 w-full max-w-5xl px-6 text-center pt-10">
-            <div className="inline-flex items-center gap-3 px-5 py-2 border border-white/10 rounded-full bg-white/5 backdrop-blur-md mb-8 shadow-xl">
+            <div className="inline-flex items-center gap-3 px-5 py-2 border border-white/10 rounded-full bg-white/5 backdrop-blur-md mb-8 shadow-xl animate-fade-in">
                <span className="relative flex h-2 w-2">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
                </span>
-               <span className="text-xs font-mono font-bold text-gray-300 uppercase tracking-widest">Global Trading Floor: Live</span>
+               <span className="text-xs font-mono font-bold text-gray-100 uppercase tracking-widest text-shadow-sm">Global Trading Floor: Live</span>
             </div>
             
-            <h1 className="font-display text-5xl md:text-7xl font-bold text-white mb-8 leading-[1.1] tracking-tight">
+            <h1 className="font-display text-5xl md:text-7xl font-bold text-white mb-8 leading-[1.1] tracking-tight drop-shadow-lg">
                 The Global <span className="text-transparent bg-clip-text bg-gradient-to-r from-cc-gold to-yellow-200">Commodity</span> <br/> 
                 Marketplace
             </h1>
-            <p className="font-sans text-xl text-gray-400 mb-12 max-w-2xl mx-auto font-light leading-relaxed">
+            <p className="font-sans text-xl text-gray-200 mb-12 max-w-2xl mx-auto font-medium leading-relaxed drop-shadow-md">
                 Connect with verified suppliers for bulk Grains, Meat, and Ingredients. 
                 Secured by Escrow & Inspection Services.
             </p>
             
             {/* Search Bar */}
-            <div className="max-w-4xl mx-auto relative group z-30">
+            <div className="max-w-4xl mx-auto relative group z-30 animate-fade-up">
                 <div className="absolute inset-y-0 left-0 pl-8 flex items-center pointer-events-none">
                     <Search className="text-gray-400" size={24} />
                 </div>
@@ -64,7 +84,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
                     placeholder="Search 5,000+ products (e.g. 'Brazilian Sugar IC45', 'Basmati Rice 1121')..."
-                    className="block w-full pl-20 pr-40 py-7 rounded-sm text-lg text-cc-primary bg-white shadow-[0_0_50px_rgba(0,0,0,0.3)] focus:ring-4 focus:ring-cc-gold/30 focus:outline-none transition-all placeholder:text-gray-400 font-medium"
+                    className="block w-full pl-20 pr-40 py-7 rounded-sm text-lg text-cc-primary bg-white shadow-[0_10px_50px_rgba(0,0,0,0.5)] focus:ring-4 focus:ring-cc-gold/30 focus:outline-none transition-all placeholder:text-gray-400 font-medium"
                 />
                 <button 
                     onClick={() => onNavigate('products')}
@@ -74,10 +94,10 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
                 </button>
             </div>
             
-            <div className="flex flex-wrap justify-center gap-6 md:gap-12 mt-12 text-gray-500 text-xs font-mono uppercase tracking-widest">
-                <span className="flex items-center gap-2 hover:text-white transition-colors cursor-default"><CheckCircle2 size={16} className="text-cc-gold"/> Verified Suppliers</span>
-                <span className="flex items-center gap-2 hover:text-white transition-colors cursor-default"><Lock size={16} className="text-cc-gold"/> Secure Payments</span>
-                <span className="flex items-center gap-2 hover:text-white transition-colors cursor-default"><ShieldCheck size={16} className="text-cc-gold"/> SGS Inspection</span>
+            <div className="flex flex-wrap justify-center gap-6 md:gap-12 mt-12 text-gray-300 text-xs font-mono uppercase tracking-widest">
+                <span className="flex items-center gap-2 hover:text-white transition-colors cursor-default drop-shadow-sm"><CheckCircle2 size={16} className="text-cc-gold"/> Verified Suppliers</span>
+                <span className="flex items-center gap-2 hover:text-white transition-colors cursor-default drop-shadow-sm"><Lock size={16} className="text-cc-gold"/> Secure Payments</span>
+                <span className="flex items-center gap-2 hover:text-white transition-colors cursor-default drop-shadow-sm"><ShieldCheck size={16} className="text-cc-gold"/> SGS Inspection</span>
             </div>
         </div>
       </section>
@@ -146,7 +166,8 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
                      <h3 className="text-lg font-bold text-cc-primary mb-2 font-display">{activeChart} Price Trend (USD/MT)</h3>
                      <p className="text-xs text-gray-500 mb-8 font-mono">6-Month FOB Average • Source: CC Group Analytics</p>
                      
-                     <div className="h-[350px] w-full">
+                     {/* Added min-w-0 to prevent flex/grid overflow issues that cause Recharts 0 width error */}
+                     <div className="h-[350px] w-full min-w-0">
                         <ResponsiveContainer width="100%" height="100%">
                             <AreaChart data={CHART_DATA}>
                                 <defs>
