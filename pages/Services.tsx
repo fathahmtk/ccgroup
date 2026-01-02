@@ -1,15 +1,7 @@
-import React, { useState } from 'react';
-import { Ship, Truck, PackageCheck, ClipboardCheck, Container, Users, ArrowRight, Anchor, MapPin, Calculator, RefreshCw } from 'lucide-react';
+import React from 'react';
+import { PackageCheck, ClipboardCheck, Container, ArrowRight, MapPin } from 'lucide-react';
 
 export const Services: React.FC = () => {
-  const [route, setRoute] = useState({ from: '', to: '' });
-  const [estimate, setEstimate] = useState<null | number>(null);
-
-  const calculateFreight = (e: React.FormEvent) => {
-      e.preventDefault();
-      // Mock calculation
-      setEstimate(Math.floor(Math.random() * (4500 - 1500 + 1)) + 1500);
-  };
 
   return (
     <div className="bg-white">
@@ -40,75 +32,8 @@ export const Services: React.FC = () => {
           </div>
       </section>
 
-      {/* 2. FREIGHT CALCULATOR (NEW) */}
-      <section className="relative -mt-24 z-30 mb-24 px-6 md:px-12">
-         <div className="max-w-[1600px] mx-auto">
-             <div className="bg-white rounded-sm shadow-2xl border border-gray-100 p-8 md:p-12 flex flex-col lg:flex-row gap-12">
-                 <div className="lg:w-1/3">
-                     <div className="flex items-center gap-2 text-cc-gold font-bold uppercase text-xs tracking-widest mb-3">
-                         <Calculator size={16} /> Instant Estimator
-                     </div>
-                     <h2 className="font-display text-3xl font-bold text-cc-primary mb-4">CC Group Logistics</h2>
-                     <p className="text-gray-500 text-sm leading-relaxed">
-                         Get an indicative spot rate for FCL shipments between major trade lanes. Rates are subject to seasonal bunker adjustment factors (BAF).
-                     </p>
-                 </div>
-                 <div className="lg:w-2/3">
-                     <form onSubmit={calculateFreight} className="grid grid-cols-1 md:grid-cols-3 gap-6 items-end">
-                         <div className="space-y-2">
-                             <label className="text-[10px] uppercase tracking-widest text-gray-500 font-bold">Port of Loading</label>
-                             <select 
-                                required
-                                onChange={(e) => setRoute({...route, from: e.target.value})}
-                                className="w-full bg-gray-50 border border-gray-200 p-4 text-cc-primary font-bold focus:border-cc-gold focus:outline-none transition-colors rounded-sm"
-                             >
-                                 <option value="">Select Origin</option>
-                                 <option>Santos, Brazil (BRSSZ)</option>
-                                 <option>Mumbai, India (INBOM)</option>
-                                 <option>Ho Chi Minh, Vietnam (VNSGN)</option>
-                                 <option>Odessa, Ukraine (UAODS)</option>
-                             </select>
-                         </div>
-                         <div className="space-y-2">
-                             <label className="text-[10px] uppercase tracking-widest text-gray-500 font-bold">Port of Discharge</label>
-                             <select 
-                                required
-                                onChange={(e) => setRoute({...route, to: e.target.value})}
-                                className="w-full bg-gray-50 border border-gray-200 p-4 text-cc-primary font-bold focus:border-cc-gold focus:outline-none transition-colors rounded-sm"
-                             >
-                                 <option value="">Select Destination</option>
-                                 <option>Jebel Ali, UAE (AEJEA)</option>
-                                 <option>Rotterdam, Netherlands (NLRTM)</option>
-                                 <option>Dammam, KSA (SADMM)</option>
-                                 <option>Singapore (SGSIN)</option>
-                             </select>
-                         </div>
-                         <button type="submit" className="h-[58px] bg-cc-primary text-white font-bold uppercase tracking-widest text-sm rounded-sm hover:bg-cc-secondary transition-colors flex items-center justify-center gap-2">
-                             {estimate ? <><RefreshCw size={16}/> Recalculate</> : 'Get Estimate'}
-                         </button>
-                     </form>
-                     
-                     {estimate && (
-                         <div className="mt-8 bg-blue-50 border border-blue-100 p-6 flex justify-between items-center rounded-sm animate-fade-in">
-                             <div>
-                                 <span className="text-xs text-blue-800 font-bold uppercase tracking-widest block mb-1">Estimated Ocean Freight (20ft FCL)</span>
-                                 <div className="flex items-center gap-2 text-sm text-blue-600">
-                                     <span>{route.from}</span> <ArrowRight size={12}/> <span>{route.to}</span>
-                                 </div>
-                             </div>
-                             <div className="text-right">
-                                 <span className="text-3xl font-display font-bold text-cc-primary">${estimate.toLocaleString()}</span>
-                                 <span className="text-xs text-gray-500 block">USD / Container</span>
-                             </div>
-                         </div>
-                     )}
-                 </div>
-             </div>
-         </div>
-      </section>
-
       {/* 3. CAPABILITIES GRID */}
-      <section className="py-24 bg-gray-50 border-b border-gray-200">
+      <section className="py-24 bg-white border-b border-gray-200">
           <div className="max-w-[1600px] mx-auto px-6 md:px-12">
               <div className="text-center mb-16">
                   <h2 className="font-display text-3xl font-bold text-cc-primary mb-4">Core Operational Capabilities</h2>

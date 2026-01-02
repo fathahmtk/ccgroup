@@ -1,20 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { ArrowRight, Search, Globe, CheckCircle2, ShoppingCart, TrendingUp, ShieldCheck, MapPin, Package, Clock, Anchor, BarChart3, Lock } from 'lucide-react';
-import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { ArrowRight, Search, CheckCircle2, TrendingUp, ShieldCheck, MapPin, Package, Clock, Anchor, Lock } from 'lucide-react';
 import { CATEGORIES, PRODUCTS, BUYING_REQUESTS } from '../constants';
 
 interface HomeProps {
   onNavigate: (page: string) => void;
 }
-
-const CHART_DATA = [
-  { month: 'Jan', Rice: 420, Sugar: 580, Oil: 900 },
-  { month: 'Feb', Rice: 435, Sugar: 560, Oil: 920 },
-  { month: 'Mar', Rice: 450, Sugar: 590, Oil: 910 },
-  { month: 'Apr', Rice: 445, Sugar: 610, Oil: 940 },
-  { month: 'May', Rice: 460, Sugar: 630, Oil: 930 },
-  { month: 'Jun', Rice: 480, Sugar: 620, Oil: 960 },
-];
 
 const HERO_IMAGES = [
   "https://images.unsplash.com/photo-1548171915-e79a380a2a4b?q=80&w=2670&auto=format&fit=crop", // Wide angle port
@@ -25,7 +15,6 @@ const HERO_IMAGES = [
 
 export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
   const [searchTerm, setSearchTerm] = useState('');
-  const [activeChart, setActiveChart] = useState<'Rice' | 'Sugar' | 'Oil'>('Rice');
   const [currentHeroIndex, setCurrentHeroIndex] = useState(0);
 
   useEffect(() => {
@@ -138,88 +127,13 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
          </div>
       </section>
 
-      {/* 3. MARKET INTELLIGENCE (NEW) */}
-      <section className="py-24 bg-white border-b border-gray-100">
-         <div className="max-w-[1600px] mx-auto px-6 md:px-12">
-             <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
-                 {/* Text Content */}
-                 <div className="lg:col-span-4">
-                     <div className="flex items-center gap-2 text-cc-secondary font-bold uppercase text-xs tracking-widest mb-4">
-                          <BarChart3 size={16} /> Market Intelligence
-                     </div>
-                     <h2 className="font-display text-4xl font-bold text-cc-primary mb-6 leading-tight">
-                         CC Group <br/> Trading Positions
-                     </h2>
-                     <p className="text-gray-500 mb-8 leading-relaxed">
-                         We take significant positions in key commodities. Our pricing reflects real-time market movements and direct origin access, cutting out the middleman.
-                     </p>
-                     
-                     <div className="space-y-2">
-                         {['Rice', 'Sugar', 'Oil'].map((commodity) => (
-                             <button 
-                                key={commodity}
-                                onClick={() => setActiveChart(commodity as any)}
-                                className={`w-full flex items-center justify-between p-4 rounded-sm border transition-all ${
-                                    activeChart === commodity 
-                                    ? 'bg-cc-primary text-white border-cc-primary shadow-lg' 
-                                    : 'bg-white text-gray-600 border-gray-200 hover:bg-gray-50'
-                                }`}
-                             >
-                                 <span className="font-bold font-display text-sm">{commodity} Index</span>
-                                 <ArrowRight size={16} className={activeChart === commodity ? 'opacity-100' : 'opacity-0'} />
-                             </button>
-                         ))}
-                     </div>
-                 </div>
-
-                 {/* Chart */}
-                 <div className="lg:col-span-8 bg-gray-50 rounded-sm p-8 border border-gray-200 shadow-inner relative min-w-0">
-                     <div className="absolute top-6 right-6 flex items-center gap-2 text-xs font-mono text-gray-400">
-                         <div className="w-2 h-2 rounded-full bg-red-500 animate-pulse"></div> Live Data
-                     </div>
-                     <h3 className="text-lg font-bold text-cc-primary mb-2 font-display">{activeChart} Price Trend (USD/MT)</h3>
-                     <p className="text-xs text-gray-500 mb-8 font-mono">6-Month FOB Average • Source: CC Group Analytics</p>
-                     
-                     <div className="w-full" style={{ height: 350 }}>
-                        <ResponsiveContainer width="100%" height="100%">
-                            <AreaChart data={CHART_DATA}>
-                                <defs>
-                                    <linearGradient id="colorValue" x1="0" y1="0" x2="0" y2="1">
-                                    <stop offset="5%" stopColor="#d97706" stopOpacity={0.3}/>
-                                    <stop offset="95%" stopColor="#d97706" stopOpacity={0}/>
-                                    </linearGradient>
-                                </defs>
-                                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#e5e7eb" />
-                                <XAxis dataKey="month" axisLine={false} tickLine={false} tick={{fill: '#9ca3af', fontSize: 12}} dy={10} />
-                                <YAxis axisLine={false} tickLine={false} tick={{fill: '#9ca3af', fontSize: 12}} />
-                                <Tooltip 
-                                    contentStyle={{backgroundColor: '#020617', border: 'none', borderRadius: '4px', color: '#fff'}}
-                                    itemStyle={{color: '#d97706', fontWeight: 'bold', fontFamily: 'monospace'}}
-                                />
-                                <Area 
-                                    type="monotone" 
-                                    dataKey={activeChart} 
-                                    stroke="#d97706" 
-                                    strokeWidth={3}
-                                    fillOpacity={1} 
-                                    fill="url(#colorValue)" 
-                                    animationDuration={1500}
-                                />
-                            </AreaChart>
-                        </ResponsiveContainer>
-                     </div>
-                 </div>
-             </div>
-         </div>
-      </section>
-
       {/* 4. LIVE TRADE OPPORTUNITIES */}
       <section className="py-24 bg-white border-b border-gray-100">
           <div className="max-w-[1600px] mx-auto px-6 md:px-12">
               <div className="flex flex-col md:flex-row justify-between items-end mb-12">
                   <div>
                       <div className="flex items-center gap-2 text-cc-secondary font-bold uppercase text-xs tracking-widest mb-3">
-                          <Globe size={14} /> Global Procurement
+                          <Anchor size={14} /> Global Procurement
                       </div>
                       <h2 className="font-display text-4xl font-bold text-cc-primary">CC Group Procurement Needs</h2>
                       <p className="text-gray-500 mt-2 font-light text-lg">We are actively buying the following commodities for our stock.</p>

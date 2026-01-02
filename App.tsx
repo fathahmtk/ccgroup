@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
-import { MarketTicker } from './components/MarketTicker';
 import { Home } from './pages/Home';
 import { Products } from './pages/Products';
 import { Contact } from './pages/Contact';
@@ -31,7 +30,6 @@ function App() {
   return (
     <CartProvider>
       <div className="font-sans text-gray-900 bg-white min-h-screen flex flex-col relative transition-colors duration-500">
-        <MarketTicker />
         <Navbar currentPage={currentPage} onNavigate={setCurrentPage} />
         <CartDrawer />
         <main className="flex-grow">
