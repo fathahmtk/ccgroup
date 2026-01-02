@@ -167,7 +167,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
                      <p className="text-xs text-gray-500 mb-8 font-mono">6-Month FOB Average • Source: CC Group Analytics</p>
                      
                      <div className="h-[350px] w-full">
-                        <ResponsiveContainer width="99%" height="100%">
+                        <ResponsiveContainer width="100%" height="100%" minWidth={0} debounce={1}>
                             <AreaChart data={CHART_DATA}>
                                 <defs>
                                     <linearGradient id="colorValue" x1="0" y1="0" x2="0" y2="1">
