@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Download, Search, Filter, ArrowUpRight, Check, Package, Scale, Globe, Tag, Eye } from 'lucide-react';
+import { Download, Search, Filter, ArrowUpRight, Check, Package, Scale, Globe, Tag, Eye, Container } from 'lucide-react';
 import { PRODUCTS, CATEGORIES } from '../constants';
 import { ProductDetailsModal } from '../components/ProductDetailsModal';
 import { Product } from '../types';
@@ -40,12 +40,12 @@ export const Products: React.FC = () => {
         {/* Header */}
         <div className="flex flex-col md:flex-row justify-between items-end mb-8 pb-8 border-b border-gray-200">
             <div>
-                <h1 className="font-display text-3xl md:text-4xl font-bold text-cc-primary mb-2">CC Group Owned Inventory</h1>
-                <p className="text-gray-500 text-sm">Showing {filteredProducts.length} lots available for immediate export.</p>
+                <h1 className="font-display text-3xl md:text-4xl font-bold text-cc-primary mb-2">Commodity Inventory</h1>
+                <p className="text-gray-500 text-sm">Showing {filteredProducts.length} wholesale lots available for export.</p>
             </div>
             <div className="flex gap-3 mt-4 md:mt-0">
                  <button className="flex items-center gap-2 px-6 py-3 bg-white border border-gray-300 text-gray-700 font-bold text-xs uppercase tracking-wide rounded-sm hover:bg-gray-50 transition-colors">
-                     <Download size={16} /> Export Price List
+                     <Download size={16} /> Export Catalog (PDF)
                  </button>
             </div>
         </div>
@@ -59,7 +59,7 @@ export const Products: React.FC = () => {
                     <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={16} />
                     <input 
                       type="text" 
-                      placeholder="Search Keyword..." 
+                      placeholder="Search HS Code or Commodity..." 
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
                       className="w-full pl-10 pr-4 py-3 border border-gray-200 bg-white rounded-sm focus:outline-none focus:border-cc-primary text-sm shadow-sm"
@@ -69,7 +69,7 @@ export const Products: React.FC = () => {
                 {/* Categories */}
                 <div className="bg-white p-6 rounded-sm border border-gray-200 shadow-sm">
                     <h3 className="font-bold text-cc-primary mb-4 flex items-center gap-2 text-sm uppercase tracking-widest">
-                        <Filter size={14} /> Categories
+                        <Filter size={14} /> Trade Sector
                     </h3>
                     <div className="space-y-2">
                         <label className="flex items-center gap-3 cursor-pointer group hover:bg-gray-50 p-1 rounded-sm -mx-1 transition-colors">
@@ -80,7 +80,7 @@ export const Products: React.FC = () => {
                                 onChange={() => setSelectedCategory('All')}
                                 className="accent-cc-secondary"
                             />
-                            <span className={`text-sm ${selectedCategory === 'All' ? 'text-cc-secondary font-bold' : 'text-gray-600 group-hover:text-gray-900'}`}>All Products</span>
+                            <span className={`text-sm ${selectedCategory === 'All' ? 'text-cc-secondary font-bold' : 'text-gray-600 group-hover:text-gray-900'}`}>All Sectors</span>
                         </label>
                         {CATEGORIES.map(cat => (
                             <label key={cat.id} className="flex items-center gap-3 cursor-pointer group hover:bg-gray-50 p-1 rounded-sm -mx-1 transition-colors">
@@ -102,10 +102,10 @@ export const Products: React.FC = () => {
                 {/* Origin Filter */}
                 <div className="bg-white p-6 rounded-sm border border-gray-200 shadow-sm">
                     <h3 className="font-bold text-cc-primary mb-4 text-sm uppercase tracking-widest">
-                        Origin
+                        Country of Origin
                     </h3>
                     <div className="space-y-2">
-                        {['Brazil', 'India', 'Thailand', 'Vietnam', 'Ukraine', 'USA'].map(origin => (
+                        {['Brazil', 'India', 'Thailand', 'Vietnam', 'Ukraine', 'New Zealand', 'Spain'].map(origin => (
                             <label key={origin} className="flex items-center gap-3 cursor-pointer hover:bg-gray-50 p-1 rounded-sm -mx-1 transition-colors">
                                 <input 
                                     type="checkbox" 
@@ -128,7 +128,7 @@ export const Products: React.FC = () => {
                             {/* Card Image */}
                             <div className="relative h-64 overflow-hidden bg-gray-100 border-b border-gray-100 cursor-pointer" onClick={() => setViewProduct(product)}>
                                 <div className="absolute top-3 left-3 z-10">
-                                     <span className="bg-white/90 backdrop-blur text-cc-primary px-2 py-1 text-[10px] font-bold uppercase tracking-widest shadow-sm border border-gray-200 rounded-sm flex items-center gap-1">
+                                     <span className="bg-white/95 backdrop-blur text-cc-primary px-3 py-1.5 text-[10px] font-bold uppercase tracking-widest shadow-sm border border-gray-200 rounded-sm flex items-center gap-1">
                                          <Globe size={10} className="text-cc-gold"/> {product.origin}
                                      </span>
                                 </div>
@@ -139,56 +139,50 @@ export const Products: React.FC = () => {
                                 />
                                 {/* Overlay Action */}
                                 <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                    <button className="bg-white text-cc-primary px-6 py-2 rounded-full font-bold text-xs uppercase tracking-widest hover:bg-cc-secondary hover:text-white transition-colors flex items-center gap-2">
-                                        <Eye size={16} /> Quick View
+                                    <button className="bg-white text-cc-primary px-6 py-3 rounded-sm font-bold text-xs uppercase tracking-widest hover:bg-cc-secondary hover:text-white transition-colors flex items-center gap-2 border border-white">
+                                        <Eye size={16} /> Inspect Lot
                                     </button>
                                 </div>
                             </div>
 
                             {/* Card Body */}
                             <div className="p-6 flex-1 flex flex-col">
-                                <div className="flex items-start justify-between mb-2">
+                                <div className="flex items-start justify-between mb-3">
                                     <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">{product.category}</span>
-                                    <span className="text-[10px] px-2 py-0.5 bg-green-50 text-green-700 rounded-full font-bold uppercase tracking-wide">In Stock</span>
+                                    <span className="text-[9px] px-2 py-1 bg-green-50 text-green-800 rounded-sm border border-green-100 font-mono font-bold uppercase tracking-wide">Available</span>
                                 </div>
                                 
                                 <h3 
                                     onClick={() => setViewProduct(product)}
-                                    className="font-display text-lg font-bold text-cc-primary mb-2 line-clamp-2 leading-snug group-hover:text-cc-secondary transition-colors cursor-pointer"
+                                    className="font-display text-lg font-bold text-cc-primary mb-3 line-clamp-2 leading-snug group-hover:text-cc-secondary transition-colors cursor-pointer"
                                 >
                                     {product.name}
                                 </h3>
                                 
-                                <p className="text-xs text-gray-500 line-clamp-2 mb-4 h-8">{product.description}</p>
+                                <p className="text-xs text-gray-500 line-clamp-2 mb-5 h-8 font-light">{product.description}</p>
 
-                                {/* Specs Mini Grid */}
-                                <div className="grid grid-cols-2 gap-2 mb-6">
-                                    <div className="bg-gray-50 p-2 rounded-sm border border-gray-100 flex items-center gap-2">
-                                        <Package size={14} className="text-gray-400" />
-                                        <div className="flex flex-col">
-                                            <span className="text-[9px] text-gray-400 uppercase font-bold">Pack</span>
-                                            <span className="text-[10px] font-bold text-gray-700">{product.specs?.['Packaging'] || 'Bulk'}</span>
-                                        </div>
+                                {/* Specs Mini Grid - Bulk Focused */}
+                                <div className="grid grid-cols-2 gap-2 mb-6 bg-gray-50/50 p-2 border border-gray-100 rounded-sm">
+                                    <div className="flex flex-col p-1">
+                                        <span className="text-[9px] text-gray-400 uppercase font-bold mb-1 flex items-center gap-1"><Package size={10}/> Packaging</span>
+                                        <span className="text-[10px] font-bold text-gray-700 truncate" title={product.specs?.['Packaging']}>{product.specs?.['Packaging'] || 'Bulk'}</span>
                                     </div>
-                                    <div className="bg-gray-50 p-2 rounded-sm border border-gray-100 flex items-center gap-2">
-                                        <Scale size={14} className="text-gray-400" />
-                                        <div className="flex flex-col">
-                                            <span className="text-[9px] text-gray-400 uppercase font-bold">MOQ</span>
-                                            <span className="text-[10px] font-bold text-gray-700">1 FCL</span>
-                                        </div>
+                                    <div className="flex flex-col p-1 border-l border-gray-200 pl-3">
+                                        <span className="text-[9px] text-gray-400 uppercase font-bold mb-1 flex items-center gap-1"><Container size={10}/> MOQ</span>
+                                        <span className="text-[10px] font-bold text-cc-primary">{product.specs?.['MOQ'] || '1 FCL'}</span>
                                     </div>
                                 </div>
 
                                 <div className="mt-auto pt-4 border-t border-gray-100 flex items-center justify-between">
-                                    <div>
-                                        <span className="block text-[10px] text-gray-400 uppercase font-bold">FOB Price</span>
-                                        <span className="text-lg font-bold text-cc-primary">{product.price}</span>
+                                    <div className="flex flex-col">
+                                        <span className="text-[9px] text-gray-400 uppercase font-bold">Incoterms</span>
+                                        <span className="text-xs font-bold text-gray-800">FOB / CIF</span>
                                     </div>
                                     <button 
                                         onClick={() => handleInquire(product)}
-                                        className="bg-cc-primary text-white px-4 py-2 rounded-sm text-xs font-bold uppercase tracking-wide hover:bg-cc-secondary transition-colors"
+                                        className="bg-cc-primary text-white px-5 py-2.5 rounded-sm text-[10px] font-bold uppercase tracking-widest hover:bg-cc-secondary transition-colors shadow-sm"
                                     >
-                                        Add to Quote
+                                        Request Quote
                                     </button>
                                 </div>
                             </div>

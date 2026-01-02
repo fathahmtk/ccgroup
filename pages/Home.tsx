@@ -294,8 +294,10 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
                               <h3 className="font-display font-bold text-lg text-cc-primary mb-4 leading-snug h-12 overflow-hidden line-clamp-2">{product.name}</h3>
                               <div className="flex items-center justify-between border-t border-gray-100 pt-6">
                                   <div>
-                                      <span className="block text-[10px] text-gray-400 uppercase font-bold mb-1">Our Offer Price</span>
-                                      <span className="text-xl font-bold text-cc-primary font-display">{product.price}</span>
+                                      <span className="block text-[10px] text-gray-400 uppercase font-bold mb-1">Stock Availability</span>
+                                      <span className="text-xs font-bold text-cc-primary font-display flex items-center gap-1">
+                                          {product.specs?.['MOQ'] || 'Bulk Load'}
+                                      </span>
                                   </div>
                                   <button onClick={() => onNavigate('products')} className="bg-gray-100 text-gray-400 hover:bg-cc-primary hover:text-white p-3 rounded-full transition-colors">
                                       <ArrowRight size={18} />

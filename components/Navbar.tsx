@@ -20,7 +20,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
 
   const navItems = [
     { name: 'Foodstuff Catalog', value: 'products' },
-    { name: 'Logistics Services', value: 'services' },
+    { name: 'Global Operations', value: 'services' },
   ];
 
   return (
@@ -44,20 +44,27 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
               </div>
 
               {/* Desktop Nav */}
-              <div className="hidden md:flex items-center gap-1">
-                {navItems.map((item) => (
-                  <button
-                    key={item.name}
-                    onClick={() => onNavigate(item.value)}
-                    className={`flex items-center px-4 py-2 text-xs font-bold uppercase tracking-widest rounded-sm transition-all duration-200 ${
-                      currentPage === item.value 
-                        ? 'text-cc-primary bg-gray-100' 
-                        : 'text-gray-500 hover:text-cc-primary hover:bg-gray-50'
-                    }`}
-                  >
-                    {item.name}
-                  </button>
-                ))}
+              <div className="hidden md:flex items-center gap-3">
+                {navItems.map((item) => {
+                  const isActive = currentPage === item.value;
+                  const isPrimary = item.value === 'products';
+
+                  return (
+                    <button
+                      key={item.name}
+                      onClick={() => onNavigate(item.value)}
+                      className={`flex items-center px-5 py-2.5 text-xs font-bold uppercase tracking-widest rounded-sm transition-all duration-200 ${
+                        isActive
+                          ? 'bg-cc-primary text-white shadow-md'
+                          : isPrimary
+                            ? 'text-cc-primary bg-gray-50 border border-gray-200 hover:border-cc-primary hover:bg-white'
+                            : 'text-gray-500 hover:text-cc-primary hover:bg-gray-50'
+                      }`}
+                    >
+                      {item.name}
+                    </button>
+                  );
+                })}
               </div>
           </div>
 
