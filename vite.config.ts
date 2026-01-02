@@ -10,7 +10,7 @@ export default defineConfig(({ mode }) => {
       'process.env.API_KEY': JSON.stringify(env.API_KEY)
     },
     build: {
-      chunkSizeWarningLimit: 1000
+      chunkSizeWarningLimit: 2000
     }
   }
 })
