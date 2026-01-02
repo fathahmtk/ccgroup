@@ -7,48 +7,47 @@ interface HomeProps {
 }
 
 const HERO_IMAGES = [
-  "https://images.unsplash.com/photo-1473649085228-583485e6e4d7?q=80&w=2600&auto=format&fit=crop", // Golden Harvest Sunset (Warm/Origin)
+  "https://images.unsplash.com/photo-1607082349566-187342175e2f?q=80&w=2600&auto=format&fit=crop", // Assorted Food Products/Grains/Legumes
   "https://images.unsplash.com/photo-1524522173746-f628baad3644?q=80&w=2600&auto=format&fit=crop", // Ship in Blue Ocean (Clean/Transit)
   "https://images.unsplash.com/photo-1494412651409-ae4beeadefe8?q=80&w=2600&auto=format&fit=crop", // Busy Port Logistics (Scale/Trade)
 ];
 
 export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
   const [searchTerm, setSearchTerm] = useState('');
-  const [currentHeroIndex, setCurrentHeroIndex] = useState(0);
   const [heroTab, setHeroTab] = useState<'buy' | 'track'>('buy');
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentHeroIndex((prev) => (prev + 1) % HERO_IMAGES.length);
-    }, 8000); // Slower, more majestic transition
-    return () => clearInterval(interval);
-  }, []);
+  // Logic for Dynamic Hero Image based on selection
+  const activeCategoryData = CATEGORIES.find(c => c.name === selectedCategory);
+  
+  // Use high-res version of category image if selected, else default hero
+  const heroImage = activeCategoryData 
+    ? activeCategoryData.image.replace('w=400', 'w=2600') // Optimize resolution for hero
+    : HERO_IMAGES[0];
 
   return (
     <div className="bg-white font-sans">
       
       {/* 1. HERO SECTION - Modern Side Layout */}
       <section className="relative h-screen min-h-[600px] w-full bg-cc-primary overflow-hidden">
-        {/* Background Slideshow */}
-        <div className="absolute inset-0 z-0">
-             {HERO_IMAGES.map((img, index) => (
-                <div 
-                    key={img}
-                    className={`absolute inset-0 transition-opacity duration-1500 ease-in-out ${index === currentHeroIndex ? 'opacity-100' : 'opacity-0'}`}
-                >
-                    <img 
-                        src={img} 
-                        className={`w-full h-full object-cover transition-transform duration-[20000ms] ease-linear ${index === currentHeroIndex ? 'scale-110' : 'scale-100'}`}
-                        alt="Global Trade Background"
-                    />
-                    {/* Sophisticated Gradient Layering for Text Contrast - Slightly lighter to show more image */}
-                    <div className="absolute inset-0 bg-cc-primary/10 mix-blend-multiply"></div>
-                    {/* Left shadow for text legibility */}
-                    <div className="absolute inset-y-0 left-0 w-3/4 bg-gradient-to-r from-black/70 via-black/30 to-transparent"></div>
-                    {/* Bottom shadow for low content */}
-                    <div className="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
-                </div>
-             ))}
+        {/* Background Image */}
+        <div className="absolute inset-0 z-0" aria-hidden="true">
+             <div 
+                key={heroImage} // Key change triggers animation
+                className="absolute inset-0 animate-fade-in"
+             >
+                <img 
+                    src={heroImage} 
+                    className="w-full h-full object-cover transition-transform duration-[20000ms] ease-linear scale-110"
+                    alt={selectedCategory || "Global Trade Background"}
+                />
+                {/* Sophisticated Gradient Layering for Text Contrast */}
+                <div className="absolute inset-0 bg-cc-primary/10 mix-blend-multiply"></div>
+                {/* Left shadow for text legibility */}
+                <div className="absolute inset-y-0 left-0 w-3/4 bg-gradient-to-r from-black/70 via-black/30 to-transparent"></div>
+                {/* Bottom shadow for low content */}
+                <div className="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
+            </div>
         </div>
 
         {/* Content Container - Bottom Left Position */}
@@ -61,16 +60,30 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
                     {/* Badge */}
                     <div className="inline-flex items-center gap-2 px-3 py-1.5 border border-white/20 rounded-full bg-black/30 backdrop-blur-md mb-6 shadow-lg">
                         <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></div>
-                        <span className="text-[10px] font-mono font-bold text-white/90 uppercase tracking-widest">Global Trading Desk • Live</span>
+                        <span className="text-[10px] font-mono font-bold text-white/90 uppercase tracking-widest">
+                            {selectedCategory ? `${selectedCategory.toUpperCase()} • SPOT MARKET` : 'GLOBAL TRADING DESK • LIVE'}
+                        </span>
                     </div>
 
                     <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-[1.1] tracking-tight drop-shadow-xl">
-                        SOURCING THE <br/>
-                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-cc-gold via-yellow-200 to-cc-gold">WORLD'S HARVEST</span>
+                        {selectedCategory ? (
+                            <>
+                                PREMIUM <br/>
+                                <span className="text-transparent bg-clip-text bg-gradient-to-r from-cc-gold via-yellow-200 to-cc-gold">{selectedCategory.toUpperCase()}</span>
+                            </>
+                        ) : (
+                            <>
+                                SOURCING THE <br/>
+                                <span className="text-transparent bg-clip-text bg-gradient-to-r from-cc-gold via-yellow-200 to-cc-gold">WORLD'S HARVEST</span>
+                            </>
+                        )}
                     </h1>
                     
                     <p className="font-sans text-lg text-gray-200 mb-8 max-w-xl font-light leading-relaxed drop-shadow-md">
-                        Connecting origin farmers to industrial consumers. B2B foodstuff trading with precision logistics.
+                        {selectedCategory 
+                            ? `Direct from origin. We secure the highest quality ${selectedCategory.toLowerCase()} for industrial processing and wholesale distribution.`
+                            : "Connecting origin farmers to industrial consumers. B2B foodstuff trading with precision logistics."
+                        }
                     </p>
                     
                     <div className="flex gap-4">
@@ -267,8 +280,11 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
                 {CATEGORIES.map((cat) => (
                     <div 
                         key={cat.id} 
-                        onClick={() => onNavigate('products')}
-                        className="group cursor-pointer relative flex flex-col items-center"
+                        onClick={() => {
+                            setSelectedCategory(cat.name);
+                            window.scrollTo({ top: 0, behavior: 'smooth' });
+                        }}
+                        className={`group cursor-pointer relative flex flex-col items-center ${selectedCategory === cat.name ? 'ring-2 ring-cc-gold ring-offset-2 rounded-2xl' : ''}`}
                     >
                         <div className="w-full aspect-square rounded-2xl overflow-hidden mb-4 relative shadow-md group-hover:shadow-2xl transition-all duration-500">
                             <img 
@@ -276,9 +292,11 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
                                 alt={cat.name} 
                                 className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
                             />
-                            <div className="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-colors"></div>
+                            <div className={`absolute inset-0 transition-colors ${selectedCategory === cat.name ? 'bg-black/0' : 'bg-black/20 group-hover:bg-black/0'}`}></div>
                         </div>
-                        <h3 className="font-display font-bold text-cc-primary text-sm text-center group-hover:text-cc-gold transition-colors">{cat.name}</h3>
+                        <h3 className={`font-display font-bold text-sm text-center transition-colors ${selectedCategory === cat.name ? 'text-cc-gold' : 'text-cc-primary group-hover:text-cc-gold'}`}>
+                            {cat.name}
+                        </h3>
                     </div>
                 ))}
             </div>

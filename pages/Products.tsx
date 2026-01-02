@@ -35,9 +35,10 @@ export const Products: React.FC = () => {
 
   // Logic for Dynamic Header Image
   const activeCategoryData = CATEGORIES.find(c => c.name === selectedCategory);
+  // Default image updated to a rich display of foodstuff/spices/grains instead of a port scene
   const heroImage = activeCategoryData 
     ? activeCategoryData.image 
-    : "https://images.unsplash.com/photo-1577239339305-1129543c8b7f?q=80&w=2574&auto=format&fit=crop"; // Fallback/All image (Port scene)
+    : "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?q=80&w=2670&auto=format&fit=crop"; 
 
   return (
     <div className="bg-gray-50 min-h-screen">
@@ -48,11 +49,11 @@ export const Products: React.FC = () => {
             <img 
               src={heroImage} 
               alt={selectedCategory} 
-              className="w-full h-full object-cover opacity-50 transition-all duration-700"
+              className="w-full h-full object-cover opacity-60 transition-all duration-700"
             />
             {/* Gradient Overlays for text readability */}
-            <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/20 to-transparent"></div>
-            <div className="absolute inset-0 bg-gradient-to-r from-gray-900/80 to-transparent"></div>
+            <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40 to-transparent"></div>
+            <div className="absolute inset-0 bg-gradient-to-r from-gray-900/90 to-transparent"></div>
          </div>
          
          <div className="relative z-10 max-w-[1800px] mx-auto px-6 md:px-8 h-full flex flex-col justify-end pb-12">
