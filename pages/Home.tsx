@@ -7,10 +7,9 @@ interface HomeProps {
 }
 
 const HERO_IMAGES = [
-  "https://images.unsplash.com/photo-1577239339305-1129543c8b7f?q=80&w=2574&auto=format&fit=crop", // Cinematic Port/Ship Aerial (Dark & Moody)
-  "https://images.unsplash.com/photo-1625246333195-031238803120?q=80&w=2574&auto=format&fit=crop", // Golden Wheat Harvest (Origin/Farming)
-  "https://images.unsplash.com/photo-1516937941348-c09645f31e3d?q=80&w=2574&auto=format&fit=crop", // Industrial Shipping (Scale)
-  "https://images.unsplash.com/photo-1559297434-fae8a1916a79?q=80&w=2670&auto=format&fit=crop"  // Bow of Ship at Sea (Transit)
+  "https://images.unsplash.com/photo-1473649085228-583485e6e4d7?q=80&w=2600&auto=format&fit=crop", // Golden Harvest Sunset (Warm/Origin)
+  "https://images.unsplash.com/photo-1524522173746-f628baad3644?q=80&w=2600&auto=format&fit=crop", // Ship in Blue Ocean (Clean/Transit)
+  "https://images.unsplash.com/photo-1494412651409-ae4beeadefe8?q=80&w=2600&auto=format&fit=crop", // Busy Port Logistics (Scale/Trade)
 ];
 
 export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
@@ -42,12 +41,12 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
                         className={`w-full h-full object-cover transition-transform duration-[20000ms] ease-linear ${index === currentHeroIndex ? 'scale-110' : 'scale-100'}`}
                         alt="Global Trade Background"
                     />
-                    {/* Sophisticated Gradient Layering for Text Contrast */}
-                    <div className="absolute inset-0 bg-cc-primary/20 mix-blend-multiply"></div>
+                    {/* Sophisticated Gradient Layering for Text Contrast - Slightly lighter to show more image */}
+                    <div className="absolute inset-0 bg-cc-primary/10 mix-blend-multiply"></div>
                     {/* Left shadow for text legibility */}
-                    <div className="absolute inset-y-0 left-0 w-3/4 bg-gradient-to-r from-black/80 via-black/40 to-transparent"></div>
+                    <div className="absolute inset-y-0 left-0 w-3/4 bg-gradient-to-r from-black/70 via-black/30 to-transparent"></div>
                     {/* Bottom shadow for low content */}
-                    <div className="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-black/90 via-black/50 to-transparent"></div>
+                    <div className="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
                 </div>
              ))}
         </div>
