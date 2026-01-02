@@ -1,11 +1,16 @@
 import { GoogleGenAI, Type } from "@google/genai";
 import { GeneratedRecipe } from "../types";
 
-// Initialize the Gemini client directly with the API key as per guidelines.
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
-
 export const generateRecipe = async (ingredientsOrDish: string): Promise<GeneratedRecipe | null> => {
+  // Prevent crash if API key is not configured in environment
+  if (!process.env.API_KEY) {
+    console.error("API Key is missing. Please set the API_KEY environment variable.");
+    return null;
+  }
+
   try {
+    // Initialize the Gemini client lazily to avoid top-level errors during module import
+    const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
     const model = "gemini-3-flash-preview";
     
     const response = await ai.models.generateContent({
