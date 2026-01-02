@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ArrowRight, Search, CheckCircle2, TrendingUp, ShieldCheck, MapPin, Package, Clock, Anchor, Lock, Globe, FileCheck, Truck } from 'lucide-react';
+import { ArrowRight, Search, CheckCircle2, TrendingUp, ShieldCheck, MapPin, Package, Clock, Anchor, Lock, Globe, FileCheck, Truck, BarChart3 } from 'lucide-react';
 import { CATEGORIES, PRODUCTS, BUYING_REQUESTS } from '../constants';
 
 interface HomeProps {
@@ -16,6 +16,7 @@ const HERO_IMAGES = [
 export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [currentHeroIndex, setCurrentHeroIndex] = useState(0);
+  const [heroTab, setHeroTab] = useState<'buy' | 'track'>('buy');
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -27,9 +28,9 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
   return (
     <div className="bg-white font-sans">
       
-      {/* 1. HERO SECTION */}
-      <section className="relative h-[85vh] min-h-[700px] w-full flex flex-col items-center justify-center bg-cc-primary overflow-hidden">
-        {/* Background Slideshow with Ken Burns Effect */}
+      {/* 1. HERO SECTION - Modern Side Layout */}
+      <section className="relative h-screen min-h-[600px] w-full bg-cc-primary overflow-hidden">
+        {/* Background Slideshow */}
         <div className="absolute inset-0 z-0">
              {HERO_IMAGES.map((img, index) => (
                 <div 
@@ -41,76 +42,110 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
                         className={`w-full h-full object-cover transition-transform duration-[10000ms] ease-linear ${index === currentHeroIndex ? 'scale-110' : 'scale-100'}`}
                         alt="Global Trade Background"
                     />
-                    {/* Dark Overlays */}
-                    <div className="absolute inset-0 bg-cc-primary/60 mix-blend-multiply"></div>
-                    <div className="absolute inset-0 bg-gradient-to-t from-cc-primary via-transparent to-cc-primary/30"></div>
+                    {/* Gradients to ensure text readability on the left and bottom */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent"></div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent"></div>
                 </div>
              ))}
         </div>
 
-        {/* Hero Content */}
-        <div className="relative z-20 w-full max-w-7xl px-6 flex flex-col items-center text-center pt-10">
-            {/* Badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 border border-white/20 rounded-full bg-white/5 backdrop-blur-md mb-8 shadow-2xl animate-fade-in">
-               <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
-               </span>
-               <span className="text-[10px] md:text-xs font-mono font-bold text-gray-100 uppercase tracking-[0.2em]">Global Trading Desk Active</span>
-            </div>
+        {/* Content Container - Bottom Left Position */}
+        <div className="relative z-20 h-full w-full max-w-[1800px] mx-auto px-6 md:px-12 flex flex-col justify-end pb-16 md:pb-24">
             
-            {/* Headlines */}
-            <h1 className="font-display text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-6 leading-[1.05] tracking-tight drop-shadow-2xl animate-fade-up">
-                SOURCING THE <br/>
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-cc-gold via-yellow-200 to-cc-gold">WORLD'S HARVEST</span>
-            </h1>
-            
-            <p className="font-sans text-lg md:text-2xl text-gray-200 mb-10 max-w-4xl mx-auto font-light leading-relaxed drop-shadow-md animate-fade-up delay-100">
-                A division of <strong>CC Group</strong>. We bridge the gap between origin farmers and industrial consumers, delivering bulk food commodities with precision logistics.
-            </p>
-            
-            {/* Search Component */}
-            <div className="w-full max-w-3xl mx-auto relative group z-30 animate-fade-up delay-200">
-                <div className="absolute inset-0 bg-white/10 blur-xl rounded-full transform group-hover:scale-105 transition-transform duration-500"></div>
-                <div className="relative flex items-center bg-white rounded-full shadow-[0_20px_60px_rgba(0,0,0,0.4)] overflow-hidden p-2 transition-transform duration-300 hover:scale-[1.01]">
-                    <div className="pl-6 text-gray-400">
-                        <Search size={24} />
+            <div className="flex flex-col lg:flex-row items-end gap-12 lg:gap-24">
+                
+                {/* Left: Text Content */}
+                <div className="flex-1 max-w-3xl animate-fade-up">
+                    {/* Badge */}
+                    <div className="inline-flex items-center gap-2 px-3 py-1.5 border border-white/20 rounded-full bg-black/20 backdrop-blur-md mb-6">
+                        <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></div>
+                        <span className="text-[10px] font-mono font-bold text-white/90 uppercase tracking-widest">Global Trading Desk • Live</span>
                     </div>
-                    <input 
-                        type="text"
-                        value={searchTerm}
-                        onChange={(e) => setSearchTerm(e.target.value)}
-                        placeholder="What are you looking for? (e.g. Sugar IC45, Rice, Frozen Poultry)..."
-                        className="flex-grow px-4 py-4 text-lg text-cc-primary placeholder:text-gray-400 focus:outline-none bg-transparent font-medium"
-                    />
-                    <button 
-                        onClick={() => onNavigate('products')}
-                        className="bg-cc-primary hover:bg-cc-dark text-white font-bold uppercase tracking-widest text-sm px-8 py-4 rounded-full transition-all duration-300 shadow-md flex items-center gap-2"
-                    >
-                        Search Stock <ArrowRight size={16} />
-                    </button>
+
+                    <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-[1.1] tracking-tight">
+                        SOURCING THE <br/>
+                        <span className="text-cc-gold">WORLD'S HARVEST</span>
+                    </h1>
+                    
+                    <p className="font-sans text-lg text-gray-200 mb-8 max-w-xl font-light leading-relaxed">
+                        Connecting origin farmers to industrial consumers. B2B foodstuff trading with precision logistics.
+                    </p>
+                    
+                    <div className="flex gap-4">
+                        <button 
+                            onClick={() => onNavigate('products')}
+                            className="bg-white text-cc-primary px-8 py-3 rounded-sm font-bold uppercase tracking-widest text-xs hover:bg-gray-100 transition-colors shadow-lg"
+                        >
+                            View Catalog
+                        </button>
+                        <button 
+                            onClick={() => onNavigate('contact')}
+                            className="border border-white/30 text-white px-8 py-3 rounded-sm font-bold uppercase tracking-widest text-xs hover:bg-white/10 transition-colors"
+                        >
+                            Contact Us
+                        </button>
+                    </div>
                 </div>
-            </div>
-            
-            {/* Quick Stats / Trust Indicators */}
-            <div className="flex flex-wrap justify-center gap-8 md:gap-16 mt-16 text-white/80 animate-fade-up delay-300">
-                <div className="flex flex-col items-center gap-1 group">
-                    <Globe size={24} className="text-cc-gold mb-2 group-hover:scale-110 transition-transform"/>
-                    <span className="font-display font-bold text-xl text-white">25+</span>
-                    <span className="text-[10px] uppercase tracking-widest font-mono">Origin Countries</span>
+
+                {/* Right: Menu Tab Widget */}
+                <div className="w-full max-w-md animate-fade-up delay-100">
+                    <div className="bg-white rounded-sm shadow-2xl overflow-hidden">
+                        {/* Tabs */}
+                        <div className="flex border-b border-gray-100">
+                            <button 
+                                onClick={() => setHeroTab('buy')}
+                                className={`flex-1 py-4 text-xs font-bold uppercase tracking-widest text-center transition-colors ${heroTab === 'buy' ? 'bg-white text-cc-primary border-b-2 border-cc-primary' : 'bg-gray-50 text-gray-400 hover:bg-gray-100'}`}
+                            >
+                                Find Stock
+                            </button>
+                            <button 
+                                onClick={() => setHeroTab('track')}
+                                className={`flex-1 py-4 text-xs font-bold uppercase tracking-widest text-center transition-colors ${heroTab === 'track' ? 'bg-white text-cc-primary border-b-2 border-cc-primary' : 'bg-gray-50 text-gray-400 hover:bg-gray-100'}`}
+                            >
+                                Track Logistics
+                            </button>
+                        </div>
+                        
+                        {/* Tab Content */}
+                        <div className="p-6">
+                            {heroTab === 'buy' ? (
+                                <div className="space-y-4">
+                                    <div className="relative">
+                                        <Search className="absolute left-3 top-3.5 text-gray-400" size={16} />
+                                        <input 
+                                            type="text"
+                                            value={searchTerm}
+                                            onChange={(e) => setSearchTerm(e.target.value)}
+                                            placeholder="Commodity (e.g. Rice, Sugar)..."
+                                            className="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-sm text-sm focus:outline-none focus:border-cc-primary transition-all"
+                                        />
+                                    </div>
+                                    <button 
+                                        onClick={() => onNavigate('products')}
+                                        className="w-full bg-cc-primary text-white py-3 font-bold uppercase tracking-widest text-xs rounded-sm hover:bg-cc-dark transition-colors flex items-center justify-center gap-2"
+                                    >
+                                        Search Inventory <ArrowRight size={14} />
+                                    </button>
+                                </div>
+                            ) : (
+                                <div className="space-y-4">
+                                    <div className="relative">
+                                        <Package className="absolute left-3 top-3.5 text-gray-400" size={16} />
+                                        <input 
+                                            type="text"
+                                            placeholder="Container / BL Number"
+                                            className="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-sm text-sm focus:outline-none focus:border-cc-primary transition-all"
+                                        />
+                                    </div>
+                                    <button className="w-full bg-cc-gold text-white py-3 font-bold uppercase tracking-widest text-xs rounded-sm hover:bg-yellow-600 transition-colors flex items-center justify-center gap-2">
+                                        Track Shipment <Globe size={14} />
+                                    </button>
+                                </div>
+                            )}
+                        </div>
+                    </div>
                 </div>
-                <div className="w-px h-12 bg-white/10 hidden md:block"></div>
-                <div className="flex flex-col items-center gap-1 group">
-                    <Truck size={24} className="text-cc-gold mb-2 group-hover:scale-110 transition-transform"/>
-                    <span className="font-display font-bold text-xl text-white">50k+ MT</span>
-                    <span className="text-[10px] uppercase tracking-widest font-mono">Shipped Annually</span>
-                </div>
-                <div className="w-px h-12 bg-white/10 hidden md:block"></div>
-                <div className="flex flex-col items-center gap-1 group">
-                    <FileCheck size={24} className="text-cc-gold mb-2 group-hover:scale-110 transition-transform"/>
-                    <span className="font-display font-bold text-xl text-white">100%</span>
-                    <span className="text-[10px] uppercase tracking-widest font-mono">Verified Suppliers</span>
-                </div>
+
             </div>
         </div>
       </section>
@@ -155,7 +190,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
          </div>
       </section>
 
-      {/* 3. CATEGORY BROWSER - Enhanced */}
+      {/* 3. CATEGORY BROWSER */}
       <section className="bg-gray-50 py-24">
          <div className="max-w-[1600px] mx-auto px-6 md:px-12">
             <div className="flex justify-between items-end mb-12">
