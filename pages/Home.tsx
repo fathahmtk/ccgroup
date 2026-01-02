@@ -159,15 +159,14 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
                  </div>
 
                  {/* Chart */}
-                 <div className="lg:col-span-8 bg-gray-50 rounded-sm p-8 border border-gray-200 shadow-inner relative">
+                 <div className="lg:col-span-8 bg-gray-50 rounded-sm p-8 border border-gray-200 shadow-inner relative min-w-0">
                      <div className="absolute top-6 right-6 flex items-center gap-2 text-xs font-mono text-gray-400">
                          <div className="w-2 h-2 rounded-full bg-red-500 animate-pulse"></div> Live Data
                      </div>
                      <h3 className="text-lg font-bold text-cc-primary mb-2 font-display">{activeChart} Price Trend (USD/MT)</h3>
                      <p className="text-xs text-gray-500 mb-8 font-mono">6-Month FOB Average • Source: CC Group Analytics</p>
                      
-                     {/* Added min-w-0 to prevent flex/grid overflow issues that cause Recharts 0 width error */}
-                     <div className="h-[350px] w-full min-w-0">
+                     <div className="h-[350px] w-full">
                         <ResponsiveContainer width="100%" height="100%">
                             <AreaChart data={CHART_DATA}>
                                 <defs>
