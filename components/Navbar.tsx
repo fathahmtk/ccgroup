@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, User, FlaskConical, Search, ShoppingCart } from 'lucide-react';
+import { Menu, X, User, FlaskConical, Search, ShoppingBag } from 'lucide-react';
+import { useCart } from '../context/CartContext';
 
 interface NavbarProps {
   currentPage: string;
@@ -9,6 +10,7 @@ interface NavbarProps {
 export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const { setIsCartOpen, cartCount } = useCart();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -17,9 +19,9 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
   }, []);
 
   const navItems = [
-    { name: 'Marketplace', value: 'products' },
-    { name: 'Logistics', value: 'services' },
-    { name: 'R&D Lab', value: 'rd-lab', icon: <FlaskConical size={14} className="mr-1 text-cc-gold" /> },
+    { name: 'Foodstuff Catalog', value: 'products' },
+    { name: 'Logistics Services', value: 'services' },
+    { name: 'Culinary R&D', value: 'rd-lab', icon: <FlaskConical size={14} className="mr-1 text-cc-gold" /> },
   ];
 
   return (
@@ -37,8 +39,8 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
                   CC
                 </div>
                 <div className="flex flex-col">
-                  <span className="font-display text-lg font-bold tracking-tight text-cc-primary leading-none group-hover:text-cc-gold transition-colors">CC GROUP</span>
-                  <span className="font-mono text-[10px] text-gray-400 uppercase tracking-[0.2em] mt-1">Trading Platform</span>
+                  <span className="font-display text-lg font-bold tracking-tight text-cc-primary leading-none group-hover:text-cc-gold transition-colors">CC FOOD STUFF</span>
+                  <span className="font-mono text-[9px] text-gray-400 uppercase tracking-widest mt-1">CC Group of Companies</span>
                 </div>
               </div>
 
@@ -65,7 +67,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
           <div className="hidden lg:flex flex-1 max-w-lg mx-8 relative">
               <input 
                 type="text" 
-                placeholder="Search products, suppliers, or origins..." 
+                placeholder="Search foodstuff, origins, or specs..." 
                 className="w-full bg-gray-50 border border-gray-200 rounded-sm py-2.5 pl-10 pr-4 text-sm focus:outline-none focus:border-cc-primary focus:bg-white transition-all"
               />
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={16} />
@@ -73,14 +75,26 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
 
           {/* Controls */}
           <div className="flex items-center gap-3">
+             <button 
+                onClick={() => setIsCartOpen(true)}
+                className="relative p-2 text-gray-600 hover:text-cc-primary hover:bg-gray-50 rounded-sm transition-colors"
+             >
+                <ShoppingBag size={20} />
+                {cartCount > 0 && (
+                  <span className="absolute -top-1 -right-1 bg-cc-gold text-white text-[10px] font-bold h-4 w-4 flex items-center justify-center rounded-full animate-fade-in shadow-sm">
+                    {cartCount}
+                  </span>
+                )}
+             </button>
+
              <button className="hidden md:flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-gray-600 hover:text-cc-primary px-3 py-2">
-                 <User size={16} /> Sign In
+                 <User size={16} /> Partner Portal
              </button>
              <button
                 onClick={() => onNavigate('contact')}
                 className="hidden md:flex items-center gap-2 px-5 py-2.5 bg-cc-primary text-white hover:bg-cc-dark hover:shadow-lg transition-all rounded-sm font-display text-xs font-bold uppercase tracking-widest"
              >
-                <ShoppingCart size={16} /> Post Buying Request
+                Request Quote
              </button>
 
              <button
@@ -111,7 +125,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
                     onClick={() => { onNavigate('contact'); setIsOpen(false); }}
                     className="mt-6 w-full py-5 bg-cc-primary text-white font-bold uppercase tracking-widest text-sm rounded-sm shadow-xl"
                 >
-                    Post Buying Request
+                    Request Quote
                 </button>
             </div>
         </div>

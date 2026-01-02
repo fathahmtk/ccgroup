@@ -7,7 +7,8 @@ import { Products } from './pages/Products';
 import { Contact } from './pages/Contact';
 import { Services } from './pages/Services';
 import { AiChef } from './pages/AiChef';
-import { CartProvider } from './context/CartContext'; // Provider kept to wrap app but context unused in UI
+import { CartProvider } from './context/CartContext';
+import { CartDrawer } from './components/CartDrawer';
 import { MessageCircle } from 'lucide-react';
 
 function App() {
@@ -35,6 +36,7 @@ function App() {
       <div className="font-sans text-gray-900 bg-white min-h-screen flex flex-col relative transition-colors duration-500">
         <MarketTicker />
         <Navbar currentPage={currentPage} onNavigate={setCurrentPage} />
+        <CartDrawer />
         <main className="flex-grow">
           {renderPage()}
         </main>

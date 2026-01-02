@@ -3,12 +3,15 @@ import { Download, Search, Filter, ArrowUpRight, Check, Package, Scale, Globe, T
 import { PRODUCTS, CATEGORIES } from '../constants';
 import { ProductDetailsModal } from '../components/ProductDetailsModal';
 import { Product } from '../types';
+import { useCart } from '../context/CartContext';
 
 export const Products: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [selectedOrigin, setSelectedOrigin] = useState<string[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [viewProduct, setViewProduct] = useState<Product | null>(null);
+  
+  const { addToCart, setIsCartOpen } = useCart();
   
   const toggleOrigin = (origin: string) => {
     setSelectedOrigin(prev => 
@@ -25,8 +28,9 @@ export const Products: React.FC = () => {
   });
 
   const handleInquire = (product: Product) => {
-      // Navigate to contact or open inquiry form
-      window.location.href = `/contact?product=${encodeURIComponent(product.name)}`;
+      addToCart(product);
+      setIsCartOpen(true);
+      setViewProduct(null);
   };
 
   return (
@@ -36,7 +40,7 @@ export const Products: React.FC = () => {
         {/* Header */}
         <div className="flex flex-col md:flex-row justify-between items-end mb-8 pb-8 border-b border-gray-200">
             <div>
-                <h1 className="font-display text-3xl md:text-4xl font-bold text-cc-primary mb-2">Marketplace Catalog</h1>
+                <h1 className="font-display text-3xl md:text-4xl font-bold text-cc-primary mb-2">CC Food Stuff Global Catalog</h1>
                 <p className="text-gray-500 text-sm">Showing {filteredProducts.length} verified listings available for export.</p>
             </div>
             <div className="flex gap-3 mt-4 md:mt-0">
@@ -181,10 +185,10 @@ export const Products: React.FC = () => {
                                         <span className="text-lg font-bold text-cc-primary">{product.price}</span>
                                     </div>
                                     <button 
-                                        onClick={() => setViewProduct(product)}
+                                        onClick={() => handleInquire(product)}
                                         className="bg-cc-primary text-white px-4 py-2 rounded-sm text-xs font-bold uppercase tracking-wide hover:bg-cc-secondary transition-colors"
                                     >
-                                        Inquire
+                                        Add to List
                                     </button>
                                 </div>
                             </div>

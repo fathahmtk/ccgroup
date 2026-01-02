@@ -20,7 +20,7 @@ export const Contact: React.FC = () => {
         
         {/* Left Column: Info */}
         <div className="lg:col-span-4">
-           <span className="font-mono text-xs text-cc-secondary uppercase tracking-[0.3em] mb-4 block">Trade Desk</span>
+           <span className="font-mono text-xs text-cc-secondary uppercase tracking-[0.3em] mb-4 block">CC Group Trade Desk</span>
            <h1 className="font-display text-5xl md:text-6xl font-bold mb-8">
                {userType === 'buyer' ? 'Start Sourcing.' : 'Start Selling.'}
            </h1>

@@ -3,20 +3,23 @@ import { GeneratedRecipe } from "../types";
 
 export const generateRecipe = async (ingredientsOrDish: string): Promise<GeneratedRecipe | null> => {
   // Prevent crash if API key is not configured in environment
-  if (!process.env.API_KEY) {
+  // We explicitly check for empty string or undefined
+  const apiKey = process.env.API_KEY || '';
+  
+  if (!apiKey) {
     console.error("API Key is missing. Please set the API_KEY environment variable.");
     return null;
   }
 
   try {
     // Initialize the Gemini client lazily to avoid top-level errors during module import
-    const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+    const ai = new GoogleGenAI({ apiKey: apiKey });
     const model = "gemini-3-flash-preview";
     
     const response = await ai.models.generateContent({
       model: model,
-      contents: `You are a Corporate Executive Chef for 'CC Group', a global foodstuff wholesaler. 
-      Your client is a business (Restaurant, Hotel, or Manufacturer).
+      contents: `You are a Corporate Executive Chef for 'CC Food Stuff', a division of 'CC Group of Companies'. 
+      Your client is a business (Restaurant, Hotel, or Manufacturer) looking for bulk food solutions.
       Create a commercial menu concept or bulk recipe formulation using these inputs: ${ingredientsOrDish}. 
       
       Focus on:
