@@ -316,6 +316,42 @@ export const PRODUCTS: Product[] = [
     specs: { 'Type': 'White/Red/Black', 'Purity': '99.9%', 'Packaging': '25kg Paper Bag' },
     reviews: []
   },
+  {
+    id: 'g7',
+    name: 'Foxtail Millet (Kangni)',
+    category: 'Grains & Millets',
+    price: 'Market Rate',
+    image: 'https://images.unsplash.com/photo-1662036254426-3041d9990263?q=80&w=800&auto=format&fit=crop',
+    description: 'Minor Millet. Ancient grain with low glycemic index. Rich in dietary fiber and minerals. Ideal for diabetic diets.',
+    origin: 'India',
+    nutrition: { servingSize: '100g', calories: 331, protein: '12.3g', carbs: '60g', fat: '4.3g' },
+    specs: { 'Purity': '99%', 'Type': 'Unpolished', 'Packaging': '25kg PP Bag' },
+    reviews: []
+  },
+  {
+    id: 'g8',
+    name: 'Amaranth (Rajgira)',
+    category: 'Grains & Millets',
+    price: 'Premium Rate',
+    image: 'https://images.unsplash.com/photo-1594917426861-5464197c3656?q=80&w=800&auto=format&fit=crop',
+    description: 'Pseudo-millet. High protein superfood. Gluten-free and rich in lysine. Used in fasting foods and energy bars.',
+    origin: 'India',
+    nutrition: { servingSize: '100g', calories: 371, protein: '14g', carbs: '65g', fat: '7g' },
+    specs: { 'Form': 'Seed / Popped', 'Purity': '99.9%', 'Packaging': '25kg Paper Bag' },
+    reviews: []
+  },
+  {
+    id: 'g9',
+    name: 'Buckwheat (Kuttu)',
+    category: 'Grains & Millets',
+    price: 'Premium Rate',
+    image: 'https://images.unsplash.com/photo-1506456073173-0370604b6849?q=80&w=800&auto=format&fit=crop',
+    description: 'Pseudo-cereal. Fruit seed related to rhubarb. Gluten-free, high fiber. Staple for fasting flour (Kuttu Atta).',
+    origin: 'India / Russia',
+    nutrition: { servingSize: '100g', calories: 343, protein: '13g', carbs: '71g', fat: '3.4g' },
+    specs: { 'Form': 'Groats / Flour', 'Moisture': '12%', 'Packaging': '25kg Bag' },
+    reviews: []
+  },
 
   // --- 5. PULSES & LENTILS ---
   {
@@ -561,4 +597,5 @@ export const MARKET_DATA = [
   { name: 'Sugar', value: 350 },
   { name: 'Oils', value: 300 },
   { name: 'Spices', value: 200 },
-  { name: 'Frozen',
+  { name: 'Frozen', value: 150 },
+];

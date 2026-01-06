@@ -9,29 +9,29 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- New Fonts: Cormorant Garamond (Display), DM Sans (Body), Montserrat (UI/Accents) -->
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- New Fonts: Playfair Display (High Impact Serif), Manrope (Modern Geo-Sans) -->
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500&display=swap" rel="stylesheet">
     
     <script>
       tailwind.config = {
         theme: {
           extend: {
             fontFamily: {
-              sans: ['DM Sans', 'sans-serif'], // Clean, modern geometric for body
-              display: ['Cormorant Garamond', 'serif'], // Luxurious, high-contrast serif for headings
-              serif: ['Cormorant Garamond', 'serif'],
-              ui: ['Montserrat', 'sans-serif'], // Sturdy caps for buttons/nav
+              sans: ['Manrope', 'sans-serif'], // Modern, geometric, clean
+              display: ['Playfair Display', 'serif'], // High contrast, luxury editorial
+              serif: ['Playfair Display', 'serif'],
+              ui: ['Manrope', 'sans-serif'],
             },
             colors: {
               cc: {
-                primary: '#052216', // Deep Midnight Forest Green
-                secondary: '#2A4538', // Muted Moss
-                sage: '#9FB3A8',    // Silver Sage
-                earth: '#9C7C60',   // Refined Clay
-                gold: '#D4B679',    // Champagne Gold (Lighter/More Metallic)
-                cream: '#F5F2EB',   // Warm Alabaster
-                surface: '#EAE6DD', // Stone
-                dark: '#010B07',    // Obsidian Green
+                primary: '#0F392B', // Deep Royal Emerald
+                secondary: '#2D5A4C', // Rich Sage
+                sage: '#A3BFAE',    // Muted Mint
+                earth: '#8D6E63',   // Cocoa
+                gold: '#DCA54C',    // Vibrant Harvest Gold
+                cream: '#F9F8F6',   // Pearl White (Cleaner background)
+                surface: '#F2F0EB', // Stone
+                dark: '#05261C',    // Obsidian Green
               }
             },
             borderRadius: {
@@ -40,7 +40,7 @@
             },
             backgroundImage: {
               'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-              'organic-gradient': 'linear-gradient(135deg, #052216 0%, #010B07 100%)',
+              'organic-gradient': 'linear-gradient(135deg, #0F392B 0%, #05261C 100%)',
             },
             animation: {
               'fade-in': 'fadeIn 0.8s ease-out forwards',
@@ -49,6 +49,7 @@
               'slide-in-right': 'slideInRight 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards',
               'slow-zoom': 'slowZoom 20s linear infinite alternate',
               'float': 'float 6s ease-in-out infinite',
+              'marquee': 'marquee 40s linear infinite',
             },
             keyframes: {
               fadeIn: {
@@ -70,6 +71,10 @@
               float: {
                 '0%, 100%': { transform: 'translateY(0)' },
                 '50%': { transform: 'translateY(-10px)' },
+              },
+              marquee: {
+                '0%': { transform: 'translateX(0)' },
+                '100%': { transform: 'translateX(-50%)' },
               }
             }
           }
@@ -78,12 +83,12 @@
     </script>
     <style>
       body {
-        background-color: #F5F2EB;
-        color: #052216;
+        background-color: #F9F8F6;
+        color: #0F392B;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
       }
-      /* Noise Texture for subtle grain */
+      /* Subtle noise Texture for depth */
       body::before {
         content: "";
         position: fixed;
@@ -91,17 +96,17 @@
         left: 0;
         width: 100%;
         height: 100%;
-        opacity: 0.04; /* Slightly increased for texture depth */
+        opacity: 0.03;
         pointer-events: none;
         z-index: 9999;
-        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
       }
       .no-scrollbar::-webkit-scrollbar {
           display: none;
       }
       ::selection {
-        background-color: #052216;
-        color: #D4B679;
+        background-color: #0F392B;
+        color: #DCA54C;
       }
     </style>
 <script type="importmap">

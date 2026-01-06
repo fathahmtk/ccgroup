@@ -16,7 +16,7 @@ const HERO_SLIDES = [
     category: "Ancient Grains & Millets",
     titleLine1: "Cultivating",
     titleHighlight: "Vitality.",
-    description: "Reintroducing the power of Millets and Heritage Grains. Sustainable, nutrient-dense superfoods sourced directly from dedicated farming collectives.",
+    description: "Reintroducing the power of Major & Minor Millets (Bajra, Ragi, Foxtail) and Pseudo-grains like Quinoa & Amaranth. Sustainable superfoods for the future.",
     ctaText: "Explore Grains"
   },
   {
@@ -107,7 +107,8 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
              {/* Key on the wrapper forces re-animation when slide changes */}
              <div key={currentSlide} className="max-w-6xl animate-fade-up">
                  <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-white/10 backdrop-blur-xl border border-white/20 shadow-[0_4px_20px_rgba(0,0,0,0.1)] mb-10">
-                    <span className="w-1.5 h-1.5 rounded-full bg-cc-gold animate-pulse shadow-[0_0_10px_#C5A065]"></span>
+                    {/* Updated to new Gold Hex */}
+                    <span className="w-1.5 h-1.5 rounded-full bg-cc-gold animate-pulse shadow-[0_0_10px_#DCA54C]"></span>
                     <span className="text-white text-[11px] font-bold uppercase tracking-[0.2em] shadow-black drop-shadow-sm">{HERO_SLIDES[currentSlide].category}</span>
                  </div>
                  
@@ -144,7 +145,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
                      <button 
                         key={index} 
                         onClick={() => setCurrentSlide(index)}
-                        className={`h-1.5 transition-all duration-500 rounded-full backdrop-blur-sm ${index === currentSlide ? 'w-16 bg-cc-gold shadow-[0_0_15px_#C5A065]' : 'w-12 bg-white/20 hover:bg-white/40'}`}
+                        className={`h-1.5 transition-all duration-500 rounded-full backdrop-blur-sm ${index === currentSlide ? 'w-16 bg-cc-gold shadow-[0_0_15px_#DCA54C]' : 'w-12 bg-white/20 hover:bg-white/40'}`}
                         aria-label={`Go to slide ${index + 1}`}
                      />
                  ))}
@@ -243,7 +244,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
                 {/* Small Item - Oils */}
                 <div 
                     onClick={() => onNavigate('products')}
-                    className="md:col-span-1 md:row-span-1 relative group rounded-[2.5rem] overflow-hidden cursor-pointer bg-[#EDF1EF] p-8 flex flex-col justify-between hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+                    className="md:col-span-1 md:row-span-1 relative group rounded-[2.5rem] overflow-hidden cursor-pointer bg-[#F2F0EB] p-8 flex flex-col justify-between hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
                 >
                     <div className="flex justify-between items-start">
                         <Droplets size={28} className="text-cc-secondary" />
