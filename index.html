@@ -9,17 +9,18 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- New Fonts: Playfair Display (High Impact Serif), Outfit (Premium Geo-Sans) -->
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500&display=swap" rel="stylesheet">
+    <!-- New Fonts: Cormorant Garamond (Heritage Serif), Urbanist (Architectural Sans), JetBrains Mono (Financial Data) -->
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=JetBrains+Mono:wght@300;400;500&family=Urbanist:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,300;1,400&display=swap" rel="stylesheet">
     
     <script>
       tailwind.config = {
         theme: {
           extend: {
             fontFamily: {
-              sans: ['Outfit', 'sans-serif'], // Premium, high-readability geometric sans
-              display: ['Playfair Display', 'serif'], // Editorial luxury
-              serif: ['Playfair Display', 'serif'],
+              sans: ['Urbanist', 'sans-serif'], // Upgraded to Urbanist for a geometric, architectural look
+              display: ['Cormorant Garamond', 'serif'], // Elegant heritage luxury
+              serif: ['Cormorant Garamond', 'serif'],
+              mono: ['JetBrains Mono', 'monospace'], // Technical/Financial data
             },
             colors: {
               cc: {
@@ -80,6 +81,8 @@
         color: #14362A;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
+        /* Urbanist generally looks better with slightly tighter tracking for display, but distinct for body */
+        letter-spacing: 0.01em; 
       }
       /* Premium Noise Texture */
       body::before {
@@ -103,6 +106,15 @@
       }
       .pause {
         animation-play-state: paused;
+      }
+      /* Custom Utility for text outline in Hero */
+      .text-outline {
+         -webkit-text-stroke: 1px rgba(255, 255, 255, 0.2);
+         color: transparent;
+      }
+      /* Typography Refinements for Urbanist */
+      h1, h2, h3, h4, h5, h6 {
+        letter-spacing: -0.02em;
       }
     </style>
 <script type="importmap">
