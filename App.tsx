@@ -1,22 +1,36 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 import { Home } from './pages/Home';
 import { Products } from './pages/Products';
 import { Contact } from './pages/Contact';
 import { Services } from './pages/Services';
+import { Trade } from './pages/Trade';
+import { Corporate } from './pages/Corporate';
 import { CartProvider } from './context/CartContext';
 import { CartDrawer } from './components/CartDrawer';
 import { MarketTicker } from './components/MarketTicker';
 import { MessageCircle } from 'lucide-react';
 
+export type TradeMode = 'export' | 'import';
+
 function App() {
   const [currentPage, setCurrentPage] = useState('home');
+  const [tradeMode, setTradeMode] = useState<TradeMode>('export');
+
+  // Scroll to top instantly when page changes
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  }, [currentPage]);
 
   const renderPage = () => {
     switch (currentPage) {
       case 'home':
-        return <Home onNavigate={setCurrentPage} />;
+        return <Home onNavigate={setCurrentPage} tradeMode={tradeMode} />;
+      case 'corporate':
+        return <Corporate />;
+      case 'trade':
+        return <Trade />;
       case 'products':
         return <Products />;
       case 'services':
@@ -24,14 +38,19 @@ function App() {
       case 'contact':
         return <Contact />;
       default:
-        return <Home onNavigate={setCurrentPage} />;
+        return <Home onNavigate={setCurrentPage} tradeMode={tradeMode} />;
     }
   };
 
   return (
     <CartProvider>
-      <div className="font-sans text-gray-900 bg-cc-cream min-h-screen flex flex-col relative transition-colors duration-500 pb-12">
-        <Navbar currentPage={currentPage} onNavigate={setCurrentPage} />
+      <div className={`font-sans text-gray-900 bg-cc-cream min-h-screen flex flex-col relative transition-colors duration-500 pb-12 ${tradeMode === 'import' ? 'theme-import' : ''}`}>
+        <Navbar 
+          currentPage={currentPage} 
+          onNavigate={setCurrentPage} 
+          tradeMode={tradeMode}
+          onToggleTradeMode={setTradeMode}
+        />
         <CartDrawer />
         
         <main className="flex-grow">

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { X, Globe, FileText, Container, Calendar, ShieldCheck, Truck, Beaker, Maximize2, ArrowRight, ChevronLeft, ChevronRight, Calculator, Download, Share2, Printer, Search } from 'lucide-react';
-import { Product } from '../types';
+import { X, Globe, FileText, Container, Calendar, ShieldCheck, Truck, Beaker, Maximize2, ArrowRight, ChevronLeft, ChevronRight, Calculator, Download, Share2, Printer, Search, Star, MessageSquare } from 'lucide-react';
+import { Product, Review } from '../types';
 import { PRODUCTS } from '../constants';
 
 interface ProductDetailsModalProps {
@@ -21,6 +21,10 @@ export const ProductDetailsModal: React.FC<ProductDetailsModalProps> = ({ produc
   // Calculator State
   const [volume, setVolume] = useState<number>(25); // Default 1 Container approx
   const [unit, setUnit] = useState('MT');
+
+  // Reviews State
+  const [reviews, setReviews] = useState<Review[]>([]);
+  const [newReview, setNewReview] = useState({ rating: 5, user: '', comment: '' });
   
   // Extract numerical price if possible, or use a placeholder base rate for estimation
   const basePrice = 1200; // Placeholder base rate per MT for calculation demo
@@ -34,6 +38,8 @@ export const ProductDetailsModal: React.FC<ProductDetailsModalProps> = ({ produc
     setCurrentImageIndex(0);
     setVolume(25);
     setIsHovering(false);
+    setReviews(product.reviews || []);
+    setNewReview({ rating: 5, user: '', comment: '' });
   }, [product]);
 
   // Handle navigation
@@ -57,6 +63,22 @@ export const ProductDetailsModal: React.FC<ProductDetailsModalProps> = ({ produc
     const x = ((e.clientX - left) / width) * 100;
     const y = ((e.clientY - top) / height) * 100;
     setMousePos({ x, y });
+  };
+
+  const handleSubmitReview = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!newReview.user || !newReview.comment) return;
+
+    const review: Review = {
+        id: Date.now().toString(),
+        user: newReview.user,
+        rating: newReview.rating,
+        comment: newReview.comment,
+        date: new Date().toLocaleDateString()
+    };
+
+    setReviews([review, ...reviews]);
+    setNewReview({ rating: 5, user: '', comment: '' });
   };
 
   // Keyboard navigation
@@ -335,6 +357,87 @@ export const ProductDetailsModal: React.FC<ProductDetailsModalProps> = ({ produc
                           <span className="block text-sm font-bold text-gray-800 font-sans">{product.category}</span>
                       </div>
                   </div>
+              </div>
+
+              {/* Reviews Section */}
+              <div className="mb-10 border-t border-gray-100 pt-8">
+                  <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-cc-primary mb-6 flex items-center gap-2">
+                      <MessageSquare size={14} /> Client Reviews ({reviews.length})
+                  </h3>
+
+                  {/* Review List */}
+                  <div className="space-y-4 mb-8 max-h-60 overflow-y-auto pr-2 custom-scrollbar">
+                      {reviews.length === 0 ? (
+                          <p className="text-sm text-gray-400 italic">No reviews yet. Be the first to review this asset.</p>
+                      ) : (
+                          reviews.map((review) => (
+                              <div key={review.id} className="bg-gray-50 p-4 rounded-xl border border-gray-100">
+                                  <div className="flex justify-between items-start mb-2">
+                                      <span className="font-bold text-cc-primary text-sm">{review.user}</span>
+                                      <span className="text-[10px] text-gray-400">{review.date}</span>
+                                  </div>
+                                  <div className="flex text-cc-gold mb-2">
+                                      {[...Array(5)].map((_, i) => (
+                                          <Star key={i} size={12} fill={i < review.rating ? "currentColor" : "none"} strokeWidth={i < review.rating ? 0 : 1} />
+                                      ))}
+                                  </div>
+                                  <p className="text-xs text-gray-600 leading-relaxed">{review.comment}</p>
+                              </div>
+                          ))
+                      )}
+                  </div>
+
+                  {/* Add Review Form */}
+                  <form onSubmit={handleSubmitReview} className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm">
+                      <h4 className="text-xs font-bold text-cc-primary mb-4 uppercase tracking-wide">Write a Review</h4>
+                      
+                      <div className="mb-4">
+                          <label className="block text-[10px] uppercase font-bold text-gray-400 mb-1">Rating</label>
+                          <div className="flex gap-1">
+                              {[1, 2, 3, 4, 5].map((star) => (
+                                  <button
+                                      key={star}
+                                      type="button"
+                                      onClick={() => setNewReview({ ...newReview, rating: star })}
+                                      className={`transition-transform hover:scale-110 ${newReview.rating >= star ? 'text-cc-gold' : 'text-gray-300'}`}
+                                  >
+                                      <Star size={20} fill={newReview.rating >= star ? "currentColor" : "none"} />
+                                  </button>
+                              ))}
+                          </div>
+                      </div>
+
+                      <div className="mb-4">
+                          <label className="block text-[10px] uppercase font-bold text-gray-400 mb-1">Name</label>
+                          <input 
+                              type="text" 
+                              required
+                              value={newReview.user}
+                              onChange={(e) => setNewReview({ ...newReview, user: e.target.value })}
+                              className="w-full bg-gray-50 border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-cc-gold text-cc-primary"
+                              placeholder="Enter your name"
+                          />
+                      </div>
+
+                      <div className="mb-4">
+                          <label className="block text-[10px] uppercase font-bold text-gray-400 mb-1">Comment</label>
+                          <textarea 
+                              required
+                              value={newReview.comment}
+                              onChange={(e) => setNewReview({ ...newReview, comment: e.target.value })}
+                              rows={3}
+                              className="w-full bg-gray-50 border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-cc-gold text-cc-primary resize-none"
+                              placeholder="Share your experience..."
+                          ></textarea>
+                      </div>
+
+                      <button 
+                          type="submit" 
+                          className="w-full bg-cc-primary text-white text-xs font-bold uppercase tracking-widest py-3 rounded-lg hover:bg-cc-dark transition-colors"
+                      >
+                          Submit Review
+                      </button>
+                  </form>
               </div>
 
               {/* Related */}
