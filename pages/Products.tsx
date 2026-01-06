@@ -259,6 +259,9 @@ export const Products: React.FC = () => {
                                   src={product.image} 
                                   alt={product.name}
                                   loading="lazy"
+                                  onError={(e) => {
+                                      e.currentTarget.src = "https://images.unsplash.com/photo-1580250642511-16609b7eb146?q=80&w=800&auto=format&fit=crop"; 
+                                  }}
                                   className="w-full h-full object-cover transition-transform duration-1000 ease-out group-hover:scale-110"
                               />
                               <div className="absolute inset-0 bg-gradient-to-t from-cc-dark/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>

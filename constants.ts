@@ -6,67 +6,67 @@ export const CATEGORIES = [
     id: 'fruits', 
     name: 'Fresh Fruits', 
     icon: '🍎',
-    image: 'https://images.unsplash.com/photo-1610832958506-aa56368176cf?q=80&w=400&auto=format&fit=crop'
+    image: 'https://images.unsplash.com/photo-1610832958506-aa56368176cf?q=80&w=600&auto=format&fit=crop'
   },
   { 
     id: 'vegetables', 
     name: 'Fresh Vegetables', 
     icon: '🥦',
-    image: 'https://images.unsplash.com/photo-1566385101042-1a0aa0c1268c?q=80&w=400&auto=format&fit=crop'
+    image: 'https://images.unsplash.com/photo-1597362925123-778f1d348433?q=80&w=600&auto=format&fit=crop'
   },
   { 
     id: 'rice', 
     name: 'Rice', 
     icon: '🍚',
-    image: 'https://images.unsplash.com/photo-1586201375761-83865001e31c?q=80&w=400&auto=format&fit=crop'
+    image: 'https://images.unsplash.com/photo-1586201375761-83865001e31c?q=80&w=600&auto=format&fit=crop'
   },
   { 
     id: 'grains', 
     name: 'Grains & Millets', 
     icon: '🌾',
-    image: 'https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?q=80&w=400&auto=format&fit=crop'
+    image: 'https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?q=80&w=600&auto=format&fit=crop'
   },
   { 
     id: 'pulses', 
     name: 'Pulses & Lentils', 
     icon: '🥣',
-    image: 'https://images.unsplash.com/photo-1515543904379-3d757afe726e?q=80&w=400&auto=format&fit=crop'
+    image: 'https://images.unsplash.com/photo-1515543904379-3d757afe726e?q=80&w=600&auto=format&fit=crop'
   },
   { 
     id: 'spices', 
     name: 'Spices', 
     icon: '🌶️',
-    image: 'https://images.unsplash.com/photo-1596040033229-a9821ebd058d?q=80&w=400&auto=format&fit=crop'
+    image: 'https://images.unsplash.com/photo-1596040033229-a9821ebd058d?q=80&w=600&auto=format&fit=crop'
   },
   { 
     id: 'oils', 
     name: 'Edible Oils & Ghee', 
     icon: '🛢️',
-    image: 'https://images.unsplash.com/photo-1474979266404-7eaacbcdccef?q=80&w=400&auto=format&fit=crop'
+    image: 'https://images.unsplash.com/photo-1474979266404-7eaacbcdccef?q=80&w=600&auto=format&fit=crop'
   },
   { 
     id: 'sugar', 
     name: 'Sugar & Essentials', 
     icon: '🧂',
-    image: 'https://images.unsplash.com/photo-1612196603417-22f3e8281313?q=80&w=400&auto=format&fit=crop'
+    image: 'https://images.unsplash.com/photo-1581441363689-1f3c3c414635?q=80&w=600&auto=format&fit=crop'
   },
   { 
     id: 'dryfruits', 
     name: 'Dry Fruits & Nuts', 
     icon: '🥜',
-    image: 'https://images.unsplash.com/photo-1627666453982-f478a5d3f263?q=80&w=400&auto=format&fit=crop'
+    image: 'https://images.unsplash.com/photo-1627666453982-f478a5d3f263?q=80&w=600&auto=format&fit=crop'
   },
   { 
     id: 'frozen', 
     name: 'Frozen & Processed', 
     icon: '❄️',
-    image: 'https://images.unsplash.com/photo-1628088062854-d1870b4553da?q=80&w=400&auto=format&fit=crop'
+    image: 'https://images.unsplash.com/photo-1628088062854-d1870b4553da?q=80&w=600&auto=format&fit=crop'
   },
   { 
     id: 'valueadded', 
     name: 'Value Added & Ancillary', 
     icon: '📦',
-    image: 'https://images.unsplash.com/photo-1512058564366-18510be2db19?q=80&w=400&auto=format&fit=crop'
+    image: 'https://images.unsplash.com/photo-1621506821957-1b50ab7787a4?q=80&w=600&auto=format&fit=crop'
   }
 ];
 
@@ -77,11 +77,11 @@ export const PRODUCTS: Product[] = [
     name: 'Indian Cavendish Banana',
     category: 'Fresh Fruits',
     price: 'Market Rate',
-    image: 'https://images.unsplash.com/photo-1571771896612-61871f0ee6bd?q=80&w=800&auto=format&fit=crop',
+    image: 'https://images.unsplash.com/photo-1528825871115-3581a5387919?q=80&w=800&auto=format&fit=crop',
     images: [
-      'https://images.unsplash.com/photo-1571771896612-61871f0ee6bd?q=80&w=800&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1603833665858-e61d17a86224?q=80&w=800&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1528825871115-3581a5387919?q=80&w=800&auto=format&fit=crop'
+      'https://images.unsplash.com/photo-1528825871115-3581a5387919?q=80&w=800&auto=format&fit=crop', // Fresh Bunch
+      'https://images.unsplash.com/photo-1603833665858-e61d17a86224?q=80&w=800&auto=format&fit=crop', // Market Display
+      'https://images.unsplash.com/photo-1571771896612-61871f0ee6bd?q=80&w=800&auto=format&fit=crop'  // Close up
     ],
     description: 'Robusta / G9 varieties. Also sourcing Nendran and Poovan. Uniform hands, spot-free yellow ripening.',
     origin: 'India',
@@ -94,7 +94,12 @@ export const PRODUCTS: Product[] = [
     name: 'Kashmiri Red Apple',
     category: 'Fresh Fruits',
     price: '₹130-150 / kg',
-    image: 'https://images.unsplash.com/photo-1568702846914-96b305d2aaeb?q=80&w=800&auto=format&fit=crop',
+    image: 'https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?q=80&w=800&auto=format&fit=crop',
+    images: [
+      'https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?q=80&w=800&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1570913149827-d2ac84ab3f9a?q=80&w=800&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1619546813926-a78fa6372cd2?q=80&w=800&auto=format&fit=crop'
+    ],
     description: 'Domestic premium apples from Himachal/Kashmir. Crunchy, sweet, and high color. Loose or Crate pack.',
     origin: 'India',
     nutrition: { servingSize: '100g', calories: 52, protein: '0.3g', carbs: '14g', fat: '0.2g' },
@@ -106,7 +111,12 @@ export const PRODUCTS: Product[] = [
     name: 'Washington Apple (Red Delicious)',
     category: 'Fresh Fruits',
     price: 'Premium Rate',
-    image: 'https://images.unsplash.com/photo-1570913149827-d2ac84ab3f9a?q=80&w=800&auto=format&fit=crop',
+    image: 'https://images.unsplash.com/photo-1568702846914-96b305d2aaeb?q=80&w=800&auto=format&fit=crop',
+    images: [
+      'https://images.unsplash.com/photo-1568702846914-96b305d2aaeb?q=80&w=800&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1570913149827-d2ac84ab3f9a?q=80&w=800&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1630145366286-9f79f1504a11?q=80&w=800&auto=format&fit=crop'
+    ],
     description: 'Imported USA Origin. Waxed, deep red color, consistent size. High shelf life for retail.',
     origin: 'USA',
     nutrition: { servingSize: '100g', calories: 52, protein: '0.3g', carbs: '14g', fat: '0.2g' },
@@ -118,7 +128,12 @@ export const PRODUCTS: Product[] = [
     name: 'Alphonso Mango (Devgad/Ratnagiri)',
     category: 'Fresh Fruits',
     price: 'Seasonal',
-    image: 'https://images.unsplash.com/photo-1605027628030-9bb6f83535e6?q=80&w=800&auto=format&fit=crop',
+    image: 'https://images.unsplash.com/photo-1553279768-865429fa0078?q=80&w=800&auto=format&fit=crop',
+    images: [
+      'https://images.unsplash.com/photo-1553279768-865429fa0078?q=80&w=800&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1605027628030-9bb6f83535e6?q=80&w=800&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1591073113125-e46713c829ed?q=80&w=800&auto=format&fit=crop'
+    ],
     description: 'The King of Mangoes. GI Tagged. Saffron pulp, thin skin. Air cargo ready for export.',
     origin: 'India',
     nutrition: { servingSize: '100g', calories: 60, protein: '0.8g', carbs: '15g', fat: '0.4g' },
@@ -130,7 +145,12 @@ export const PRODUCTS: Product[] = [
     name: 'Valencia Orange',
     category: 'Fresh Fruits',
     price: 'Market Rate',
-    image: 'https://images.unsplash.com/photo-1547514701-42782101795e?q=80&w=800&auto=format&fit=crop',
+    image: 'https://images.unsplash.com/photo-1611080626919-7cf5a9dbab5b?q=80&w=800&auto=format&fit=crop',
+    images: [
+      'https://images.unsplash.com/photo-1611080626919-7cf5a9dbab5b?q=80&w=800&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1547514701-42782101795e?q=80&w=800&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1582979512210-99b6a53385f9?q=80&w=800&auto=format&fit=crop'
+    ],
     description: 'Imported from Egypt/South Africa. High juice content. Perfect for HoReCa and Juicing.',
     origin: 'Egypt / South Africa',
     nutrition: { servingSize: '100g', calories: 47, protein: '0.9g', carbs: '12g', fat: '0.1g' },
@@ -142,7 +162,12 @@ export const PRODUCTS: Product[] = [
     name: 'Exotic Kiwi & Dragon Fruit',
     category: 'Fresh Fruits',
     price: 'Premium Rate',
-    image: 'https://images.unsplash.com/photo-1585059895524-72359e06138a?q=80&w=800&auto=format&fit=crop',
+    image: 'https://images.unsplash.com/photo-1517699418036-fb5d179fef0c?q=80&w=800&auto=format&fit=crop',
+    images: [
+      'https://images.unsplash.com/photo-1517699418036-fb5d179fef0c?q=80&w=800&auto=format&fit=crop', // Kiwi
+      'https://images.unsplash.com/photo-1526367355799-73e4b77f8670?q=80&w=800&auto=format&fit=crop', // Dragon fruit
+      'https://images.unsplash.com/photo-1619632863923-a5f97307049e?q=80&w=800&auto=format&fit=crop'
+    ],
     description: 'Hayward Green Kiwi (Chile/Iran) and Vietnamese Dragon Fruit (White/Red Flesh).',
     origin: 'Chile / Vietnam',
     nutrition: { servingSize: '100g', calories: 61, protein: '1.1g', carbs: '15g', fat: '0.5g' },
@@ -157,6 +182,11 @@ export const PRODUCTS: Product[] = [
     category: 'Fresh Vegetables',
     price: '₹46.80 / kg (Indicative)',
     image: 'https://images.unsplash.com/photo-1618512496248-a07fe83aa829?q=80&w=800&auto=format&fit=crop',
+    images: [
+      'https://images.unsplash.com/photo-1618512496248-a07fe83aa829?q=80&w=800&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1508747703725-719777637510?q=80&w=800&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1587049352846-4a222e784d38?q=80&w=800&auto=format&fit=crop'
+    ],
     description: 'A Grade Red Onion. Double skin dried. 45mm-55mm+ size. Long shelf life for export.',
     origin: 'India',
     nutrition: { servingSize: '100g', calories: 40, protein: '1.1g', carbs: '9g', fat: '0.1g' },
@@ -169,6 +199,11 @@ export const PRODUCTS: Product[] = [
     category: 'Fresh Vegetables',
     price: '₹8-12 / kg (Bulk)',
     image: 'https://images.unsplash.com/photo-1518977676605-693d3a11168f?q=80&w=800&auto=format&fit=crop',
+    images: [
+      'https://images.unsplash.com/photo-1518977676605-693d3a11168f?q=80&w=800&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1603598587189-da6a9883652c?q=80&w=800&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1508313880080-c4bef0730395?q=80&w=800&auto=format&fit=crop'
+    ],
     description: 'Chipsona / LR / 3797 varieties. High dry matter for processing or fresh table consumption.',
     origin: 'India',
     nutrition: { servingSize: '100g', calories: 77, protein: '2g', carbs: '17g', fat: '0.1g' },
@@ -181,6 +216,11 @@ export const PRODUCTS: Product[] = [
     category: 'Fresh Vegetables',
     price: 'Market Rate',
     image: 'https://images.unsplash.com/photo-1563565375-f3fdf5d2e374?q=80&w=800&auto=format&fit=crop',
+    images: [
+      'https://images.unsplash.com/photo-1563565375-f3fdf5d2e374?q=80&w=800&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1595153245209-42b79e276081?q=80&w=800&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1597362925123-778f1d348433?q=80&w=800&auto=format&fit=crop'
+    ],
     description: 'Hotel grade Capsicum, Broccoli, Zucchini, and Iceberg Lettuce. Greenhouse cultivated.',
     origin: 'India',
     nutrition: { servingSize: '100g', calories: 20, protein: '0.9g', carbs: '4.6g', fat: '0.2g' },
@@ -198,7 +238,7 @@ export const PRODUCTS: Product[] = [
     images: [
       'https://images.unsplash.com/photo-1586201375761-83865001e31c?q=80&w=800&auto=format&fit=crop',
       'https://images.unsplash.com/photo-1536304993881-ffc028db696f?q=80&w=800&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1516684732162-798a0062be99?q=80&w=800&auto=format&fit=crop'
+      'https://images.unsplash.com/photo-1630145202684-2a24c6e26875?q=80&w=800&auto=format&fit=crop'
     ],
     description: 'Extra Long Grain (8.35mm avg). Available in Steam, White Sella, and Golden Sella. 95% Purity.',
     origin: 'India',
@@ -212,6 +252,11 @@ export const PRODUCTS: Product[] = [
     category: 'Rice',
     price: 'Market Rate',
     image: 'https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?q=80&w=800&auto=format&fit=crop',
+    images: [
+      'https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?q=80&w=800&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1595103444738-95841cb6f743?q=80&w=800&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1542617300-4b95d033501a?q=80&w=800&auto=format&fit=crop'
+    ],
     description: 'Medium grain, lightweight aromatic rice. 12+ months old crop. Ideal for daily staples.',
     origin: 'India (Karnataka/AP)',
     nutrition: { servingSize: '100g', calories: 130, protein: '2.5g', carbs: '28g', fat: '0.5g' },
@@ -224,6 +269,11 @@ export const PRODUCTS: Product[] = [
     category: 'Rice',
     price: 'Market Rate',
     image: 'https://images.unsplash.com/photo-1599581885482-143013b52d9c?q=80&w=800&auto=format&fit=crop',
+    images: [
+      'https://images.unsplash.com/photo-1599581885482-143013b52d9c?q=80&w=800&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1610419082084-29007e997a3e?q=80&w=800&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1631880998592-23f49497042a?q=80&w=800&auto=format&fit=crop'
+    ],
     description: 'Kerala Rosematta. Parboiled red rice with high nutrient retention. Bold grain.',
     origin: 'India (Kerala)',
     nutrition: { servingSize: '100g', calories: 350, protein: '9g', carbs: '78g', fat: '1g' },
@@ -236,6 +286,11 @@ export const PRODUCTS: Product[] = [
     category: 'Rice',
     price: 'Economy Rate',
     image: 'https://images.unsplash.com/photo-1613531338573-984dd08f1b61?q=80&w=800&auto=format&fit=crop',
+    images: [
+      'https://images.unsplash.com/photo-1613531338573-984dd08f1b61?q=80&w=800&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1565267425121-a39c9413247f?q=80&w=800&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1626082929543-5bab0f006c42?q=80&w=800&auto=format&fit=crop'
+    ],
     description: 'Long grain non-basmati. 5% or 25% broken. High volume export staple for Africa/Gulf.',
     origin: 'India',
     nutrition: { servingSize: '100g', calories: 130, protein: '2.7g', carbs: '28g', fat: '0.3g' },
@@ -250,6 +305,11 @@ export const PRODUCTS: Product[] = [
     category: 'Grains & Millets',
     price: 'Market Rate',
     image: 'https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?q=80&w=800&auto=format&fit=crop',
+    images: [
+      'https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?q=80&w=800&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1501430654243-c934cec2e1c0?q=80&w=800&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1601633575975-520e7df6992d?q=80&w=800&auto=format&fit=crop'
+    ],
     description: 'Premium Indian Wheat. High gluten (12-13%). Machine cleaned. Suitable for Bakery & Chakki Atta.',
     origin: 'India',
     nutrition: { servingSize: '100g', calories: 340, protein: '13.2g', carbs: '72g', fat: '2.5g' },
@@ -262,6 +322,11 @@ export const PRODUCTS: Product[] = [
     category: 'Grains & Millets',
     price: 'Market Rate',
     image: 'https://images.unsplash.com/photo-1551754655-cd27e38d2076?q=80&w=800&auto=format&fit=crop',
+    images: [
+      'https://images.unsplash.com/photo-1551754655-cd27e38d2076?q=80&w=800&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1600201018318-7b4c68892716?q=80&w=800&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1614983056157-550604f2f451?q=80&w=800&auto=format&fit=crop'
+    ],
     description: 'For Animal Feed or Starch Industry. High carbohydrate content. Low Aflatoxin.',
     origin: 'India',
     nutrition: { servingSize: '100g', calories: 365, protein: '9.4g', carbs: '74g', fat: '4.7g' },
@@ -274,6 +339,11 @@ export const PRODUCTS: Product[] = [
     category: 'Grains & Millets',
     price: 'Market Rate',
     image: 'https://images.unsplash.com/photo-1621817292275-52f205a22c57?q=80&w=800&auto=format&fit=crop',
+    images: [
+      'https://images.unsplash.com/photo-1621817292275-52f205a22c57?q=80&w=800&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1662036254426-3041d9990263?q=80&w=800&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1647420959325-a131804f8615?q=80&w=800&auto=format&fit=crop'
+    ],
     description: 'Major Millet. Highly nutritious, gluten-free, and rich in iron. Used for flatbreads (Rotla) and porridge.',
     origin: 'India',
     nutrition: { servingSize: '100g', calories: 378, protein: '11g', carbs: '72g', fat: '4g' },
@@ -286,6 +356,11 @@ export const PRODUCTS: Product[] = [
     category: 'Grains & Millets',
     price: 'Market Rate',
     image: 'https://images.unsplash.com/photo-1518567709337-37dfd0800c7e?q=80&w=800&auto=format&fit=crop',
+    images: [
+      'https://images.unsplash.com/photo-1518567709337-37dfd0800c7e?q=80&w=800&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1516213760439-d3550e68d009?q=80&w=800&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1549419161-001099b2446a?q=80&w=800&auto=format&fit=crop'
+    ],
     description: 'White Sorghum. Ancient grain, high in fiber and antioxidants. Staple for Bhakri/Roti and Animal Feed.',
     origin: 'India',
     nutrition: { servingSize: '100g', calories: 339, protein: '11.3g', carbs: '74.6g', fat: '3.3g' },
@@ -298,6 +373,11 @@ export const PRODUCTS: Product[] = [
     category: 'Grains & Millets',
     price: 'Market Rate',
     image: 'https://images.unsplash.com/photo-1647420959325-a131804f8615?q=80&w=800&auto=format&fit=crop',
+    images: [
+      'https://images.unsplash.com/photo-1647420959325-a131804f8615?q=80&w=800&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1596232501066-673e4a2fb6bc?q=80&w=800&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1662036254426-3041d9990263?q=80&w=800&auto=format&fit=crop'
+    ],
     description: 'Red Millet. Exceptional calcium content. Used for Malt, Dosa, and Porridge. Deep red colour.',
     origin: 'India',
     nutrition: { servingSize: '100g', calories: 328, protein: '7.3g', carbs: '72g', fat: '1.3g' },
@@ -310,6 +390,11 @@ export const PRODUCTS: Product[] = [
     category: 'Grains & Millets',
     price: 'Premium Rate',
     image: 'https://images.unsplash.com/photo-1586259074092-2637a85de9e0?q=80&w=800&auto=format&fit=crop',
+    images: [
+      'https://images.unsplash.com/photo-1586259074092-2637a85de9e0?q=80&w=800&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1601314643034-716d1f99c859?q=80&w=800&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1586985288764-754162e2456f?q=80&w=800&auto=format&fit=crop'
+    ],
     description: 'Pseudo-millet. Complete protein containing all 9 essential amino acids. Saponin-free/Washed.',
     origin: 'India / Peru',
     nutrition: { servingSize: '100g', calories: 368, protein: '14g', carbs: '64g', fat: '6g' },
@@ -322,6 +407,11 @@ export const PRODUCTS: Product[] = [
     category: 'Grains & Millets',
     price: 'Market Rate',
     image: 'https://images.unsplash.com/photo-1662036254426-3041d9990263?q=80&w=800&auto=format&fit=crop',
+    images: [
+      'https://images.unsplash.com/photo-1662036254426-3041d9990263?q=80&w=800&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1621817292275-52f205a22c57?q=80&w=800&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1647420959325-a131804f8615?q=80&w=800&auto=format&fit=crop'
+    ],
     description: 'Minor Millet. Ancient grain with low glycemic index. Rich in dietary fiber and minerals. Ideal for diabetic diets.',
     origin: 'India',
     nutrition: { servingSize: '100g', calories: 331, protein: '12.3g', carbs: '60g', fat: '4.3g' },
@@ -334,6 +424,11 @@ export const PRODUCTS: Product[] = [
     category: 'Grains & Millets',
     price: 'Premium Rate',
     image: 'https://images.unsplash.com/photo-1594917426861-5464197c3656?q=80&w=800&auto=format&fit=crop',
+    images: [
+      'https://images.unsplash.com/photo-1594917426861-5464197c3656?q=80&w=800&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?q=80&w=800&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1506456073173-0370604b6849?q=80&w=800&auto=format&fit=crop'
+    ],
     description: 'Pseudo-millet. High protein superfood. Gluten-free and rich in lysine. Used in fasting foods and energy bars.',
     origin: 'India',
     nutrition: { servingSize: '100g', calories: 371, protein: '14g', carbs: '65g', fat: '7g' },
@@ -346,6 +441,11 @@ export const PRODUCTS: Product[] = [
     category: 'Grains & Millets',
     price: 'Premium Rate',
     image: 'https://images.unsplash.com/photo-1506456073173-0370604b6849?q=80&w=800&auto=format&fit=crop',
+    images: [
+      'https://images.unsplash.com/photo-1506456073173-0370604b6849?q=80&w=800&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1601633575975-520e7df6992d?q=80&w=800&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?q=80&w=800&auto=format&fit=crop'
+    ],
     description: 'Pseudo-cereal. Fruit seed related to rhubarb. Gluten-free, high fiber. Staple for fasting flour (Kuttu Atta).',
     origin: 'India / Russia',
     nutrition: { servingSize: '100g', calories: 343, protein: '13g', carbs: '71g', fat: '3.4g' },
@@ -359,7 +459,12 @@ export const PRODUCTS: Product[] = [
     name: 'Toor Dal (Pigeon Peas)',
     category: 'Pulses & Lentils',
     price: 'Market Rate',
-    image: 'https://images.unsplash.com/photo-1515543904379-3d757afe726e?q=80&w=800&auto=format&fit=crop',
+    image: 'https://images.unsplash.com/photo-1585996656885-b6d396a84c68?q=80&w=800&auto=format&fit=crop',
+    images: [
+      'https://images.unsplash.com/photo-1585996656885-b6d396a84c68?q=80&w=800&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1515543904379-3d757afe726e?q=80&w=800&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1584270354949-c26b0d5b4a0c?q=80&w=800&auto=format&fit=crop'
+    ],
     description: 'Fatka / Desi grades. Oily and Non-oily options. High protein content.',
     origin: 'India / Myanmar',
     nutrition: { servingSize: '100g', calories: 343, protein: '22g', carbs: '63g', fat: '1.5g' },
@@ -372,6 +477,11 @@ export const PRODUCTS: Product[] = [
     category: 'Pulses & Lentils',
     price: 'Market Rate',
     image: 'https://images.unsplash.com/photo-1584270354949-c26b0d5b4a0c?q=80&w=800&auto=format&fit=crop',
+    images: [
+      'https://images.unsplash.com/photo-1584270354949-c26b0d5b4a0c?q=80&w=800&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1566453850734-733d31267b2d?q=80&w=800&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1627042503525-452174d8d197?q=80&w=800&auto=format&fit=crop'
+    ],
     description: 'White Chickpeas. Counts 42-44 / 44-46 (12mm). Creamy texture for Hummus/Curry.',
     origin: 'India',
     nutrition: { servingSize: '100g', calories: 364, protein: '19g', carbs: '61g', fat: '6g' },
@@ -384,6 +494,11 @@ export const PRODUCTS: Product[] = [
     category: 'Pulses & Lentils',
     price: 'Market Rate',
     image: 'https://images.unsplash.com/photo-1559816656-9a259c238bd7?q=80&w=800&auto=format&fit=crop',
+    images: [
+      'https://images.unsplash.com/photo-1559816656-9a259c238bd7?q=80&w=800&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1610725664338-23c21c2522fb?q=80&w=800&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1562916892-0b17c85859e9?q=80&w=800&auto=format&fit=crop'
+    ],
     description: 'Washed and split Mung beans. Quick cooking. Staple for Dal Tadka.',
     origin: 'India',
     nutrition: { servingSize: '100g', calories: 347, protein: '24g', carbs: '63g', fat: '1.2g' },
@@ -398,6 +513,11 @@ export const PRODUCTS: Product[] = [
     category: 'Spices',
     price: 'Market Rate',
     image: 'https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?q=80&w=800&auto=format&fit=crop',
+    images: [
+      'https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?q=80&w=800&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1601648764658-cf37e8c07b70?q=80&w=800&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1596040033229-a9821ebd058d?q=80&w=800&auto=format&fit=crop'
+    ],
     description: 'Teja S17 / Sanam S4 / Byadgi. High Pungency and Color varieties. Stem/Stemless.',
     origin: 'India (Guntur)',
     nutrition: { servingSize: '100g', calories: 40, protein: '2g', carbs: '9g', fat: '1g' },
@@ -410,6 +530,11 @@ export const PRODUCTS: Product[] = [
     category: 'Spices',
     price: 'Premium Rate',
     image: 'https://images.unsplash.com/photo-1550951663-8a38c2084df8?q=80&w=800&auto=format&fit=crop',
+    images: [
+      'https://images.unsplash.com/photo-1550951663-8a38c2084df8?q=80&w=800&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1629858342738-958b958c83a1?q=80&w=800&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1601648764658-cf37e8c07b70?q=80&w=800&auto=format&fit=crop'
+    ],
     description: '8mm+ Bold Pods. Intense aroma and bright green color. Handpicked from Idukki.',
     origin: 'India (Kerala)',
     nutrition: { servingSize: '1 pod', calories: 5, protein: '0.1g', carbs: '1g', fat: '0g' },
@@ -422,6 +547,11 @@ export const PRODUCTS: Product[] = [
     category: 'Spices',
     price: 'Market Rate',
     image: 'https://images.unsplash.com/photo-1615485925694-a035aa933853?q=80&w=800&auto=format&fit=crop',
+    images: [
+      'https://images.unsplash.com/photo-1615485925694-a035aa933853?q=80&w=800&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1596040033229-a9821ebd058d?q=80&w=800&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1630138536855-873646545169?q=80&w=800&auto=format&fit=crop'
+    ],
     description: 'High Curcumin (3-5%). Double polished fingers. Vibrant yellow color.',
     origin: 'India',
     nutrition: { servingSize: '1 tsp', calories: 8, protein: '0g', carbs: '1g', fat: '0g' },
@@ -435,7 +565,12 @@ export const PRODUCTS: Product[] = [
     name: 'Refined Sunflower Oil',
     category: 'Edible Oils & Ghee',
     price: 'Market Rate',
-    image: 'https://images.unsplash.com/photo-1620888200673-827c191a221f?q=80&w=800&auto=format&fit=crop',
+    image: 'https://images.unsplash.com/photo-1474979266404-7eaacbcdccef?q=80&w=800&auto=format&fit=crop',
+    images: [
+      'https://images.unsplash.com/photo-1474979266404-7eaacbcdccef?q=80&w=800&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1620888200673-827c191a221f?q=80&w=800&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?q=80&w=800&auto=format&fit=crop'
+    ],
     description: 'Imported Origin (Ukraine/Russia) or Domestic. Clear, Lite, Vitamin E fortified.',
     origin: 'Ukraine / Russia / India',
     nutrition: { servingSize: '1 tbsp', calories: 120, protein: '0g', carbs: '0g', fat: '14g' },
@@ -448,6 +583,11 @@ export const PRODUCTS: Product[] = [
     category: 'Edible Oils & Ghee',
     price: 'Premium Rate',
     image: 'https://images.unsplash.com/photo-1631452180519-c014fe946bc7?q=80&w=800&auto=format&fit=crop',
+    images: [
+      'https://images.unsplash.com/photo-1631452180519-c014fe946bc7?q=80&w=800&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1597362925123-778f1d348433?q=80&w=800&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1559563458-527698bf5295?q=80&w=800&auto=format&fit=crop'
+    ],
     description: 'Traditional Danedar texture. Rich aroma. 99.7% Fat. Clarified Butter.',
     origin: 'India',
     nutrition: { servingSize: '1 tbsp', calories: 112, protein: '0g', carbs: '0g', fat: '13g' },
@@ -461,7 +601,12 @@ export const PRODUCTS: Product[] = [
     name: 'White Crystal Sugar (S30/M30)',
     category: 'Sugar & Essentials',
     price: 'Market Rate',
-    image: 'https://images.unsplash.com/photo-1612196603417-22f3e8281313?q=80&w=800&auto=format&fit=crop',
+    image: 'https://images.unsplash.com/photo-1581441363689-1f3c3c414635?q=80&w=800&auto=format&fit=crop',
+    images: [
+      'https://images.unsplash.com/photo-1581441363689-1f3c3c414635?q=80&w=800&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1612196603417-22f3e8281313?q=80&w=800&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1622483767028-3f66f32aef97?q=80&w=800&auto=format&fit=crop'
+    ],
     description: 'ICUMSA < 100. Sulphurless. Sparkling white. Double Refined.',
     origin: 'India',
     nutrition: { servingSize: '100g', calories: 387, protein: '0g', carbs: '99.9g', fat: '0g' },
@@ -474,6 +619,11 @@ export const PRODUCTS: Product[] = [
     category: 'Sugar & Essentials',
     price: 'Market Rate',
     image: 'https://images.unsplash.com/photo-1629124446545-2e1189d2d095?q=80&w=800&auto=format&fit=crop',
+    images: [
+      'https://images.unsplash.com/photo-1629124446545-2e1189d2d095?q=80&w=800&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1601633575975-520e7df6992d?q=80&w=800&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1631880998592-23f49497042a?q=80&w=800&auto=format&fit=crop'
+    ],
     description: 'Chemical-free. Available in Balls, Cubes, or Powder. Rich in Iron.',
     origin: 'India',
     nutrition: { servingSize: '100g', calories: 383, protein: '0.4g', carbs: '98g', fat: '0.1g' },
@@ -487,7 +637,12 @@ export const PRODUCTS: Product[] = [
     name: 'Cashew Nuts (W320/W240)',
     category: 'Dry Fruits & Nuts',
     price: 'Market Rate',
-    image: 'https://images.unsplash.com/photo-1596232501066-673e4a2fb6bc?q=80&w=800&auto=format&fit=crop',
+    image: 'https://images.unsplash.com/photo-1533479632832-6bc6b978a35e?q=80&w=800&auto=format&fit=crop',
+    images: [
+      'https://images.unsplash.com/photo-1533479632832-6bc6b978a35e?q=80&w=800&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1596232501066-673e4a2fb6bc?q=80&w=800&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1627666453982-f478a5d3f263?q=80&w=800&auto=format&fit=crop'
+    ],
     description: 'Whole White Kernels. Crunchy and Sweet. W320 is standard export grade.',
     origin: 'India / Vietnam',
     nutrition: { servingSize: '30g', calories: 157, protein: '5g', carbs: '9g', fat: '12g' },
@@ -500,6 +655,11 @@ export const PRODUCTS: Product[] = [
     category: 'Dry Fruits & Nuts',
     price: 'Market Rate',
     image: 'https://images.unsplash.com/photo-1563200877-c9183d254353?q=80&w=800&auto=format&fit=crop',
+    images: [
+      'https://images.unsplash.com/photo-1563200877-c9183d254353?q=80&w=800&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1595153245209-42b79e276081?q=80&w=800&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1616688755088-34f71a938c35?q=80&w=800&auto=format&fit=crop'
+    ],
     description: 'Imported from Saudi/UAE/Tunisia/Iran. Soft flesh, dark color, high sweetness.',
     origin: 'Saudi Arabia / Iran / Tunisia',
     nutrition: { servingSize: '100g', calories: 277, protein: '1.8g', carbs: '75g', fat: '0.2g' },
@@ -514,6 +674,11 @@ export const PRODUCTS: Product[] = [
     category: 'Frozen & Processed',
     price: 'Market Rate',
     image: 'https://images.unsplash.com/photo-1590799797089-2244247596b6?q=80&w=800&auto=format&fit=crop',
+    images: [
+      'https://images.unsplash.com/photo-1590799797089-2244247596b6?q=80&w=800&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1516684732162-798a0062be99?q=80&w=800&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1595103444738-95841cb6f743?q=80&w=800&auto=format&fit=crop'
+    ],
     description: 'Farm fresh sweet peas, blanched and IQF frozen. No preservatives.',
     origin: 'India',
     nutrition: { servingSize: '100g', calories: 81, protein: '5g', carbs: '14g', fat: '0.4g' },
@@ -526,6 +691,11 @@ export const PRODUCTS: Product[] = [
     category: 'Frozen & Processed',
     price: 'Market Rate',
     image: 'https://images.unsplash.com/photo-1630384030331-8e662ac516c7?q=80&w=800&auto=format&fit=crop',
+    images: [
+      'https://images.unsplash.com/photo-1630384030331-8e662ac516c7?q=80&w=800&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1573080496987-a199f8cd7558?q=80&w=800&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1605692683933-728b7e71362e?q=80&w=800&auto=format&fit=crop'
+    ],
     description: 'Shoestring (6mm) or Regular (9mm). Pre-fried. Crisp golden texture.',
     origin: 'India / Imported',
     nutrition: { servingSize: '100g', calories: 150, protein: '2g', carbs: '25g', fat: '5g' },
@@ -540,6 +710,11 @@ export const PRODUCTS: Product[] = [
     category: 'Value Added & Ancillary',
     price: 'Market Rate',
     image: 'https://images.unsplash.com/photo-1621506821957-1b50ab7787a4?q=80&w=800&auto=format&fit=crop',
+    images: [
+      'https://images.unsplash.com/photo-1621506821957-1b50ab7787a4?q=80&w=800&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1601633575975-520e7df6992d?q=80&w=800&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1615485500704-8e99099928b3?q=80&w=800&auto=format&fit=crop'
+    ],
     description: 'Traditional Indian pickles in oil. Mango, Lime, Mixed Veg options. Bulk or Retail pack.',
     origin: 'India',
     nutrition: { servingSize: '1 tbsp', calories: 25, protein: '0g', carbs: '2g', fat: '2g' },
@@ -552,6 +727,11 @@ export const PRODUCTS: Product[] = [
     category: 'Value Added & Ancillary',
     price: 'Market Rate',
     image: 'https://images.unsplash.com/photo-1586985289688-ca3cf47d3e6e?q=80&w=800&auto=format&fit=crop',
+    images: [
+      'https://images.unsplash.com/photo-1586985289688-ca3cf47d3e6e?q=80&w=800&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?q=80&w=800&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1596040033229-a9821ebd058d?q=80&w=800&auto=format&fit=crop'
+    ],
     description: 'Fine milled rice flour for food processing. Ready-to-cook spice blends (Masalas).',
     origin: 'India',
     nutrition: { servingSize: '100g', calories: 366, protein: '6g', carbs: '80g', fat: '1.4g' },

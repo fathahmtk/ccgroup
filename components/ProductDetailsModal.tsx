@@ -119,6 +119,7 @@ export const ProductDetailsModal: React.FC<ProductDetailsModalProps> = ({ produc
               src={galleryImages[currentImageIndex]} 
               alt={product.name}
               className="max-w-full max-h-full p-4 object-contain select-none animate-fade-in transition-opacity duration-300"
+              onError={(e) => { e.currentTarget.src = "https://images.unsplash.com/photo-1580250642511-16609b7eb146?q=80&w=800&auto=format&fit=crop"; }}
            />
         </div>
       )}
@@ -154,6 +155,7 @@ export const ProductDetailsModal: React.FC<ProductDetailsModalProps> = ({ produc
                   src={galleryImages[currentImageIndex]} 
                   alt={product.name}
                   className="absolute inset-0 w-full h-full object-cover transition-transform duration-100 animate-fade-in"
+                  onError={(e) => { e.currentTarget.src = "https://images.unsplash.com/photo-1580250642511-16609b7eb146?q=80&w=800&auto=format&fit=crop"; }}
                   style={{
                     transformOrigin: `${mousePos.x}% ${mousePos.y}%`,
                     transform: isHovering ? 'scale(2)' : 'scale(1)',
