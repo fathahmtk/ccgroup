@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Download, Search, Filter, ArrowUpRight, Check, Package, Scale, Globe, Tag, Eye, Container } from 'lucide-react';
+import React, { useState, useMemo, useRef, useEffect } from 'react';
+import { Search, Package, ChevronRight, SlidersHorizontal, Globe, Filter, X, Check, ChevronDown } from 'lucide-react';
 import { PRODUCTS, CATEGORIES } from '../constants';
 import { ProductDetailsModal } from '../components/ProductDetailsModal';
 import { Product } from '../types';
@@ -11,226 +11,305 @@ export const Products: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [viewProduct, setViewProduct] = useState<Product | null>(null);
   
+  // For dropdown management
+  const [activeDropdown, setActiveDropdown] = useState<'category' | 'origin' | null>(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
   const { addToCart, setIsCartOpen } = useCart();
   
+  // Close dropdowns when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setActiveDropdown(null);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  const availableOrigins = useMemo(() => {
+    const origins = new Set<string>();
+    PRODUCTS.forEach(product => {
+      const parts = product.origin.split('/').map(p => p.trim());
+      parts.forEach(part => {
+        const cleanOrigin = part.split('(')[0].trim();
+        if (cleanOrigin) origins.add(cleanOrigin);
+      });
+    });
+    return Array.from(origins).sort();
+  }, []);
+
   const toggleOrigin = (origin: string) => {
     setSelectedOrigin(prev => 
       prev.includes(origin) ? prev.filter(o => o !== origin) : [...prev, origin]
     );
   };
 
+  const clearFilters = () => {
+    setSelectedCategory('All');
+    setSelectedOrigin([]);
+    setSearchQuery('');
+    setActiveDropdown(null);
+  };
+
   const filteredProducts = PRODUCTS.filter(p => {
     const catMatch = selectedCategory === 'All' || p.category === selectedCategory;
-    const originMatch = selectedOrigin.length === 0 || selectedOrigin.includes(p.origin);
+    const originMatch = selectedOrigin.length === 0 || selectedOrigin.some(o => p.origin.includes(o));
     const searchMatch = p.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
                         p.category.toLowerCase().includes(searchQuery.toLowerCase());
     return catMatch && originMatch && searchMatch;
   });
 
-  const handleInquire = (product: Product) => {
+  const handleInquire = (product: Product, e?: React.MouseEvent) => {
+      e?.stopPropagation();
       addToCart(product);
       setIsCartOpen(true);
       setViewProduct(null);
   };
 
-  // Logic for Dynamic Header Image
-  const activeCategoryData = CATEGORIES.find(c => c.name === selectedCategory);
-  // Default image updated to a rich display of foodstuff/spices/grains instead of a port scene
-  const heroImage = activeCategoryData 
-    ? activeCategoryData.image 
-    : "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?q=80&w=2670&auto=format&fit=crop"; 
+  const getCertBadges = (product: Product) => {
+      const text = (product.description + " " + JSON.stringify(product.specs || {})).toLowerCase();
+      const badges = [];
+      if (text.includes('halal')) badges.push('Halal');
+      if (text.includes('iso')) badges.push('ISO');
+      if (text.includes('organic')) badges.push('Organic');
+      return badges;
+  };
+
+  const getCountryFlag = (origin: string) => {
+    const lower = origin.toLowerCase();
+    if (lower.includes('india')) return '🇮🇳';
+    if (lower.includes('usa')) return '🇺🇸';
+    if (lower.includes('egypt')) return '🇪🇬';
+    if (lower.includes('chile')) return '🇨🇱';
+    if (lower.includes('vietnam')) return '🇻🇳';
+    if (lower.includes('ukraine')) return '🇺🇦';
+    if (lower.includes('saudi')) return '🇸🇦';
+    if (lower.includes('myanmar')) return '🇲🇲';
+    if (lower.includes('russia')) return '🇷🇺';
+    if (lower.includes('tunisia')) return '🇹🇳';
+    if (lower.includes('iran')) return '🇮🇷';
+    if (lower.includes('south africa')) return '🇿🇦';
+    return '🌐';
+  };
 
   return (
-    <div className="bg-gray-50 min-h-screen">
+    <div className="bg-cc-cream min-h-screen">
       
-      {/* Dynamic Header Banner */}
-      <div className="relative h-[400px] w-full overflow-hidden bg-cc-primary pt-20">
-         <div className="absolute inset-0 z-0">
-            <img 
-              src={heroImage} 
-              alt={selectedCategory} 
-              className="w-full h-full object-cover opacity-60 transition-all duration-700"
-            />
-            {/* Gradient Overlays for text readability */}
-            <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40 to-transparent"></div>
-            <div className="absolute inset-0 bg-gradient-to-r from-gray-900/90 to-transparent"></div>
+      {/* Header Section */}
+      <div className="relative pt-32 pb-20 bg-cc-primary overflow-hidden">
+         <div className="absolute inset-0 overflow-hidden">
+             <img src="https://images.unsplash.com/photo-1509358271058-acd22cc93898?q=80&w=2000" className="w-full h-full object-cover opacity-30 scale-105 animate-slow-zoom" />
+             <div className="absolute inset-0 bg-gradient-to-b from-cc-dark/60 to-cc-primary"></div>
          </div>
-         
-         <div className="relative z-10 max-w-[1800px] mx-auto px-6 md:px-8 h-full flex flex-col justify-end pb-12">
-             <span className="text-cc-gold font-bold uppercase tracking-widest text-xs mb-3 flex items-center gap-2 animate-fade-up">
-                <Package size={14}/> {selectedCategory === 'All' ? 'Global Catalog' : 'Product Category'}
-             </span>
-             <h1 className="font-display text-4xl md:text-6xl font-bold text-white mb-4 animate-fade-up">
-                {selectedCategory === 'All' ? 'Commodity Inventory' : selectedCategory}
-             </h1>
-             <p className="text-gray-300 text-lg max-w-xl font-light leading-relaxed animate-fade-up">
-                 {selectedCategory === 'All' 
-                    ? `Access our real-time spot market inventory. Showing ${filteredProducts.length} wholesale lots available for immediate export.`
-                    : `Premium ${activeCategoryData?.name.toLowerCase()} sourced directly from origin. Verified quality for industrial processing.`
-                 }
-             </p>
+         <div className="max-w-[1800px] mx-auto px-6 md:px-16 relative z-10 text-center">
+             <div className="animate-fade-up">
+                 <h1 className="font-display text-5xl md:text-7xl text-white mb-6">
+                    Global Trade Catalog
+                 </h1>
+                 <p className="text-white/60 text-xl font-light max-w-2xl mx-auto leading-relaxed">
+                     Explore our live inventory of certified commodities. Sourced directly from origin for industrial use.
+                 </p>
+             </div>
          </div>
       </div>
 
-      <div className="max-w-[1800px] mx-auto px-6 md:px-8 py-12">
-        
-        {/* Top Controls */}
-        <div className="flex justify-between items-center mb-8">
-            <p className="text-gray-500 text-sm font-medium">Found <span className="text-cc-primary font-bold">{filteredProducts.length}</span> results</p>
-            <button className="flex items-center gap-2 px-6 py-3 bg-white border border-gray-300 text-gray-700 font-bold text-xs uppercase tracking-wide rounded-sm hover:bg-gray-50 transition-colors shadow-sm">
-                 <Download size={16} /> Export Catalog
-             </button>
-        </div>
-
-        <div className="flex flex-col lg:flex-row gap-8">
-            
-            {/* SIDEBAR FILTERS */}
-            <div className="w-full lg:w-72 flex-shrink-0 space-y-8">
-                {/* Search */}
-                <div className="relative">
-                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={16} />
+      {/* FILTER BAR - STICKY */}
+      <div className="sticky top-20 z-40 bg-white/80 backdrop-blur-xl border-y border-gray-200/60 shadow-sm" ref={dropdownRef}>
+         <div className="max-w-[1800px] mx-auto px-6 md:px-16 py-4">
+            <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
+                
+                {/* Search Input */}
+                <div className="relative w-full md:w-96 group">
+                    <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-cc-gold transition-colors" size={18} />
                     <input 
                       type="text" 
-                      placeholder="Search HS Code or Commodity..." 
+                      placeholder="Search commodities (e.g. Sugar, Rice)..." 
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
-                      className="w-full pl-10 pr-4 py-3 border border-gray-200 bg-white rounded-sm focus:outline-none focus:border-cc-primary text-sm shadow-sm"
+                      className="w-full pl-12 pr-4 py-2.5 bg-gray-100/50 border border-gray-200 rounded-full focus:outline-none focus:ring-1 focus:ring-cc-gold focus:bg-white transition-all text-sm font-medium"
                     />
+                    {searchQuery && (
+                        <button onClick={() => setSearchQuery('')} className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600">
+                            <X size={14} />
+                        </button>
+                    )}
                 </div>
 
-                {/* Categories with Images */}
-                <div className="bg-white p-6 rounded-sm border border-gray-200 shadow-sm">
-                    <h3 className="font-bold text-cc-primary mb-6 flex items-center gap-2 text-sm uppercase tracking-widest">
-                        <Filter size={14} /> Trade Sector
-                    </h3>
-                    <div className="space-y-3">
-                        <label className={`flex items-center gap-3 cursor-pointer group p-2 rounded-md transition-all border ${selectedCategory === 'All' ? 'bg-gray-50 border-gray-200' : 'border-transparent hover:bg-gray-50'}`}>
-                            <input 
-                                type="radio" 
-                                name="category" 
-                                checked={selectedCategory === 'All'}
-                                onChange={() => setSelectedCategory('All')}
-                                className="hidden"
-                            />
-                            <div className={`w-10 h-10 rounded-md flex items-center justify-center border border-gray-100 ${selectedCategory === 'All' ? 'bg-cc-primary text-white' : 'bg-gray-100 text-gray-400'}`}>
-                                <Globe size={20} />
-                            </div>
-                            <span className={`text-sm ${selectedCategory === 'All' ? 'text-cc-primary font-bold' : 'text-gray-600 group-hover:text-gray-900'}`}>All Sectors</span>
-                        </label>
-                        
-                        {CATEGORIES.map(cat => (
-                            <label key={cat.id} className={`flex items-center gap-3 cursor-pointer group p-2 rounded-md transition-all border ${selectedCategory === cat.name ? 'bg-gray-50 border-gray-200' : 'border-transparent hover:bg-gray-50'}`}>
-                                <input 
-                                    type="radio" 
-                                    name="category"
-                                    checked={selectedCategory === cat.name}
-                                    onChange={() => setSelectedCategory(cat.name)}
-                                    className="hidden"
-                                />
-                                <img 
-                                    src={cat.image} 
-                                    alt={cat.name} 
-                                    className={`w-10 h-10 rounded-md object-cover transition-opacity border border-gray-100 ${selectedCategory === cat.name ? 'opacity-100 shadow-sm' : 'opacity-70 group-hover:opacity-100'}`} 
-                                />
-                                <span className={`text-sm ${selectedCategory === cat.name ? 'text-cc-primary font-bold' : 'text-gray-600 group-hover:text-gray-900'}`}>
-                                    {cat.name}
-                                </span>
-                            </label>
-                        ))}
-                    </div>
-                </div>
+                {/* Filters Row */}
+                <div className="flex gap-3 w-full md:w-auto overflow-x-auto pb-1 md:pb-0 no-scrollbar">
+                   
+                   {/* Category Dropdown Toggle */}
+                   <div className="relative">
+                       <button 
+                          onClick={() => setActiveDropdown(activeDropdown === 'category' ? null : 'category')}
+                          className={`flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-bold border transition-all whitespace-nowrap ${selectedCategory !== 'All' ? 'bg-cc-primary text-white border-cc-primary' : 'bg-white text-gray-600 border-gray-200 hover:border-cc-gold'}`}
+                       >
+                           <Package size={16} />
+                           {selectedCategory === 'All' ? 'Category' : selectedCategory}
+                           <ChevronDown size={14} className={`transition-transform duration-300 ${activeDropdown === 'category' ? 'rotate-180' : ''}`} />
+                       </button>
 
-                {/* Origin Filter */}
-                <div className="bg-white p-6 rounded-sm border border-gray-200 shadow-sm">
-                    <h3 className="font-bold text-cc-primary mb-4 text-sm uppercase tracking-widest">
-                        Country of Origin
-                    </h3>
-                    <div className="space-y-2">
-                        {['Brazil', 'India', 'Thailand', 'Vietnam', 'Ukraine', 'New Zealand', 'Spain'].map(origin => (
-                            <label key={origin} className="flex items-center gap-3 cursor-pointer hover:bg-gray-50 p-1 rounded-sm -mx-1 transition-colors">
-                                <input 
-                                    type="checkbox" 
-                                    className="accent-cc-secondary rounded-sm" 
-                                    checked={selectedOrigin.includes(origin)}
-                                    onChange={() => toggleOrigin(origin)}
-                                />
-                                <span className="text-sm text-gray-600">{origin}</span>
-                            </label>
-                        ))}
-                    </div>
-                </div>
-            </div>
+                       {/* Dropdown Menu */}
+                       {activeDropdown === 'category' && (
+                           <div className="absolute top-full right-0 md:left-0 mt-2 w-64 bg-white rounded-2xl shadow-xl border border-gray-100 p-2 grid gap-1 animate-fade-in z-50 max-h-[60vh] overflow-y-auto">
+                               <button 
+                                  onClick={() => { setSelectedCategory('All'); setActiveDropdown(null); }}
+                                  className={`flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-left transition-colors ${selectedCategory === 'All' ? 'bg-gray-100 font-bold' : 'hover:bg-gray-50'}`}
+                               >
+                                   <div className="w-8 flex justify-center"><Filter size={14}/></div>
+                                   All Categories
+                               </button>
+                               {CATEGORIES.map(cat => (
+                                   <button 
+                                      key={cat.id}
+                                      onClick={() => { setSelectedCategory(cat.name); setActiveDropdown(null); }}
+                                      className={`flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-left transition-colors ${selectedCategory === cat.name ? 'bg-cc-cream text-cc-primary font-bold' : 'hover:bg-gray-50 text-gray-600'}`}
+                                   >
+                                       <div className="w-8 text-lg text-center">{cat.icon}</div>
+                                       {cat.name}
+                                   </button>
+                               ))}
+                           </div>
+                       )}
+                   </div>
 
-            {/* PRODUCT GRID */}
-            <div className="flex-1">
-                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-                    {filteredProducts.map(product => (
-                        <div key={product.id} className="bg-white border border-gray-200 rounded-sm hover:shadow-xl transition-all duration-300 group flex flex-col relative">
-                            {/* Card Image */}
-                            <div className="relative h-64 overflow-hidden bg-gray-100 border-b border-gray-100 cursor-pointer" onClick={() => setViewProduct(product)}>
-                                <div className="absolute top-3 left-3 z-10">
-                                     <span className="bg-white/95 backdrop-blur text-cc-primary px-3 py-1.5 text-[10px] font-bold uppercase tracking-widest shadow-sm border border-gray-200 rounded-sm flex items-center gap-1">
-                                         <Globe size={10} className="text-cc-gold"/> {product.origin}
-                                     </span>
-                                </div>
-                                <img 
-                                    src={product.image} 
-                                    alt={product.name}
-                                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                                />
-                                {/* Overlay Action */}
-                                <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                    <button className="bg-white text-cc-primary px-6 py-3 rounded-sm font-bold text-xs uppercase tracking-widest hover:bg-cc-secondary hover:text-white transition-colors flex items-center gap-2 border border-white">
-                                        <Eye size={16} /> Inspect Lot
-                                    </button>
-                                </div>
-                            </div>
+                   {/* Origin Dropdown Toggle */}
+                   <div className="relative">
+                       <button 
+                          onClick={() => setActiveDropdown(activeDropdown === 'origin' ? null : 'origin')}
+                          className={`flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-bold border transition-all whitespace-nowrap ${selectedOrigin.length > 0 ? 'bg-cc-primary text-white border-cc-primary' : 'bg-white text-gray-600 border-gray-200 hover:border-cc-gold'}`}
+                       >
+                           <Globe size={16} />
+                           {selectedOrigin.length > 0 ? `Origins (${selectedOrigin.length})` : 'Origin'}
+                           <ChevronDown size={14} className={`transition-transform duration-300 ${activeDropdown === 'origin' ? 'rotate-180' : ''}`} />
+                       </button>
 
-                            {/* Card Body */}
-                            <div className="p-6 flex-1 flex flex-col">
-                                <div className="flex items-start justify-between mb-3">
-                                    <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">{product.category}</span>
-                                    <span className="text-[9px] px-2 py-1 bg-green-50 text-green-800 rounded-sm border border-green-100 font-mono font-bold uppercase tracking-wide">Available</span>
-                                </div>
-                                
-                                <h3 
-                                    onClick={() => setViewProduct(product)}
-                                    className="font-display text-lg font-bold text-cc-primary mb-3 line-clamp-2 leading-snug group-hover:text-cc-secondary transition-colors cursor-pointer"
-                                >
-                                    {product.name}
-                                </h3>
-                                
-                                <p className="text-xs text-gray-500 line-clamp-2 mb-5 h-8 font-light">{product.description}</p>
+                       {/* Dropdown Menu */}
+                       {activeDropdown === 'origin' && (
+                           <div className="absolute top-full right-0 md:left-0 mt-2 w-64 bg-white rounded-2xl shadow-xl border border-gray-100 p-2 animate-fade-in z-50 max-h-[60vh] overflow-y-auto">
+                               <div className="px-3 py-2 text-xs font-bold text-gray-400 uppercase tracking-widest border-b border-gray-100 mb-2">Select Origins</div>
+                               {availableOrigins.map(origin => (
+                                   <button 
+                                      key={origin}
+                                      onClick={() => toggleOrigin(origin)}
+                                      className="w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-sm text-left hover:bg-gray-50 transition-colors group"
+                                   >
+                                       <span className={`${selectedOrigin.includes(origin) ? 'font-bold text-cc-primary' : 'text-gray-600'}`}>
+                                           {getCountryFlag(origin)} <span className="ml-2">{origin}</span>
+                                       </span>
+                                       {selectedOrigin.includes(origin) && <Check size={14} className="text-cc-gold"/>}
+                                   </button>
+                               ))}
+                               <div className="pt-2 mt-2 border-t border-gray-100">
+                                   <button 
+                                      onClick={() => { setSelectedOrigin([]); setActiveDropdown(null); }}
+                                      className="w-full py-2 text-xs font-bold text-cc-primary uppercase tracking-widest hover:bg-cc-cream rounded-lg"
+                                   >
+                                       Reset Origins
+                                   </button>
+                               </div>
+                           </div>
+                       )}
+                   </div>
 
-                                {/* Specs Mini Grid - Bulk Focused */}
-                                <div className="grid grid-cols-2 gap-2 mb-6 bg-gray-50/50 p-2 border border-gray-100 rounded-sm">
-                                    <div className="flex flex-col p-1">
-                                        <span className="text-[9px] text-gray-400 uppercase font-bold mb-1 flex items-center gap-1"><Package size={10}/> Packaging</span>
-                                        <span className="text-[10px] font-bold text-gray-700 truncate" title={product.specs?.['Packaging']}>{product.specs?.['Packaging'] || 'Bulk'}</span>
-                                    </div>
-                                    <div className="flex flex-col p-1 border-l border-gray-200 pl-3">
-                                        <span className="text-[9px] text-gray-400 uppercase font-bold mb-1 flex items-center gap-1"><Container size={10}/> MOQ</span>
-                                        <span className="text-[10px] font-bold text-cc-primary">{product.specs?.['MOQ'] || '1 FCL'}</span>
-                                    </div>
-                                </div>
+                   {/* Reset Button */}
+                   {(selectedCategory !== 'All' || selectedOrigin.length > 0 || searchQuery) && (
+                       <button 
+                          onClick={clearFilters}
+                          className="flex items-center gap-2 px-4 py-2.5 rounded-full text-sm font-bold text-red-500 hover:bg-red-50 transition-colors whitespace-nowrap"
+                       >
+                           <X size={14} /> Clear
+                       </button>
+                   )}
 
-                                <div className="mt-auto pt-4 border-t border-gray-100 flex items-center justify-between">
-                                    <div className="flex flex-col">
-                                        <span className="text-[9px] text-gray-400 uppercase font-bold">Incoterms</span>
-                                        <span className="text-xs font-bold text-gray-800">FOB / CIF</span>
-                                    </div>
-                                    <button 
-                                        onClick={() => handleInquire(product)}
-                                        className="bg-cc-primary text-white px-5 py-2.5 rounded-sm text-[10px] font-bold uppercase tracking-widest hover:bg-cc-secondary transition-colors shadow-sm"
-                                    >
-                                        Request Quote
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    ))}
                 </div>
             </div>
+         </div>
+      </div>
+
+      <div className="max-w-[1800px] mx-auto px-6 md:px-16 py-12 relative z-20">
+        
+        {/* Results Info */}
+        <div className="mb-8 flex items-center justify-between">
+            <span className="text-xs font-bold text-gray-400 uppercase tracking-widest">
+                Showing {filteredProducts.length} Lots
+            </span>
+        </div>
+
+        {/* Product Grid - Full Width */}
+        <div className="min-h-[400px]">
+            {filteredProducts.length === 0 ? (
+              <div className="flex flex-col items-center justify-center py-32 text-center bg-white rounded-[2rem] border border-dashed border-gray-200">
+                <div className="w-20 h-20 bg-gray-50 rounded-full flex items-center justify-center mb-6 text-gray-300">
+                    <Search size={32} />
+                </div>
+                <h3 className="text-2xl font-display text-gray-800 mb-2">No active lots found.</h3>
+                <p className="text-gray-500 mb-8 max-w-xs">Try adjusting your filters or search for a different commodity.</p>
+                <button onClick={clearFilters} className="text-cc-primary font-bold uppercase tracking-widest text-xs border-b border-cc-primary hover:text-cc-gold hover:border-cc-gold transition-colors">Clear All Filters</button>
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4 gap-8">
+                  {filteredProducts.map((product, index) => (
+                      <div 
+                         key={product.id} 
+                         className="group flex flex-col bg-white rounded-[2rem] pb-4 shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 border border-gray-100 cursor-pointer overflow-hidden" 
+                         onClick={() => setViewProduct(product)}
+                         style={{ animationDelay: `${index * 50}ms` }}
+                      >
+                          {/* Card Image */}
+                          <div className="relative aspect-[4/5] overflow-hidden bg-gray-100 mb-5">
+                              <img 
+                                  src={product.image} 
+                                  alt={product.name}
+                                  loading="lazy"
+                                  className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+                              />
+                              <div className="absolute inset-0 bg-black/10 group-hover:bg-black/20 transition-colors"></div>
+                              
+                              <div className="absolute top-4 left-4">
+                                  <span className="bg-white/95 backdrop-blur text-cc-primary px-3 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest shadow-sm flex items-center gap-1.5 border border-gray-100">
+                                      <span className="text-base leading-none">{getCountryFlag(product.origin)}</span>
+                                      <span>{product.origin.split('/')[0].split('(')[0].trim()}</span>
+                                  </span>
+                              </div>
+
+                              <div className="absolute bottom-0 inset-x-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                                  <button 
+                                    onClick={(e) => handleInquire(product, e)}
+                                    className="w-full bg-white text-cc-primary py-3.5 rounded-xl font-bold uppercase tracking-widest text-[10px] hover:bg-cc-gold hover:text-white transition-colors shadow-lg"
+                                  >
+                                    Add to Inquiry
+                                  </button>
+                              </div>
+                          </div>
+
+                          <div className="flex flex-col flex-grow px-5">
+                              <div className="flex justify-between items-start mb-2">
+                                  <span className="text-[10px] font-bold text-cc-sage uppercase tracking-widest">{product.category}</span>
+                                  <div className="flex gap-1">
+                                    {getCertBadges(product).map(b => (
+                                        <span key={b} className="text-[9px] px-2 py-0.5 bg-gray-100 text-gray-500 rounded-full">{b}</span>
+                                    ))}
+                                  </div>
+                              </div>
+                              
+                              <h3 className="font-display text-xl text-cc-primary mb-2 leading-tight group-hover:text-cc-earth transition-colors min-h-[3.5rem]">
+                                  {product.name}
+                              </h3>
+                              
+                              <div className="mt-auto pt-4 border-t border-gray-50 flex items-center justify-between group/link">
+                                  <span className="text-xs font-bold text-gray-400">MOQ: {product.specs?.['MOQ'] || '1 FCL'}</span>
+                                  <span className="w-8 h-8 rounded-full bg-cc-cream flex items-center justify-center text-cc-primary group-hover/link:bg-cc-primary group-hover/link:text-white transition-colors">
+                                      <ChevronRight size={14} />
+                                  </span>
+                              </div>
+                          </div>
+                      </div>
+                  ))}
+              </div>
+            )}
         </div>
 
         {/* Modal */}
@@ -238,7 +317,8 @@ export const Products: React.FC = () => {
             <ProductDetailsModal 
                 product={viewProduct} 
                 onClose={() => setViewProduct(null)} 
-                onInquire={handleInquire}
+                onInquire={(p) => handleInquire(p)}
+                onSelectProduct={setViewProduct}
             />
         )}
       </div>

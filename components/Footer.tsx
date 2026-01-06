@@ -1,62 +1,65 @@
 import React from 'react';
-import { Mail, MapPin, Phone, Linkedin, MessageCircle } from 'lucide-react';
+import { ArrowUpRight, Leaf } from 'lucide-react';
+import { Logo } from './Logo';
 
 export const Footer: React.FC = () => {
   return (
-    <footer className="bg-cc-primary text-white pt-20 pb-10 border-t border-white/10">
-      <div className="max-w-[1600px] mx-auto px-6 md:px-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
-           
-           <div className="md:col-span-2">
-              <h3 className="font-display text-2xl font-bold mb-6">CC FOOD STUFF</h3>
-              <p className="text-gray-400 max-w-md leading-relaxed mb-8 font-light text-sm">
-                 A division of <strong>CC Group of Companies</strong>. 
-                 We are a premier <strong>B2B Foodstuff Import–Export & Wholesale Trading</strong> house. Sourcing directly from origins and delivering to industrial partners worldwide.
-              </p>
-              <div className="flex gap-4">
-                  <a href="#" className="w-10 h-10 border border-white/20 rounded-full flex items-center justify-center hover:bg-white hover:text-cc-primary transition-colors">
-                      <Linkedin size={18} />
-                  </a>
-                  <a href="#" className="w-10 h-10 border border-white/20 rounded-full flex items-center justify-center hover:bg-white hover:text-cc-primary transition-colors">
-                      <MessageCircle size={18} />
-                  </a>
-              </div>
-           </div>
+    <footer className="bg-cc-dark text-white pt-24 pb-12 rounded-t-[3rem] mt-12">
+      <div className="max-w-[1800px] mx-auto px-6 md:px-12">
+         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-20">
+            {/* Brand Section */}
+            <div className="space-y-6">
+               <Logo variant="white" className="mb-4" />
+               <p className="text-white/60 font-light leading-relaxed pr-4">
+                  A division of CC Group of Companies. Orchestrating the global movement of essential food commodities with precision and integrity.
+               </p>
+            </div>
+            
+            {/* Headquarters */}
+            <div>
+               <h4 className="font-bold text-xs uppercase tracking-widest mb-6 text-cc-gold">Headquarters</h4>
+               <p className="text-white/60 font-light leading-relaxed mb-4">
+                  CC Food Stuff Trading<br/>
+                  Vadakara, Kerala, India
+               </p>
+               <a href="mailto:trade@ccfoodstuff.com" className="text-white border-b border-white/20 hover:border-white transition-colors pb-0.5">trade@ccfoodstuff.com</a>
+            </div>
 
-           <div>
-              <h4 className="font-bold text-sm uppercase tracking-widest mb-6 text-gray-500">Global HQ</h4>
-              <ul className="space-y-4 text-gray-300 text-sm">
-                 <li className="flex items-start gap-3">
-                    <MapPin size={18} className="text-cc-secondary flex-shrink-0 mt-0.5" />
-                    <span>Jebel Ali Free Zone (South),<br/>Dubai, United Arab Emirates</span>
-                 </li>
-                 <li className="flex items-center gap-3">
-                    <Phone size={18} className="text-cc-secondary flex-shrink-0" />
-                    <span>+971 4 123 4567</span>
-                 </li>
-                 <li className="flex items-center gap-3">
-                    <Mail size={18} className="text-cc-secondary flex-shrink-0" />
-                    <span>trade@ccfoodstuff.com</span>
-                 </li>
-              </ul>
-           </div>
+            {/* Sitemap */}
+            <div>
+               <h4 className="font-bold text-xs uppercase tracking-widest mb-6 text-cc-gold">Sitemap</h4>
+               <ul className="space-y-3">
+                  {['Home', 'Products', 'Services', 'Contact'].map(item => (
+                     <li key={item}>
+                        <a href="#" className="text-white/60 hover:text-white transition-colors flex items-center gap-2 group">
+                           {item} <ArrowUpRight size={12} className="opacity-0 group-hover:opacity-100 transition-opacity"/>
+                        </a>
+                     </li>
+                  ))}
+               </ul>
+            </div>
 
-           <div>
-              <h4 className="font-bold text-sm uppercase tracking-widest mb-6 text-gray-500">Corporate</h4>
-              <ul className="space-y-3 text-gray-400 text-sm">
-                 <li><a href="#" className="hover:text-white transition-colors">About CC Group</a></li>
-                 <li><a href="#" className="hover:text-white transition-colors">Investor Relations</a></li>
-                 <li><a href="#" className="hover:text-white transition-colors">Careers</a></li>
-                 <li><a href="#" className="hover:text-white transition-colors">Privacy Policy</a></li>
-              </ul>
-           </div>
+            {/* Sustainability - New Section */}
+            <div>
+               <h4 className="font-bold text-xs uppercase tracking-widest mb-6 text-cc-gold">Sustainability</h4>
+               <p className="text-white/60 font-light leading-relaxed mb-6 text-sm">
+                  We are committed to ethical sourcing, reducing our carbon footprint, and empowering local farming communities across our global supply chain.
+               </p>
+               <a href="#" className="inline-flex items-center gap-2 text-white border-b border-white/20 hover:border-cc-gold hover:text-cc-gold transition-colors pb-1 text-sm group">
+                  <Leaf size={14} /> 
+                  <span>2024 Impact Report</span>
+                  <ArrowUpRight size={12} className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"/>
+               </a>
+            </div>
+         </div>
 
-        </div>
-
-        <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-gray-600 font-mono">
-           <p>© {new Date().getFullYear()} CC Group of Companies. All Rights Reserved.</p>
-           <p className="mt-2 md:mt-0">Trade License: 12345678 • VAT: 100200300</p>
-        </div>
+         <div className="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-white/10 text-xs text-white/40 font-mono uppercase tracking-wider">
+            <p>&copy; {new Date().getFullYear()} CC Group. All Rights Reserved.</p>
+            <div className="flex gap-6 mt-4 md:mt-0">
+               <a href="#" className="hover:text-white">Privacy</a>
+               <a href="#" className="hover:text-white">Terms</a>
+            </div>
+         </div>
       </div>
     </footer>
   );

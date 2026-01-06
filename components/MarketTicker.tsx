@@ -1,5 +1,5 @@
 import React from 'react';
-import { TrendingUp, TrendingDown, Globe } from 'lucide-react';
+import { TrendingUp, TrendingDown } from 'lucide-react';
 
 const MARKET_INDICES = [
   { name: 'CC INDEX', price: '1,240.50', change: '+1.8%', up: true }, // Proprietary Index
@@ -9,18 +9,13 @@ const MARKET_INDICES = [
   { name: 'PALM OIL (MDEX)', price: '3,850', change: '-1.5%', up: false },
   { name: 'BRENT CRUDE', price: '82.40', change: '+0.5%', up: true },
   { name: 'FREIGHT (BALTIC)', price: '1,540', change: '+4.2%', up: true },
-  { name: 'USD/AED', price: '3.673', change: '0.0%', up: true },
+  { name: 'USD/INR', price: '83.12', change: '+0.1%', up: true },
   { name: 'CORN (CBOT)', price: '450.00', change: '-0.2%', up: false },
 ];
 
 export const MarketTicker: React.FC = () => {
   return (
     <div className="bg-cc-primary text-white border-b border-white/10 overflow-hidden h-10 flex items-center relative z-50">
-      <div className="absolute left-0 bg-cc-primary z-10 h-full px-4 flex items-center shadow-[5px_0_10px_rgba(0,0,0,0.5)]">
-        <div className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-cc-secondary">
-          <Globe size={12} /> Global Indices
-        </div>
-      </div>
       
       {/* Ticker Animation */}
       <div className="flex animate-marquee whitespace-nowrap">

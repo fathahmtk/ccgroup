@@ -2,203 +2,487 @@ import { Product, Testimonial, BuyingRequest } from './types';
 
 export const CATEGORIES = [
   { 
+    id: 'fruits', 
+    name: 'Fresh Fruits', 
+    icon: '🍎',
+    image: 'https://images.unsplash.com/photo-1610832958506-aa56368176cf?q=80&w=400&auto=format&fit=crop'
+  },
+  { 
+    id: 'vegetables', 
+    name: 'Fresh Vegetables', 
+    icon: '🥦',
+    image: 'https://images.unsplash.com/photo-1566385101042-1a0aa0c1268c?q=80&w=400&auto=format&fit=crop'
+  },
+  { 
+    id: 'rice', 
+    name: 'Rice', 
+    icon: '🍚',
+    image: 'https://images.unsplash.com/photo-1586201375761-83865001e31c?q=80&w=400&auto=format&fit=crop'
+  },
+  { 
     id: 'grains', 
     name: 'Grains & Cereals', 
     icon: '🌾',
-    image: 'https://images.unsplash.com/photo-1586201375761-83865001e31c?q=80&w=400&auto=format&fit=crop' // Sacks of rice
+    image: 'https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?q=80&w=400&auto=format&fit=crop'
   },
   { 
-    id: 'meat', 
-    name: 'Meat & Poultry', 
-    icon: '🥩',
-    image: 'https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?q=80&w=400&auto=format&fit=crop' // Raw meat
-  },
-  { 
-    id: 'seafood', 
-    name: 'Seafood', 
-    icon: '🐟',
-    image: 'https://images.unsplash.com/photo-1534942082298-54b3952f4479?q=80&w=400&auto=format&fit=crop' // Raw fish
-  },
-  { 
-    id: 'oils', 
-    name: 'Edible Oils', 
-    icon: '🌻',
-    image: 'https://images.unsplash.com/photo-1474979266404-7eaacbcdccef?q=80&w=400&auto=format&fit=crop' // Olive oil (industrial context if possible, but this is generic)
-  },
-  { 
-    id: 'dairy', 
-    name: 'Dairy Ingredients', 
-    icon: '🥛',
-    image: 'https://images.unsplash.com/photo-1628088062854-d1870b4553da?q=80&w=400&auto=format&fit=crop' // Milk/Dairy
+    id: 'pulses', 
+    name: 'Pulses & Lentils', 
+    icon: '🥣',
+    image: 'https://images.unsplash.com/photo-1515543904379-3d757afe726e?q=80&w=400&auto=format&fit=crop'
   },
   { 
     id: 'spices', 
-    name: 'Spices & Herbs', 
+    name: 'Spices', 
     icon: '🌶️',
-    image: 'https://images.unsplash.com/photo-1596040033229-a9821ebd058d?q=80&w=400&auto=format&fit=crop' // Spices
+    image: 'https://images.unsplash.com/photo-1596040033229-a9821ebd058d?q=80&w=400&auto=format&fit=crop'
+  },
+  { 
+    id: 'oils', 
+    name: 'Edible Oils & Ghee', 
+    icon: '🛢️',
+    image: 'https://images.unsplash.com/photo-1474979266404-7eaacbcdccef?q=80&w=400&auto=format&fit=crop'
   },
   { 
     id: 'sugar', 
-    name: 'Sugar & Sweeteners', 
-    icon: '🍬',
-    image: 'https://images.unsplash.com/photo-1612196603417-22f3e8281313?q=80&w=400&auto=format&fit=crop' // Sugar
+    name: 'Sugar & Essentials', 
+    icon: '🧂',
+    image: 'https://images.unsplash.com/photo-1612196603417-22f3e8281313?q=80&w=400&auto=format&fit=crop'
   },
+  { 
+    id: 'dryfruits', 
+    name: 'Dry Fruits & Nuts', 
+    icon: '🥜',
+    image: 'https://images.unsplash.com/photo-1627666453982-f478a5d3f263?q=80&w=400&auto=format&fit=crop'
+  },
+  { 
+    id: 'frozen', 
+    name: 'Frozen & Processed', 
+    icon: '❄️',
+    image: 'https://images.unsplash.com/photo-1628088062854-d1870b4553da?q=80&w=400&auto=format&fit=crop'
+  },
+  { 
+    id: 'valueadded', 
+    name: 'Value Added & Ancillary', 
+    icon: '📦',
+    image: 'https://images.unsplash.com/photo-1512058564366-18510be2db19?q=80&w=400&auto=format&fit=crop'
+  }
 ];
 
 export const PRODUCTS: Product[] = [
-  // MEAT & POULTRY
+  // --- 1. FRESH FRUITS (Domestic + Imported) ---
   {
-    id: 'm1',
-    name: 'Frozen Chicken Griller (900g-1200g)',
-    category: 'Meat & Poultry',
+    id: 'f1',
+    name: 'Indian Cavendish Banana',
+    category: 'Fresh Fruits',
     price: 'Market Rate',
-    image: 'https://images.unsplash.com/photo-1615937657715-bc7b4b7962c1?q=80&w=800&auto=format&fit=crop', // Raw chicken
-    description: 'Grade A Frozen Whole Chicken. Halal Certified. Individually Wrapped (IWP).',
-    origin: 'Brazil',
-    nutrition: { servingSize: '100g', calories: 215, protein: '18g', carbs: '0g', fat: '15g' },
-    specs: { 'Freezing': 'IQF / BQF', 'Shelf Life': '24 Months', 'Certifications': 'HALAL, SIF', 'Packaging': '10kg Master Carton', 'MOQ': '27 MT (1x40ft)' },
+    image: 'https://images.unsplash.com/photo-1571771896612-61871f0ee6bd?q=80&w=800&auto=format&fit=crop',
+    description: 'Robusta / G9 varieties. Also sourcing Nendran and Poovan. Uniform hands, spot-free yellow ripening.',
+    origin: 'India',
+    nutrition: { servingSize: '100g', calories: 89, protein: '1.1g', carbs: '22.8g', fat: '0.3g' },
+    specs: { 'Variety': 'Robusta/G9/Nendran', 'Packaging': '13.5kg / 7kg Carton', 'Class': 'Class A Export' },
     reviews: []
   },
   {
-    id: 'm2',
-    name: 'Boneless Beef Cuts (Forequarters)',
-    category: 'Meat & Poultry',
-    price: 'Market Rate',
-    image: 'https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?q=80&w=800&auto=format&fit=crop',
-    description: 'Frozen Beef Forequarters. 90VL. Industrial block frozen for processing.',
+    id: 'f2',
+    name: 'Kashmiri Red Apple',
+    category: 'Fresh Fruits',
+    price: '₹130-150 / kg',
+    image: 'https://images.unsplash.com/photo-1568702846914-96b305d2aaeb?q=80&w=800&auto=format&fit=crop',
+    description: 'Domestic premium apples from Himachal/Kashmir. Crunchy, sweet, and high color. Loose or Crate pack.',
     origin: 'India',
-    nutrition: { servingSize: '100g', calories: 250, protein: '26g', carbs: '0g', fat: '17g' },
-    specs: { 'Lean Content': '90% VL', 'Shelf Life': '18 Months', 'Storage': '-18°C', 'Packaging': '25kg Block / Poly', 'MOQ': '28 MT' },
+    nutrition: { servingSize: '100g', calories: 52, protein: '0.3g', carbs: '14g', fat: '0.2g' },
+    specs: { 'Grade': 'Best / A Grade', 'Packaging': '20kg Crate / 10kg Carton', 'Season': 'Aug-Jan' },
+    reviews: []
+  },
+  {
+    id: 'f3',
+    name: 'Washington Apple (Red Delicious)',
+    category: 'Fresh Fruits',
+    price: 'Premium Rate',
+    image: 'https://images.unsplash.com/photo-1570913149827-d2ac84ab3f9a?q=80&w=800&auto=format&fit=crop',
+    description: 'Imported USA Origin. Waxed, deep red color, consistent size. High shelf life for retail.',
+    origin: 'USA',
+    nutrition: { servingSize: '100g', calories: 52, protein: '0.3g', carbs: '14g', fat: '0.2g' },
+    specs: { 'Count': '80/100/113', 'Packaging': '18kg Telescopic Carton', 'Storage': 'CA Stored' },
+    reviews: []
+  },
+  {
+    id: 'f4',
+    name: 'Alphonso Mango (Devgad/Ratnagiri)',
+    category: 'Fresh Fruits',
+    price: 'Seasonal',
+    image: 'https://images.unsplash.com/photo-1605027628030-9bb6f83535e6?q=80&w=800&auto=format&fit=crop',
+    description: 'The King of Mangoes. GI Tagged. Saffron pulp, thin skin. Air cargo ready for export.',
+    origin: 'India',
+    nutrition: { servingSize: '100g', calories: 60, protein: '0.8g', carbs: '15g', fat: '0.4g' },
+    specs: { 'Packaging': '1 Dozen Box', 'Weight': '225g-275g', 'Season': 'Mar-Jun' },
+    reviews: []
+  },
+  {
+    id: 'f5',
+    name: 'Valencia Orange',
+    category: 'Fresh Fruits',
+    price: 'Market Rate',
+    image: 'https://images.unsplash.com/photo-1547514701-42782101795e?q=80&w=800&auto=format&fit=crop',
+    description: 'Imported from Egypt/South Africa. High juice content. Perfect for HoReCa and Juicing.',
+    origin: 'Egypt / South Africa',
+    nutrition: { servingSize: '100g', calories: 47, protein: '0.9g', carbs: '12g', fat: '0.1g' },
+    specs: { 'Count': '48/56/64/72', 'Packaging': '15kg Carton', 'Brix': '11% Min' },
+    reviews: []
+  },
+  {
+    id: 'f6',
+    name: 'Exotic Kiwi & Dragon Fruit',
+    category: 'Fresh Fruits',
+    price: 'Premium Rate',
+    image: 'https://images.unsplash.com/photo-1585059895524-72359e06138a?q=80&w=800&auto=format&fit=crop',
+    description: 'Hayward Green Kiwi (Chile/Iran) and Vietnamese Dragon Fruit (White/Red Flesh).',
+    origin: 'Chile / Vietnam',
+    nutrition: { servingSize: '100g', calories: 61, protein: '1.1g', carbs: '15g', fat: '0.5g' },
+    specs: { 'Packaging': '3kg/5kg/10kg Box', 'Grade': 'Premium', 'Availability': 'Year-round' },
     reviews: []
   },
 
-  // SEAFOOD
+  // --- 2. FRESH VEGETABLES ---
+  {
+    id: 'v1',
+    name: 'Nashik Red Onion',
+    category: 'Fresh Vegetables',
+    price: '₹46.80 / kg (Indicative)',
+    image: 'https://images.unsplash.com/photo-1618512496248-a07fe83aa829?q=80&w=800&auto=format&fit=crop',
+    description: 'A Grade Red Onion. Double skin dried. 45mm-55mm+ size. Long shelf life for export.',
+    origin: 'India',
+    nutrition: { servingSize: '100g', calories: 40, protein: '1.1g', carbs: '9g', fat: '0.1g' },
+    specs: { 'Size': '45mm+', 'Packaging': '20kg/50kg Mesh Bag', 'Type': 'N-53 / Agrifound Dark Red' },
+    reviews: []
+  },
+  {
+    id: 'v2',
+    name: 'Fresh Potato (Agra/Indore)',
+    category: 'Fresh Vegetables',
+    price: '₹8-12 / kg (Bulk)',
+    image: 'https://images.unsplash.com/photo-1518977676605-693d3a11168f?q=80&w=800&auto=format&fit=crop',
+    description: 'Chipsona / LR / 3797 varieties. High dry matter for processing or fresh table consumption.',
+    origin: 'India',
+    nutrition: { servingSize: '100g', calories: 77, protein: '2g', carbs: '17g', fat: '0.1g' },
+    specs: { 'Size': '45mm+', 'Packaging': '50kg Jute/Mesh Bag', 'Surface': 'Washed / Unwashed' },
+    reviews: []
+  },
+  {
+    id: 'v3',
+    name: 'Green Capsicum & Exotic Veg',
+    category: 'Fresh Vegetables',
+    price: 'Market Rate',
+    image: 'https://images.unsplash.com/photo-1563565375-f3fdf5d2e374?q=80&w=800&auto=format&fit=crop',
+    description: 'Hotel grade Capsicum, Broccoli, Zucchini, and Iceberg Lettuce. Greenhouse cultivated.',
+    origin: 'India',
+    nutrition: { servingSize: '100g', calories: 20, protein: '0.9g', carbs: '4.6g', fat: '0.2g' },
+    specs: { 'Packaging': 'Corrugated Box / Crate', 'Grade': 'A (Hotel)', 'Shelf Life': '1-2 Weeks' },
+    reviews: []
+  },
+
+  // --- 3. RICE ---
+  {
+    id: 'r1',
+    name: '1121 Basmati Rice (Steam/Sella)',
+    category: 'Rice',
+    price: '₹85-95 / kg (Bulk)',
+    image: 'https://images.unsplash.com/photo-1586201375761-83865001e31c?q=80&w=800&auto=format&fit=crop',
+    description: 'Extra Long Grain (8.35mm avg). Available in Steam, White Sella, and Golden Sella. 95% Purity.',
+    origin: 'India',
+    nutrition: { servingSize: '100g', calories: 130, protein: '2.7g', carbs: '28g', fat: '0.3g' },
+    specs: { 'Grain Length': '8.35mm', 'Moisture': '12.5% Max', 'Packaging': '5kg/10kg/25kg BOPP/Non-Woven' },
+    reviews: []
+  },
+  {
+    id: 'r2',
+    name: 'Sona Masuri Rice',
+    category: 'Rice',
+    price: 'Market Rate',
+    image: 'https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?q=80&w=800&auto=format&fit=crop',
+    description: 'Medium grain, lightweight aromatic rice. 12+ months old crop. Ideal for daily staples.',
+    origin: 'India (Karnataka/AP)',
+    nutrition: { servingSize: '100g', calories: 130, protein: '2.5g', carbs: '28g', fat: '0.5g' },
+    specs: { 'Polish': 'Silky / Double Polish', 'Broken': '5% Max', 'Packaging': '25kg PP Bag' },
+    reviews: []
+  },
+  {
+    id: 'r3',
+    name: 'Matta Rice (Palakkadan)',
+    category: 'Rice',
+    price: 'Market Rate',
+    image: 'https://images.unsplash.com/photo-1599581885482-143013b52d9c?q=80&w=800&auto=format&fit=crop',
+    description: 'Kerala Rosematta. Parboiled red rice with high nutrient retention. Bold grain.',
+    origin: 'India (Kerala)',
+    nutrition: { servingSize: '100g', calories: 350, protein: '9g', carbs: '78g', fat: '1g' },
+    specs: { 'Type': 'Vadi / Unda', 'Packaging': '5kg/10kg/25kg/50kg', 'Processing': 'Double Boiled' },
+    reviews: []
+  },
+  {
+    id: 'r4',
+    name: 'IR64 Parboiled Rice',
+    category: 'Rice',
+    price: 'Economy Rate',
+    image: 'https://images.unsplash.com/photo-1613531338573-984dd08f1b61?q=80&w=800&auto=format&fit=crop',
+    description: 'Long grain non-basmati. 5% or 25% broken. High volume export staple for Africa/Gulf.',
+    origin: 'India',
+    nutrition: { servingSize: '100g', calories: 130, protein: '2.7g', carbs: '28g', fat: '0.3g' },
+    specs: { 'Broken': '5% / 25%', 'Sortex': '100% / Rejection', 'Packaging': '50kg PP Bag' },
+    reviews: []
+  },
+
+  // --- 4. GRAINS & CEREALS ---
+  {
+    id: 'g1',
+    name: 'Milling Wheat (Lokwan/Sharbati)',
+    category: 'Grains & Cereals',
+    price: 'Market Rate',
+    image: 'https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?q=80&w=800&auto=format&fit=crop',
+    description: 'Premium Indian Wheat. High gluten (12-13%). Machine cleaned. Suitable for Bakery & Chakki Atta.',
+    origin: 'India',
+    nutrition: { servingSize: '100g', calories: 340, protein: '13.2g', carbs: '72g', fat: '2.5g' },
+    specs: { 'Protein': '12.5% Min', 'Moisture': '12% Max', 'Packaging': '50kg Jute/PP Bag' },
+    reviews: []
+  },
+  {
+    id: 'g2',
+    name: 'Yellow Maize (Corn)',
+    category: 'Grains & Cereals',
+    price: 'Market Rate',
+    image: 'https://images.unsplash.com/photo-1551754655-cd27e38d2076?q=80&w=800&auto=format&fit=crop',
+    description: 'For Animal Feed or Starch Industry. High carbohydrate content. Low Aflatoxin.',
+    origin: 'India',
+    nutrition: { servingSize: '100g', calories: 365, protein: '9.4g', carbs: '74g', fat: '4.7g' },
+    specs: { 'Moisture': '14% Max', 'Admixture': '2% Max', 'Packaging': 'Bulk / 50kg PP' },
+    reviews: []
+  },
+  {
+    id: 'g3',
+    name: 'Millets (Ragi/Bajra/Jowar)',
+    category: 'Grains & Cereals',
+    price: 'Market Rate',
+    image: 'https://images.unsplash.com/photo-1621817292275-52f205a22c57?q=80&w=800&auto=format&fit=crop',
+    description: 'Superfoods. Finger Millet (Ragi), Pearl Millet (Bajra), Sorghum (Jowar). Whole grains.',
+    origin: 'India',
+    nutrition: { servingSize: '100g', calories: 378, protein: '11g', carbs: '72g', fat: '4g' },
+    specs: { 'Purity': '99%', 'Packaging': '25kg/50kg', 'Form': 'Whole Grain' },
+    reviews: []
+  },
+
+  // --- 5. PULSES & LENTILS ---
+  {
+    id: 'p1',
+    name: 'Toor Dal (Pigeon Peas)',
+    category: 'Pulses & Lentils',
+    price: 'Market Rate',
+    image: 'https://images.unsplash.com/photo-1515543904379-3d757afe726e?q=80&w=800&auto=format&fit=crop',
+    description: 'Fatka / Desi grades. Oily and Non-oily options. High protein content.',
+    origin: 'India / Myanmar',
+    nutrition: { servingSize: '100g', calories: 343, protein: '22g', carbs: '63g', fat: '1.5g' },
+    specs: { 'Polish': 'Water/Oil', 'Foreign Matter': '1% Max', 'Packaging': '30kg/50kg Bag' },
+    reviews: []
+  },
+  {
+    id: 'p2',
+    name: 'Kabuli Chana (Chickpeas)',
+    category: 'Pulses & Lentils',
+    price: 'Market Rate',
+    image: 'https://images.unsplash.com/photo-1584270354949-c26b0d5b4a0c?q=80&w=800&auto=format&fit=crop',
+    description: 'White Chickpeas. Counts 42-44 / 44-46 (12mm). Creamy texture for Hummus/Curry.',
+    origin: 'India',
+    nutrition: { servingSize: '100g', calories: 364, protein: '19g', carbs: '61g', fat: '6g' },
+    specs: { 'Size': '7mm - 12mm', 'Count': '42-44 / 44-46 / 58-60', 'Packaging': '25kg/50kg PP' },
+    reviews: []
+  },
+  {
+    id: 'p3',
+    name: 'Moong Dal (Yellow Split)',
+    category: 'Pulses & Lentils',
+    price: 'Market Rate',
+    image: 'https://images.unsplash.com/photo-1559816656-9a259c238bd7?q=80&w=800&auto=format&fit=crop',
+    description: 'Washed and split Mung beans. Quick cooking. Staple for Dal Tadka.',
+    origin: 'India',
+    nutrition: { servingSize: '100g', calories: 347, protein: '24g', carbs: '63g', fat: '1.2g' },
+    specs: { 'Purity': '99%', 'Moisture': '12%', 'Packaging': '25kg/50kg' },
+    reviews: []
+  },
+
+  // --- 6. SPICES ---
+  {
+    id: 'sp1',
+    name: 'Guntur Dry Red Chilli',
+    category: 'Spices',
+    price: 'Market Rate',
+    image: 'https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?q=80&w=800&auto=format&fit=crop',
+    description: 'Teja S17 / Sanam S4 / Byadgi. High Pungency and Color varieties. Stem/Stemless.',
+    origin: 'India (Guntur)',
+    nutrition: { servingSize: '100g', calories: 40, protein: '2g', carbs: '9g', fat: '1g' },
+    specs: { 'SHU': '20k - 90k', 'ASTA': '40-100', 'Packaging': '5kg/10kg/25kg Jute Bag' },
+    reviews: []
+  },
+  {
+    id: 'sp2',
+    name: 'Alleppey Green Cardamom',
+    category: 'Spices',
+    price: 'Premium Rate',
+    image: 'https://images.unsplash.com/photo-1550951663-8a38c2084df8?q=80&w=800&auto=format&fit=crop',
+    description: '8mm+ Bold Pods. Intense aroma and bright green color. Handpicked from Idukki.',
+    origin: 'India (Kerala)',
+    nutrition: { servingSize: '1 pod', calories: 5, protein: '0.1g', carbs: '1g', fat: '0g' },
+    specs: { 'Size': '7mm / 8mm+', 'Litre Weight': '400g+', 'Packaging': '5kg Vacuum Pack' },
+    reviews: []
+  },
+  {
+    id: 'sp3',
+    name: 'Turmeric Finger (Salem/Erode)',
+    category: 'Spices',
+    price: 'Market Rate',
+    image: 'https://images.unsplash.com/photo-1615485925694-a035aa933853?q=80&w=800&auto=format&fit=crop',
+    description: 'High Curcumin (3-5%). Double polished fingers. Vibrant yellow color.',
+    origin: 'India',
+    nutrition: { servingSize: '1 tsp', calories: 8, protein: '0g', carbs: '1g', fat: '0g' },
+    specs: { 'Curcumin': '3% / 5%', 'Polish': 'Single/Double', 'Packaging': '25kg/50kg Jute' },
+    reviews: []
+  },
+
+  // --- 7. OILS & GHEE ---
+  {
+    id: 'o1',
+    name: 'Refined Sunflower Oil',
+    category: 'Edible Oils & Ghee',
+    price: 'Market Rate',
+    image: 'https://images.unsplash.com/photo-1620888200673-827c191a221f?q=80&w=800&auto=format&fit=crop',
+    description: 'Imported Origin (Ukraine/Russia) or Domestic. Clear, Lite, Vitamin E fortified.',
+    origin: 'Ukraine / Russia / India',
+    nutrition: { servingSize: '1 tbsp', calories: 120, protein: '0g', carbs: '0g', fat: '14g' },
+    specs: { 'Packaging': '1L Bottle / 15kg Tin / Flexitank', 'FFA': '0.1% Max' },
+    reviews: []
+  },
+  {
+    id: 'o2',
+    name: 'Pure Cow/Buffalo Ghee',
+    category: 'Edible Oils & Ghee',
+    price: 'Premium Rate',
+    image: 'https://images.unsplash.com/photo-1631452180519-c014fe946bc7?q=80&w=800&auto=format&fit=crop',
+    description: 'Traditional Danedar texture. Rich aroma. 99.7% Fat. Clarified Butter.',
+    origin: 'India',
+    nutrition: { servingSize: '1 tbsp', calories: 112, protein: '0g', carbs: '0g', fat: '13g' },
+    specs: { 'Type': 'Cow / Buffalo', 'Packaging': '200ml/500ml/1L/15kg Tin', 'Aroma': 'Rich' },
+    reviews: []
+  },
+
+  // --- 8. SUGAR & SALT ---
   {
     id: 's1',
-    name: 'Vannamei White Shrimp (HLSO)',
-    category: 'Seafood',
+    name: 'White Crystal Sugar (S30/M30)',
+    category: 'Sugar & Essentials',
     price: 'Market Rate',
-    image: 'https://images.unsplash.com/photo-1565680018434-b513d5e5fd47?q=80&w=800&auto=format&fit=crop', // Raw shrimp
-    description: 'Headless Shell-On. Size 21/25. Block Frozen. Aquaculture GAP certified.',
-    origin: 'Vietnam',
-    nutrition: { servingSize: '100g', calories: 106, protein: '20g', carbs: '0g', fat: '1.7g' },
-    specs: { 'Glazing': '5-10%', 'Process': 'Block Frozen', 'Certifications': 'ASC, BRC', 'Packaging': '6x1.8kg Block', 'MOQ': '1 FCL (40ft)' },
+    image: 'https://images.unsplash.com/photo-1612196603417-22f3e8281313?q=80&w=800&auto=format&fit=crop',
+    description: 'ICUMSA < 100. Sulphurless. Sparkling white. Double Refined.',
+    origin: 'India',
+    nutrition: { servingSize: '100g', calories: 387, protein: '0g', carbs: '99.9g', fat: '0g' },
+    specs: { 'Grade': 'S30 / M30', 'Polarization': '99.8%', 'Packaging': '50kg PP Bag' },
     reviews: []
   },
   {
     id: 's2',
-    name: 'Atlantic Mackerel (WR)',
-    category: 'Seafood',
+    name: 'Natural Jaggery (Gur)',
+    category: 'Sugar & Essentials',
     price: 'Market Rate',
-    image: 'https://images.unsplash.com/photo-1534942082298-54b3952f4479?q=80&w=800&auto=format&fit=crop', // Raw fish
-    description: 'Whole Round Frozen Mackerel (300-500g). High fat content for smoking/canning.',
-    origin: 'Norway',
-    nutrition: { servingSize: '100g', calories: 205, protein: '19g', carbs: '0g', fat: '14g' },
-    specs: { 'Fat Content': '20%+', 'Catch Method': 'Trawl', 'Season': 'Sep-Nov', 'Packaging': '20kg Master Carton', 'MOQ': '26 MT' },
-    reviews: []
-  },
-
-  // GRAINS
-  {
-    id: '1',
-    name: 'Royal Basmati Rice 1121',
-    category: 'Grains & Cereals',
-    price: 'Market Rate',
-    image: 'https://images.unsplash.com/photo-1586201375761-83865001e31c?q=80&w=800&auto=format&fit=crop', // Sacks
-    description: 'Premium 1121 Steam Basmati Rice. Extra Long Grain. 0% broken. Mill direct.',
+    image: 'https://images.unsplash.com/photo-1629124446545-2e1189d2d095?q=80&w=800&auto=format&fit=crop',
+    description: 'Chemical-free. Available in Balls, Cubes, or Powder. Rich in Iron.',
     origin: 'India',
-    nutrition: { servingSize: '100g', calories: 130, protein: '2.7g', carbs: '28g', fat: '0.3g' },
-    specs: { 'Grain Length': '8.35mm', 'Moisture': '12% Max', 'Purity': '95%', 'Packaging': '50kg PP Bag', 'MOQ': '25 MT (1x20ft)' },
-    reviews: []
-  },
-  {
-    id: '2',
-    name: 'Thai Hom Mali Jasmine Rice',
-    category: 'Grains & Cereals',
-    price: 'Market Rate',
-    image: 'https://images.unsplash.com/photo-1599581885482-143013b52d9c?q=80&w=800&auto=format&fit=crop', // Raw rice texture
-    description: 'New Crop 100% Whole Kernel Jasmine Rice. Certified Thai Hom Mali.',
-    origin: 'Thailand',
-    nutrition: { servingSize: '100g', calories: 125, protein: '2.5g', carbs: '27g', fat: '0.2g' },
-    specs: { 'Crop Year': 'Current', 'Broken': '5% Max', 'Certifications': 'Thai Hom Mali', 'Packaging': '25kg/50kg PP Bag', 'MOQ': '25 MT' },
+    nutrition: { servingSize: '100g', calories: 383, protein: '0.4g', carbs: '98g', fat: '0.1g' },
+    specs: { 'Form': 'Solid / Powder', 'Color': 'Golden / Dark Brown', 'Packaging': '10kg/30kg Box' },
     reviews: []
   },
 
-  // OILS
+  // --- 9. DRY FRUITS ---
   {
-    id: '5',
-    name: 'Extra Virgin Olive Oil',
-    category: 'Edible Oils',
+    id: 'df1',
+    name: 'Cashew Nuts (W320/W240)',
+    category: 'Dry Fruits & Nuts',
     price: 'Market Rate',
-    image: 'https://images.unsplash.com/photo-1474979266404-7eaacbcdccef?q=80&w=800&auto=format&fit=crop',
-    description: 'Cold-pressed, Acidity <0.8%. Available in bulk Flexi-tanks for bottling.',
-    origin: 'Spain',
-    nutrition: { servingSize: '1 tbsp', calories: 119, protein: '0g', carbs: '0g', fat: '14g' },
-    specs: { 'Acidity': '<0.8%', 'Extraction': 'Cold Pressed', 'Origin': 'Andalusia', 'Packaging': 'Flexitank (21MT)', 'MOQ': '21 MT' },
+    image: 'https://images.unsplash.com/photo-1596232501066-673e4a2fb6bc?q=80&w=800&auto=format&fit=crop',
+    description: 'Whole White Kernels. Crunchy and Sweet. W320 is standard export grade.',
+    origin: 'India / Vietnam',
+    nutrition: { servingSize: '30g', calories: 157, protein: '5g', carbs: '9g', fat: '12g' },
+    specs: { 'Grade': 'W180 / W240 / W320', 'Packaging': '10kg Tin / 25lbs Vacuum', 'Moisture': '5% Max' },
     reviews: []
   },
   {
-    id: '7',
-    name: 'Refined Sunflower Oil',
-    category: 'Edible Oils',
+    id: 'df2',
+    name: 'Premium Dates (Kimia/Medjool)',
+    category: 'Dry Fruits & Nuts',
     price: 'Market Rate',
-    image: 'https://images.unsplash.com/photo-1620888200673-827c191a221f?q=80&w=800&auto=format&fit=crop',
-    description: 'Winterized, deodorized. ISO 22000 refinery. Bulk or bottled.',
-    origin: 'Ukraine',
-    nutrition: { servingSize: '1 tbsp', calories: 120, protein: '0g', carbs: '0g', fat: '14g' },
-    specs: { 'FFA': '0.1% Max', 'Color': 'Golden Yellow', 'Refining': 'Winterized', 'Packaging': 'Flexitank / 5L PET', 'MOQ': '1 FCL' },
+    image: 'https://images.unsplash.com/photo-1563200877-c9183d254353?q=80&w=800&auto=format&fit=crop',
+    description: 'Imported from Saudi/UAE/Tunisia/Iran. Soft flesh, dark color, high sweetness.',
+    origin: 'Saudi Arabia / Iran / Tunisia',
+    nutrition: { servingSize: '100g', calories: 277, protein: '1.8g', carbs: '75g', fat: '0.2g' },
+    specs: { 'Variety': 'Mazafati/Kimia/Medjool', 'Packaging': '500g Box x 12', 'Storage': 'Cold Storage' },
+    reviews: []
+  },
+  
+  // --- 10. FROZEN & PROCESSED ---
+  {
+    id: 'fz1',
+    name: 'Frozen Green Peas (IQF)',
+    category: 'Frozen & Processed',
+    price: 'Market Rate',
+    image: 'https://images.unsplash.com/photo-1590799797089-2244247596b6?q=80&w=800&auto=format&fit=crop',
+    description: 'Farm fresh sweet peas, blanched and IQF frozen. No preservatives.',
+    origin: 'India',
+    nutrition: { servingSize: '100g', calories: 81, protein: '5g', carbs: '14g', fat: '0.4g' },
+    specs: { 'Process': 'IQF', 'Packaging': '1kg / 2.5kg / 30kg Bulk', 'Shelf Life': '18 Months' },
+    reviews: []
+  },
+  {
+    id: 'fz2',
+    name: 'French Fries (Frozen)',
+    category: 'Frozen & Processed',
+    price: 'Market Rate',
+    image: 'https://images.unsplash.com/photo-1630384030331-8e662ac516c7?q=80&w=800&auto=format&fit=crop',
+    description: 'Shoestring (6mm) or Regular (9mm). Pre-fried. Crisp golden texture.',
+    origin: 'India / Imported',
+    nutrition: { servingSize: '100g', calories: 150, protein: '2g', carbs: '25g', fat: '5g' },
+    specs: { 'Cut': '6mm / 9mm', 'Packaging': '2.5kg x 5 Bags', 'Grade': 'A' },
     reviews: []
   },
 
-  // SPICES
+  // --- 11. VALUE ADDED ---
   {
-    id: '9',
-    name: 'Black Pepper GL 550',
-    category: 'Spices & Herbs',
+    id: 'va1',
+    name: 'Pickles (Mango/Lime)',
+    category: 'Value Added & Ancillary',
     price: 'Market Rate',
-    image: 'https://images.unsplash.com/photo-1564858880650-67123aa24032?q=80&w=800&auto=format&fit=crop', // Peppercorns
-    description: 'Garbled Light 550g/l. Machine Cleaned. High Piperine content.',
-    origin: 'Vietnam',
-    nutrition: { servingSize: '1 tsp', calories: 6, protein: '0.2g', carbs: '1g', fat: '0g' },
-    specs: { 'Density': '550g/l', 'Moisture': '13% Max', 'Admixture': '1% Max', 'Packaging': '50kg Jute Bag', 'MOQ': '14 MT' },
+    image: 'https://images.unsplash.com/photo-1621506821957-1b50ab7787a4?q=80&w=800&auto=format&fit=crop',
+    description: 'Traditional Indian pickles in oil. Mango, Lime, Mixed Veg options. Bulk or Retail pack.',
+    origin: 'India',
+    nutrition: { servingSize: '1 tbsp', calories: 25, protein: '0g', carbs: '2g', fat: '2g' },
+    specs: { 'Packaging': '5kg Bucket / 300g Jar', 'Type': 'Spicy / Mild', 'Shelf Life': '12 Months' },
     reviews: []
   },
-
-  // SUGAR
   {
-    id: '23',
-    name: 'Refined Sugar ICUMSA 45',
-    category: 'Sugar & Sweeteners',
+    id: 'va2',
+    name: 'Rice Flour / Spices Mix',
+    category: 'Value Added & Ancillary',
     price: 'Market Rate',
-    image: 'https://images.unsplash.com/photo-1612196603417-22f3e8281313?q=80&w=800&auto=format&fit=crop', // White sugar
-    description: 'White Refined Cane Sugar. ICUMSA 45. Highly refined. Vessel/Container loads.',
-    origin: 'Brazil',
-    nutrition: { servingSize: '100g', calories: 400, protein: '0g', carbs: '100g', fat: '0g' },
-    specs: { 'Polarization': '99.80%', 'Ash Content': '0.04% Max', 'Color': 'Sparkling White', 'Packaging': '50kg PP Bag', 'MOQ': '260 MT (10 Containers)' },
-    reviews: []
-  },
-
-  // DAIRY
-  {
-    id: '24',
-    name: 'Milk Powder (FCMP)',
-    category: 'Dairy Ingredients',
-    price: 'Market Rate',
-    image: 'https://images.unsplash.com/photo-1626127117387-9d769e574c82?q=80&w=800&auto=format&fit=crop', // Powder
-    description: 'Full Cream Milk Powder 26-28% Fat. Spray dried. For reconstitution/bakery.',
-    origin: 'New Zealand',
-    nutrition: { servingSize: '100g', calories: 500, protein: '24g', carbs: '38g', fat: '26g' },
-    specs: { 'Fat': '26% Min', 'Protein': '24% Min', 'Solubility': '99%', 'Packaging': '25kg Multi-ply Paper Bag', 'MOQ': '16 MT' },
+    image: 'https://images.unsplash.com/photo-1586985289688-ca3cf47d3e6e?q=80&w=800&auto=format&fit=crop',
+    description: 'Fine milled rice flour for food processing. Ready-to-cook spice blends (Masalas).',
+    origin: 'India',
+    nutrition: { servingSize: '100g', calories: 366, protein: '6g', carbs: '80g', fat: '1.4g' },
+    specs: { 'Mesh Size': 'Fine / Coarse', 'Packaging': '1kg / 50kg Bag', 'Purity': '100%' },
     reviews: []
   }
 ];
 
 export const BUYING_REQUESTS: BuyingRequest[] = [
-  { id: 'br1', commodity: 'White Rice 5% Broken', volume: '12,500 MT', destination: 'Cotonou, Benin', postedDate: '2 hours ago', status: 'Urgent' },
-  { id: 'br2', commodity: 'Refined Sunflower Oil', volume: '500 MT', destination: 'Mersin, Turkey', postedDate: '5 hours ago', status: 'Open' },
-  { id: 'br3', commodity: 'Yellow Maize (Animal Feed)', volume: '50,000 MT', destination: 'Qingdao, China', postedDate: '1 day ago', status: 'Closing Soon' },
-  { id: 'br4', commodity: 'Frozen Chicken Paws', volume: '27 MT (1 FCL)', destination: 'Haiphong, Vietnam', postedDate: '1 day ago', status: 'Open' },
-  { id: 'br5', commodity: 'Raw Cashew Nuts', volume: '1000 MT', destination: 'Cochin, India', postedDate: '3 hours ago', status: 'Urgent' },
+  { id: 'br1', commodity: '1121 Steam Basmati', volume: '25,000 MT', destination: 'Dammam, Saudi Arabia', postedDate: '2 hours ago', status: 'Urgent' },
+  { id: 'br2', commodity: 'Refined Sugar ICUMSA 45', volume: '12,500 MT', destination: 'Mombasa, Kenya', postedDate: '4 hours ago', status: 'Open' },
+  { id: 'br3', commodity: 'Yellow Maize (Feed)', volume: '50,000 MT', destination: 'Haiphong, Vietnam', postedDate: '1 day ago', status: 'Closing Soon' },
+  { id: 'br4', commodity: 'Frozen Buffalo Meat (98VL)', volume: '2 Containers', destination: 'Kuala Lumpur, Malaysia', postedDate: '1 day ago', status: 'Open' },
+  { id: 'br5', commodity: 'Raw Cashew Nuts', volume: '500 MT', destination: 'Mangalore, India', postedDate: '3 hours ago', status: 'Urgent' },
 ];
 
 export const TESTIMONIALS: Testimonial[] = [
@@ -219,10 +503,10 @@ export const TESTIMONIALS: Testimonial[] = [
 export const CERTIFICATIONS = [
   { name: 'FSSAI', description: 'Food Safety and Standards Authority of India' },
   { name: 'APEDA', description: 'Agricultural & Processed Food Products Export Development Authority' },
-  { name: 'IEC', description: 'Import Export Code (Govt of India)' },
   { name: 'ISO 22000', description: 'Food Safety Management System' },
   { name: 'HACCP', description: 'Hazard Analysis Critical Control Point' },
-  { name: 'Halal', description: 'Certified Halal for GCC/Islamic Markets' }
+  { name: 'Halal', description: 'Certified Halal for GCC/Islamic Markets' },
+  { name: 'Spices Board', description: 'Spices Board of India Registered Exporter' }
 ];
 
 export const MARKET_DATA = [
