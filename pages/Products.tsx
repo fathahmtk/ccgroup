@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useRef, useEffect } from 'react';
-import { Search, Package, ChevronRight, SlidersHorizontal, Globe, Filter, X, Check, ChevronDown } from 'lucide-react';
+import { Search, Package, ChevronRight, Globe, Filter, X, Check, ChevronDown, BarChart2, Info, ArrowUpRight } from 'lucide-react';
 import { PRODUCTS, CATEGORIES } from '../constants';
 import { ProductDetailsModal } from '../components/ProductDetailsModal';
 import { Product } from '../types';
@@ -68,15 +68,6 @@ export const Products: React.FC = () => {
       setViewProduct(null);
   };
 
-  const getCertBadges = (product: Product) => {
-      const text = (product.description + " " + JSON.stringify(product.specs || {})).toLowerCase();
-      const badges = [];
-      if (text.includes('halal')) badges.push('Halal');
-      if (text.includes('iso')) badges.push('ISO');
-      if (text.includes('organic')) badges.push('Organic');
-      return badges;
-  };
-
   const getCountryFlag = (origin: string) => {
     const lower = origin.toLowerCase();
     if (lower.includes('india')) return '🇮🇳';
@@ -95,81 +86,82 @@ export const Products: React.FC = () => {
   };
 
   return (
-    <div className="bg-cc-cream min-h-screen">
+    <div className="bg-cc-cream min-h-screen font-sans">
       
-      {/* Header Section */}
-      <div className="relative pt-32 pb-20 bg-cc-primary overflow-hidden">
-         <div className="absolute inset-0 overflow-hidden">
-             {/* Increased opacity for better visibility */}
-             <img src="https://images.unsplash.com/photo-1509358271058-acd22cc93898?q=80&w=2000" className="w-full h-full object-cover opacity-60 scale-105 animate-slow-zoom" />
-             {/* Gradient for text readability only */}
-             <div className="absolute inset-0 bg-gradient-to-b from-cc-dark/60 via-transparent to-cc-primary"></div>
+      {/* Header Section - Modern Dark Corporate */}
+      <div className="relative pt-36 pb-20 bg-cc-dark overflow-hidden">
+         <div className="absolute inset-0">
+             <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10"></div>
+             <div className="absolute right-0 bottom-0 w-1/2 h-full bg-gradient-to-l from-cc-primary/30 to-transparent"></div>
          </div>
-         <div className="max-w-[1800px] mx-auto px-6 md:px-16 relative z-10 text-center">
+         <div className="max-w-[1800px] mx-auto px-6 md:px-12 relative z-10">
              <div className="animate-fade-up">
-                 <h1 className="font-display text-5xl md:text-7xl text-white mb-6 drop-shadow-xl">
-                    Global Trade Catalog
+                 <div className="flex items-center gap-3 mb-6">
+                    <span className="w-12 h-[1px] bg-cc-gold"></span>
+                    <span className="text-cc-gold text-xs font-bold uppercase tracking-[0.2em]">Global Inventory</span>
+                 </div>
+                 <h1 className="font-display text-5xl md:text-7xl text-white mb-6">
+                    Commodity <span className="text-white/40 italic font-serif">Exchange.</span>
                  </h1>
-                 <p className="text-white/80 text-xl font-light max-w-2xl mx-auto leading-relaxed drop-shadow-md">
-                     Explore our live inventory of certified commodities. Sourced directly from origin for industrial use.
+                 <p className="text-white/70 text-lg font-light max-w-xl leading-relaxed font-sans border-l border-white/10 pl-6">
+                     Real-time access to our verified supply chain. Browse certified lots available for immediate FOB/CIF contract.
                  </p>
              </div>
          </div>
       </div>
 
-      {/* FILTER BAR - STICKY GLASS */}
-      <div className="sticky top-20 z-40 bg-white/70 backdrop-blur-xl border-y border-white/40 shadow-sm" ref={dropdownRef}>
-         <div className="max-w-[1800px] mx-auto px-6 md:px-16 py-4">
+      {/* FILTER BAR - Professional Toolbar */}
+      <div className="sticky top-20 z-40 bg-white/95 backdrop-blur-md border-b border-gray-200 shadow-sm" ref={dropdownRef}>
+         <div className="max-w-[1800px] mx-auto px-6 md:px-12 py-4">
             <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
                 
                 {/* Search Input */}
                 <div className="relative w-full md:w-96 group">
-                    <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-cc-gold transition-colors" size={18} />
+                    <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-cc-primary transition-colors" size={18} />
                     <input 
                       type="text" 
-                      placeholder="Search commodities (e.g. Sugar, Rice)..." 
+                      placeholder="Search assets (e.g. Sugar, S-30)..." 
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
-                      className="w-full pl-12 pr-4 py-2.5 bg-gray-100/50 border border-gray-200 rounded-full focus:outline-none focus:ring-1 focus:ring-cc-gold focus:bg-white transition-all text-sm font-medium hover:bg-white"
+                      className="w-full pl-12 pr-4 py-2.5 bg-gray-100/50 border border-gray-200 rounded-full focus:outline-none focus:bg-white focus:border-cc-primary transition-all text-sm font-medium font-sans placeholder:text-gray-400 text-cc-primary"
                     />
                     {searchQuery && (
-                        <button onClick={() => setSearchQuery('')} className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600">
+                        <button onClick={() => setSearchQuery('')} className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-cc-primary">
                             <X size={14} />
                         </button>
                     )}
                 </div>
 
                 {/* Filters Row */}
-                <div className="flex gap-3 w-full md:w-auto overflow-x-auto pb-1 md:pb-0 no-scrollbar">
+                <div className="flex gap-3 w-full md:w-auto overflow-x-auto pb-1 md:pb-0 no-scrollbar items-center">
                    
-                   {/* Category Dropdown Toggle */}
+                   {/* Category */}
                    <div className="relative">
                        <button 
                           onClick={() => setActiveDropdown(activeDropdown === 'category' ? null : 'category')}
-                          className={`flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-bold border transition-all whitespace-nowrap ${selectedCategory !== 'All' ? 'bg-cc-primary text-white border-cc-primary shadow-lg' : 'bg-white/80 text-gray-600 border-gray-200 hover:border-cc-gold backdrop-blur-sm'}`}
+                          className={`flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-bold border transition-all whitespace-nowrap font-sans uppercase tracking-wide ${selectedCategory !== 'All' ? 'bg-cc-primary text-white border-cc-primary' : 'bg-white text-gray-600 border-gray-200 hover:border-cc-primary/30 hover:text-cc-primary'}`}
                        >
-                           <Package size={16} />
+                           <Package size={14} />
                            {selectedCategory === 'All' ? 'Category' : selectedCategory}
-                           <ChevronDown size={14} className={`transition-transform duration-300 ${activeDropdown === 'category' ? 'rotate-180' : ''}`} />
+                           <ChevronDown size={12} className={`transition-transform duration-300 ${activeDropdown === 'category' ? 'rotate-180' : ''}`} />
                        </button>
 
                        {/* Dropdown Menu */}
                        {activeDropdown === 'category' && (
-                           <div className="absolute top-full right-0 md:left-0 mt-2 w-64 bg-white/95 backdrop-blur-xl rounded-2xl shadow-[0_10px_40px_rgba(0,0,0,0.1)] border border-gray-100 p-2 grid gap-1 animate-fade-in z-50 max-h-[60vh] overflow-y-auto">
+                           <div className="absolute top-full right-0 md:left-0 mt-2 w-72 bg-white rounded-2xl shadow-xl border border-gray-100 p-2 grid gap-0.5 animate-fade-in z-50 max-h-[60vh] overflow-y-auto">
                                <button 
                                   onClick={() => { setSelectedCategory('All'); setActiveDropdown(null); }}
-                                  className={`flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-left transition-colors ${selectedCategory === 'All' ? 'bg-gray-100 font-bold' : 'hover:bg-gray-50'}`}
+                                  className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm text-left transition-colors font-sans ${selectedCategory === 'All' ? 'bg-gray-100 font-bold text-cc-primary' : 'hover:bg-gray-50 text-gray-600'}`}
                                >
-                                   <div className="w-8 flex justify-center"><Filter size={14}/></div>
                                    All Categories
                                </button>
                                {CATEGORIES.map(cat => (
                                    <button 
                                       key={cat.id}
                                       onClick={() => { setSelectedCategory(cat.name); setActiveDropdown(null); }}
-                                      className={`flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-left transition-colors ${selectedCategory === cat.name ? 'bg-cc-cream text-cc-primary font-bold' : 'hover:bg-gray-50 text-gray-600'}`}
+                                      className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm text-left transition-colors font-sans ${selectedCategory === cat.name ? 'bg-cc-primary/5 text-cc-primary font-bold' : 'hover:bg-gray-50 text-gray-600'}`}
                                    >
-                                       <div className="w-8 text-lg text-center">{cat.icon}</div>
+                                       <span>{cat.icon}</span>
                                        {cat.name}
                                    </button>
                                ))}
@@ -177,26 +169,24 @@ export const Products: React.FC = () => {
                        )}
                    </div>
 
-                   {/* Origin Dropdown Toggle */}
+                   {/* Origin */}
                    <div className="relative">
                        <button 
                           onClick={() => setActiveDropdown(activeDropdown === 'origin' ? null : 'origin')}
-                          className={`flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-bold border transition-all whitespace-nowrap ${selectedOrigin.length > 0 ? 'bg-cc-primary text-white border-cc-primary shadow-lg' : 'bg-white/80 text-gray-600 border-gray-200 hover:border-cc-gold backdrop-blur-sm'}`}
+                          className={`flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-bold border transition-all whitespace-nowrap font-sans uppercase tracking-wide ${selectedOrigin.length > 0 ? 'bg-cc-primary text-white border-cc-primary' : 'bg-white text-gray-600 border-gray-200 hover:border-cc-primary/30 hover:text-cc-primary'}`}
                        >
-                           <Globe size={16} />
+                           <Globe size={14} />
                            {selectedOrigin.length > 0 ? `Origins (${selectedOrigin.length})` : 'Origin'}
-                           <ChevronDown size={14} className={`transition-transform duration-300 ${activeDropdown === 'origin' ? 'rotate-180' : ''}`} />
+                           <ChevronDown size={12} className={`transition-transform duration-300 ${activeDropdown === 'origin' ? 'rotate-180' : ''}`} />
                        </button>
 
-                       {/* Dropdown Menu */}
                        {activeDropdown === 'origin' && (
-                           <div className="absolute top-full right-0 md:left-0 mt-2 w-64 bg-white/95 backdrop-blur-xl rounded-2xl shadow-[0_10px_40px_rgba(0,0,0,0.1)] border border-gray-100 p-2 animate-fade-in z-50 max-h-[60vh] overflow-y-auto">
-                               <div className="px-3 py-2 text-xs font-bold text-gray-400 uppercase tracking-widest border-b border-gray-100 mb-2">Select Origins</div>
+                           <div className="absolute top-full right-0 md:left-0 mt-2 w-64 bg-white rounded-2xl shadow-xl border border-gray-100 p-2 animate-fade-in z-50 max-h-[60vh] overflow-y-auto">
                                {availableOrigins.map(origin => (
                                    <button 
                                       key={origin}
                                       onClick={() => toggleOrigin(origin)}
-                                      className="w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-sm text-left hover:bg-gray-50 transition-colors group"
+                                      className="w-full flex items-center justify-between px-4 py-3 rounded-xl text-sm text-left hover:bg-gray-50 transition-colors group font-sans"
                                    >
                                        <span className={`${selectedOrigin.includes(origin) ? 'font-bold text-cc-primary' : 'text-gray-600'}`}>
                                            {getCountryFlag(origin)} <span className="ml-2">{origin}</span>
@@ -207,20 +197,20 @@ export const Products: React.FC = () => {
                                <div className="pt-2 mt-2 border-t border-gray-100">
                                    <button 
                                       onClick={() => { setSelectedOrigin([]); setActiveDropdown(null); }}
-                                      className="w-full py-2 text-xs font-bold text-cc-primary uppercase tracking-widest hover:bg-cc-cream rounded-lg"
+                                      className="w-full py-2 text-xs font-bold text-cc-earth uppercase tracking-widest hover:bg-red-50 rounded-lg font-sans transition-colors"
                                    >
-                                       Reset Origins
+                                       Reset Origin
                                    </button>
                                </div>
                            </div>
                        )}
                    </div>
 
-                   {/* Reset Button */}
+                   {/* Reset */}
                    {(selectedCategory !== 'All' || selectedOrigin.length > 0 || searchQuery) && (
                        <button 
                           onClick={clearFilters}
-                          className="flex items-center gap-2 px-4 py-2.5 rounded-full text-sm font-bold text-red-500 hover:bg-red-50 transition-colors whitespace-nowrap bg-white/50 backdrop-blur-sm"
+                          className="flex items-center gap-1 px-4 py-2 rounded-full text-xs font-bold text-gray-400 hover:text-cc-earth hover:bg-red-50 transition-colors whitespace-nowrap font-sans uppercase tracking-wide"
                        >
                            <X size={14} /> Clear
                        </button>
@@ -231,83 +221,98 @@ export const Products: React.FC = () => {
          </div>
       </div>
 
-      <div className="max-w-[1800px] mx-auto px-6 md:px-16 py-12 relative z-20">
+      <div className="max-w-[1800px] mx-auto px-6 md:px-12 py-12 relative z-20">
         
         {/* Results Info */}
         <div className="mb-8 flex items-center justify-between">
-            <span className="text-xs font-bold text-gray-400 uppercase tracking-widest">
-                Showing {filteredProducts.length} Lots
+            <span className="text-[10px] font-bold text-cc-primary/50 uppercase tracking-[0.2em] font-sans">
+                Active Listings: {filteredProducts.length}
             </span>
         </div>
 
-        {/* Product Grid - Full Width */}
-        <div className="min-h-[400px]">
+        {/* Product Grid - Asset Style */}
+        <div className="min-h-[500px]">
             {filteredProducts.length === 0 ? (
-              <div className="flex flex-col items-center justify-center py-32 text-center bg-white rounded-[2rem] border border-dashed border-gray-200">
-                <div className="w-20 h-20 bg-gray-50 rounded-full flex items-center justify-center mb-6 text-gray-300">
-                    <Search size={32} />
+              <div className="flex flex-col items-center justify-center py-32 text-center bg-white rounded-3xl border border-dashed border-gray-200">
+                <div className="w-20 h-20 bg-gray-50 rounded-full flex items-center justify-center mb-6">
+                    <Search size={32} className="text-gray-300" />
                 </div>
-                <h3 className="text-2xl font-display text-gray-800 mb-2">No active lots found.</h3>
-                <p className="text-gray-500 mb-8 max-w-xs">Try adjusting your filters or search for a different commodity.</p>
-                <button onClick={clearFilters} className="text-cc-primary font-bold uppercase tracking-widest text-xs border-b border-cc-primary hover:text-cc-gold hover:border-cc-gold transition-colors">Clear All Filters</button>
+                <h3 className="text-2xl font-display text-cc-primary mb-2">No assets found</h3>
+                <p className="text-gray-400 text-sm mb-8 font-sans">Try adjusting your market filters.</p>
+                <button onClick={clearFilters} className="text-cc-primary font-bold text-xs uppercase tracking-widest border-b border-cc-primary hover:text-cc-gold hover:border-cc-gold transition-colors">Reset All Filters</button>
               </div>
             ) : (
-              <div className="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4 gap-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
                   {filteredProducts.map((product, index) => (
                       <div 
                          key={product.id} 
-                         className="group flex flex-col bg-white rounded-[2rem] pb-4 shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 border border-gray-100 cursor-pointer overflow-hidden" 
+                         className="group bg-white rounded-3xl shadow-sm hover:shadow-2xl transition-all duration-500 border border-transparent hover:border-cc-gold/30 flex flex-col overflow-hidden relative cursor-pointer" 
                          onClick={() => setViewProduct(product)}
-                         style={{ animationDelay: `${index * 50}ms` }}
                       >
-                          {/* Card Image */}
-                          <div className="relative aspect-[4/5] overflow-hidden bg-gray-50 mb-5">
-                              {/* Bright Image by default, brighter on hover */}
+                          {/* Image Header */}
+                          <div className="relative h-64 overflow-hidden bg-cc-cream">
                               <img 
                                   src={product.image} 
                                   alt={product.name}
                                   loading="lazy"
-                                  className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110 group-hover:brightness-110"
+                                  className="w-full h-full object-cover transition-transform duration-1000 ease-out group-hover:scale-110"
                               />
-                              {/* Only show slight gradient on hover for button readability, otherwise clear */}
-                              <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                              <div className="absolute inset-0 bg-gradient-to-t from-cc-dark/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                               
-                              <div className="absolute top-4 left-4">
-                                  <span className="bg-white/70 backdrop-blur-md text-cc-primary px-3 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest shadow-sm flex items-center gap-1.5 border border-white/50">
-                                      <span className="text-base leading-none">{getCountryFlag(product.origin)}</span>
-                                      <span>{product.origin.split('/')[0].split('(')[0].trim()}</span>
+                              {/* Overlay Badges */}
+                              <div className="absolute top-4 left-4 flex gap-2">
+                                  <span className="bg-white/90 backdrop-blur text-cc-dark px-3 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-wide shadow-sm flex items-center gap-1.5 font-sans">
+                                      {getCountryFlag(product.origin)} {product.origin.split('/')[0].split('(')[0].trim()}
                                   </span>
                               </div>
-
-                              <div className="absolute bottom-0 inset-x-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                                  <button 
-                                    onClick={(e) => handleInquire(product, e)}
-                                    className="w-full bg-white/90 backdrop-blur-md text-cc-primary py-3.5 rounded-xl font-bold uppercase tracking-widest text-[10px] hover:bg-cc-gold hover:text-white transition-colors shadow-lg"
-                                  >
-                                    Add to Inquiry
-                                  </button>
+                              
+                              <div className="absolute bottom-4 right-4 translate-y-10 group-hover:translate-y-0 transition-transform duration-300 ease-out">
+                                  <span className="bg-cc-gold text-cc-primary px-4 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest shadow-lg flex items-center gap-2">
+                                     Details <ArrowUpRight size={14}/>
+                                  </span>
                               </div>
                           </div>
 
-                          <div className="flex flex-col flex-grow px-5">
-                              <div className="flex justify-between items-start mb-2">
-                                  <span className="text-[10px] font-bold text-cc-sage uppercase tracking-widest">{product.category}</span>
-                                  <div className="flex gap-1">
-                                    {getCertBadges(product).map(b => (
-                                        <span key={b} className="text-[9px] px-2 py-0.5 bg-gray-100 text-gray-500 rounded-full">{b}</span>
-                                    ))}
+                          {/* Data Body */}
+                          <div className="p-6 flex flex-col flex-grow">
+                              <div className="flex justify-between items-start mb-3">
+                                  <span className="text-[10px] font-bold text-cc-gold uppercase tracking-[0.15em] font-sans">{product.category}</span>
+                                  {/* Availability Dot */}
+                                  <div className="flex items-center gap-1.5 bg-green-50 px-2.5 py-1 rounded-full border border-green-100">
+                                      <span className="w-1.5 h-1.5 rounded-full bg-green-600 animate-pulse"></span>
+                                      <span className="text-[9px] font-bold text-green-700 uppercase tracking-wide">Live</span>
                                   </div>
                               </div>
                               
-                              <h3 className="font-display text-xl text-cc-primary mb-2 leading-tight group-hover:text-cc-earth transition-colors min-h-[3.5rem]">
+                              <h3 className="font-display text-xl text-cc-primary font-medium mb-6 line-clamp-2 leading-tight min-h-[3.5rem] group-hover:text-cc-secondary transition-colors">
                                   {product.name}
                               </h3>
                               
-                              <div className="mt-auto pt-4 border-t border-gray-50 flex items-center justify-between group/link">
-                                  <span className="text-xs font-bold text-gray-400">MOQ: {product.specs?.['MOQ'] || '1 FCL'}</span>
-                                  <span className="w-8 h-8 rounded-full bg-cc-cream flex items-center justify-center text-cc-primary group-hover/link:bg-cc-primary group-hover/link:text-white transition-colors">
-                                      <ChevronRight size={14} />
-                                  </span>
+                              {/* Spec Grid */}
+                              <div className="grid grid-cols-2 gap-y-4 gap-x-4 mb-6 py-4 border-t border-b border-gray-50">
+                                  <div>
+                                      <span className="block text-[9px] text-gray-400 uppercase font-bold mb-1 tracking-wider">MOQ</span>
+                                      <span className="block text-xs font-bold text-cc-primary font-sans">{product.specs?.['MOQ'] || '1 FCL'}</span>
+                                  </div>
+                                  <div>
+                                      <span className="block text-[9px] text-gray-400 uppercase font-bold mb-1 tracking-wider">Price</span>
+                                      <span className="block text-xs font-bold text-cc-primary font-sans truncate">{product.price}</span>
+                                  </div>
+                                  {product.specs && Object.entries(product.specs).slice(0, 2).map(([key, val]) => (
+                                     <div key={key}>
+                                          <span className="block text-[9px] text-gray-400 uppercase font-bold mb-1 tracking-wider">{key}</span>
+                                          <span className="block text-xs font-bold text-cc-primary font-sans truncate">{val}</span>
+                                     </div>
+                                  ))}
+                              </div>
+
+                              <div className="mt-auto">
+                                  <button 
+                                    onClick={(e) => handleInquire(product, e)}
+                                    className="w-full py-3 rounded-xl border border-cc-primary text-cc-primary font-bold text-[10px] uppercase tracking-[0.15em] hover:bg-cc-primary hover:text-white transition-all duration-300"
+                                  >
+                                    Add to Quote
+                                  </button>
                               </div>
                           </div>
                       </div>
