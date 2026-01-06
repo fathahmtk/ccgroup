@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Droplets, Wheat, ArrowRight, Scale, Sun, ShieldCheck, Globe, TrendingUp, Truck, Anchor, FileText, Activity, Quote, Briefcase, ArrowDown, Users, CheckCircle, Award, Landmark, Mail, BarChart3, ChevronRight } from 'lucide-react';
+import { Droplets, Wheat, ArrowRight, Scale, Sun, ShieldCheck, Globe, TrendingUp, Truck, Anchor, FileText, Activity, Quote, Briefcase, Users, CheckCircle, Award, Landmark, BarChart3, ChevronRight } from 'lucide-react';
 import { PRODUCTS, BUYING_REQUESTS, TESTIMONIALS } from '../constants';
 import { ProductDetailsModal } from '../components/ProductDetailsModal';
 import { Product } from '../types';
@@ -157,13 +157,14 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, tradeMode = 'export' }) 
                         alt={slide.titleHighlight}
                     />
                  </div>
-                 <div className="absolute inset-0 bg-gradient-to-r from-cc-dark via-cc-dark/40 to-transparent"></div>
+                 {/* Stronger Gradients for better text readability */}
+                 <div className="absolute inset-0 bg-gradient-to-r from-cc-dark/95 via-cc-dark/40 to-transparent"></div>
                  <div className="absolute inset-0 bg-gradient-to-t from-cc-dark via-transparent to-transparent opacity-90"></div>
              </div>
          ))}
 
          <div className="max-w-[1800px] mx-auto px-6 md:px-16 relative z-10 w-full mb-32 md:mb-20">
-             <div key={currentSlide} className="max-w-5xl animate-fade-up">
+             <div key={currentSlide} className="max-w-6xl animate-fade-up">
                  <div className="inline-flex items-center gap-3 mb-8 bg-black/20 backdrop-blur-md px-4 py-2 rounded-full border border-white/10">
                     <span className="w-2 h-2 rounded-full bg-cc-gold animate-pulse"></span>
                     <span className="text-cc-gold text-[10px] font-bold uppercase tracking-[0.2em] font-sans">
@@ -171,21 +172,21 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, tradeMode = 'export' }) 
                     </span>
                  </div>
                  
-                 <h1 className="font-display text-7xl md:text-[9rem] text-white leading-[0.85] mb-10 tracking-tight drop-shadow-lg">
+                 <h1 className="font-display text-7xl md:text-[9rem] text-white leading-[0.85] mb-10 tracking-tighter drop-shadow-lg">
                      {HERO_SLIDES[currentSlide].titleLine1} <br/>
                      <span className="text-transparent text-outline italic font-serif">{HERO_SLIDES[currentSlide].titleHighlight}</span>
                  </h1>
                  
                  <div className="flex flex-col md:flex-row gap-16 items-start md:items-end">
-                    <div className="bg-cc-dark/40 backdrop-blur-lg p-6 rounded-2xl border-l border-cc-gold max-w-lg">
-                        <p className="text-gray-200 text-lg font-light leading-relaxed font-sans">
+                    <div className="bg-white/5 backdrop-blur-md p-8 rounded-3xl border border-white/10 max-w-lg shadow-2xl">
+                        <p className="text-gray-100 text-lg font-light leading-relaxed font-sans">
                             {HERO_SLIDES[currentSlide].description}
                         </p>
                     </div>
                     
                     <button 
                         onClick={() => onNavigate(HERO_SLIDES[currentSlide].target)}
-                        className="bg-cc-gold text-cc-primary px-12 py-6 rounded-full font-bold uppercase tracking-widest text-xs hover:bg-white transition-all duration-300 flex items-center gap-4 shadow-[0_10px_30px_rgba(0,0,0,0.3)] group hover:scale-105 font-sans"
+                        className="bg-cc-gold text-cc-primary px-12 py-6 rounded-full font-bold uppercase tracking-widest text-xs hover:bg-white transition-all duration-300 flex items-center gap-4 shadow-[0_10px_30px_rgba(197,160,89,0.3)] group hover:scale-105 font-sans"
                     >
                         {isImport ? "Join Network" : HERO_SLIDES[currentSlide].ctaText} <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
                     </button>
@@ -271,7 +272,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, tradeMode = 'export' }) 
                       { name: 'Black Pepper', index: 'Kochi', val: '₹58,400', change: '+1.1%', icon: <Droplets size={20}/> },
                       { name: 'Jeera (Cumin)', index: 'Unjha', val: '₹28,400', change: '+0.5%', icon: <Sun size={20}/> },
                   ].map((item, i) => (
-                      <div key={i} className="bg-white p-8 rounded-[2rem] border border-gray-100 shadow-[0_10px_30px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.06)] transition-all hover:-translate-y-2 group cursor-default relative overflow-hidden">
+                      <div key={i} className="bg-gradient-to-br from-white to-gray-50 p-8 rounded-[2rem] border border-gray-100 shadow-sm hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 group cursor-default relative overflow-hidden">
                           <div className="absolute top-0 right-0 w-32 h-32 bg-cc-cream rounded-bl-full -mr-10 -mt-10 transition-transform group-hover:scale-110"></div>
                           
                           <div className="relative z-10">
@@ -304,7 +305,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, tradeMode = 'export' }) 
                 {/* Large Card 1 */}
                 <div 
                     onClick={() => onNavigate('products')}
-                    className="group relative h-[700px] rounded-[3rem] overflow-hidden cursor-pointer shadow-xl hover:shadow-2xl transition-all duration-500"
+                    className="group relative h-[700px] rounded-[3rem] overflow-hidden cursor-pointer shadow-xl hover:shadow-2xl transition-all duration-700"
                 >
                     <img src="https://images.unsplash.com/photo-1586201375761-83865001e31c?q=80&w=1200" className="w-full h-full object-cover transition-transform duration-[1.5s] group-hover:scale-105" alt="Grains" />
                     <div className="absolute inset-0 bg-gradient-to-t from-cc-dark via-cc-dark/10 to-transparent opacity-80 group-hover:opacity-90 transition-opacity"></div>
@@ -329,7 +330,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, tradeMode = 'export' }) 
                 {/* Large Card 2 */}
                 <div 
                     onClick={() => onNavigate('products')}
-                    className="group relative h-[700px] rounded-[3rem] overflow-hidden cursor-pointer shadow-xl hover:shadow-2xl transition-all duration-500"
+                    className="group relative h-[700px] rounded-[3rem] overflow-hidden cursor-pointer shadow-xl hover:shadow-2xl transition-all duration-700"
                 >
                     <img src="https://images.unsplash.com/photo-1620888200673-827c191a221f?q=80&w=1200" className="w-full h-full object-cover transition-transform duration-[1.5s] group-hover:scale-105" alt="Oils" />
                     <div className="absolute inset-0 bg-gradient-to-t from-cc-dark via-cc-dark/10 to-transparent opacity-80 group-hover:opacity-90 transition-opacity"></div>

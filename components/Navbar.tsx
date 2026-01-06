@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, ShoppingBag, Globe, ChevronDown, ArrowRightLeft } from 'lucide-react';
+import { Menu, X, ShoppingBag, Globe } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 import { Logo } from './Logo';
 
@@ -18,12 +18,12 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate, tradeMo
   const { setIsCartOpen, cartCount } = useCart();
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 50);
+    const handleScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Navbar is transparent at top, then becomes a floating glass pill
+  // Navbar starts transparent, becomes a floating luxury dock
   const isTransparent = !scrolled;
 
   const MENU_ITEMS = ['home', 'corporate', 'trade', 'products', 'services', 'contact'];
@@ -51,81 +51,84 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate, tradeMo
   return (
     <>
       <nav 
-        className={`fixed z-50 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] flex justify-center ${
+        className={`fixed z-50 transition-all duration-700 ease-[cubic-bezier(0.19,1,0.22,1)] flex justify-center ${
             scrolled 
-                ? 'top-6 inset-x-0 pointer-events-none' 
-                : 'top-0 inset-x-0 py-8 bg-transparent'
+                ? 'top-4 inset-x-0 pointer-events-none' 
+                : 'top-0 inset-x-0 py-6 bg-transparent'
         }`}
       >
         <div 
-            className={`transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] flex items-center justify-between pointer-events-auto ${
+            className={`transition-all duration-700 ease-[cubic-bezier(0.19,1,0.22,1)] flex items-center justify-between pointer-events-auto ${
                 scrolled 
-                    ? 'w-[95%] lg:w-[90%] max-w-6xl bg-cc-dark/90 backdrop-blur-xl shadow-[0_20px_40px_rgba(0,0,0,0.4)] py-4 px-8 rounded-full border border-white/10' 
-                    : 'w-full max-w-[1800px] px-6 md:px-12 bg-transparent'
+                    ? 'w-[95%] lg:w-[85%] max-w-7xl bg-cc-dark/80 backdrop-blur-2xl shadow-[0_8px_32px_rgba(0,0,0,0.12)] py-3 px-6 rounded-2xl border border-white/10' 
+                    : 'w-full max-w-[1920px] px-6 md:px-12 bg-transparent'
             }`}
         >
-          {/* Logo */}
-          <div 
-            className="flex items-center gap-3 cursor-pointer group"
-            onClick={() => handleNavClick('home')}
-          >
-             <Logo variant={scrolled ? 'white' : (isTransparent ? 'white' : 'default')} className={scrolled ? "scale-90 origin-left transition-transform" : "scale-100 origin-left"} />
-             {/* Mode Badge */}
-             <span className={`text-[9px] font-bold uppercase tracking-widest px-2 py-0.5 rounded border ml-2 hidden md:block transition-colors ${
-                 scrolled || isTransparent 
-                    ? 'border-white/20 text-white/60' 
-                    : 'border-cc-primary/20 text-cc-primary/60'
-             }`}>
-                {tradeMode} Mode
-             </span>
-          </div>
+          {/* Logo & Mode Switcher */}
+          <div className="flex items-center gap-6">
+            <div 
+                className="flex items-center gap-3 cursor-pointer group"
+                onClick={() => handleNavClick('home')}
+            >
+                <Logo variant={scrolled ? 'white' : (isTransparent ? 'white' : 'default')} className={scrolled ? "scale-90 origin-left transition-transform" : "scale-100 origin-left"} />
+            </div>
 
-          {/* Desktop Nav */}
-          <div className={`hidden lg:flex items-center ${scrolled ? 'gap-1' : 'gap-6'}`}>
-             {MENU_ITEMS.map((item) => (
-                <button 
-                   key={item}
-                   onClick={() => handleNavClick(item)}
-                   className={`text-[10px] font-bold uppercase tracking-[0.2em] transition-all duration-300 relative group px-4 py-2.5 rounded-full font-sans ${
-                       scrolled 
-                        ? 'text-white/60 hover:text-white hover:bg-white/10' 
-                        : (isTransparent ? 'text-white/70 hover:text-white hover:bg-white/10' : 'text-cc-primary/70 hover:text-cc-primary hover:bg-cc-primary/5')
-                   } ${currentPage === item ? (scrolled ? 'text-white bg-white/10' : 'text-white font-extrabold bg-white/10 backdrop-blur-md') : ''}`}
-                >
-                   {getMenuLabel(item)}
-                </button>
-             ))}
-          </div>
-
-          {/* Right Actions */}
-          <div className="flex items-center gap-3">
-             {/* Trade Mode Toggle */}
-             <div className={`hidden md:flex items-center rounded-full p-1 border transition-colors ${
+            {/* Desktop Mode Toggle */}
+            <div className={`hidden md:flex items-center rounded-lg p-1 border transition-all duration-500 ${
                  scrolled || isTransparent ? 'bg-white/5 border-white/10' : 'bg-cc-primary/5 border-cc-primary/10'
              }`}>
                  <button 
                     onClick={() => onToggleTradeMode('export')}
-                    className={`px-3 py-1.5 rounded-full text-[9px] font-bold uppercase tracking-wider transition-all ${
+                    className={`px-3 py-1 rounded-md text-[9px] font-bold uppercase tracking-wider transition-all duration-300 ${
                         tradeMode === 'export' 
                             ? (scrolled || isTransparent ? 'bg-white text-cc-primary shadow-sm' : 'bg-cc-primary text-white shadow-sm') 
-                            : (scrolled || isTransparent ? 'text-white/50 hover:text-white' : 'text-cc-primary/50 hover:text-cc-primary')
+                            : (scrolled || isTransparent ? 'text-white/40 hover:text-white' : 'text-cc-primary/40 hover:text-cc-primary')
                     }`}
                  >
                     Export
                  </button>
                  <button 
                     onClick={() => onToggleTradeMode('import')}
-                    className={`px-3 py-1.5 rounded-full text-[9px] font-bold uppercase tracking-wider transition-all ${
+                    className={`px-3 py-1 rounded-md text-[9px] font-bold uppercase tracking-wider transition-all duration-300 ${
                         tradeMode === 'import' 
                             ? (scrolled || isTransparent ? 'bg-white text-cc-primary shadow-sm' : 'bg-cc-primary text-white shadow-sm') 
-                            : (scrolled || isTransparent ? 'text-white/50 hover:text-white' : 'text-cc-primary/50 hover:text-cc-primary')
+                            : (scrolled || isTransparent ? 'text-white/40 hover:text-white' : 'text-cc-primary/40 hover:text-cc-primary')
                     }`}
                  >
                     Import
                  </button>
              </div>
+          </div>
 
-             <button className={`hidden md:flex items-center gap-2 px-4 py-2.5 rounded-full border text-[10px] font-bold uppercase tracking-widest transition-colors font-sans ${
+          {/* Desktop Nav Links */}
+          <div className={`hidden lg:flex items-center absolute left-1/2 -translate-x-1/2 ${scrolled ? 'gap-1' : 'gap-2'}`}>
+             {MENU_ITEMS.map((item) => {
+                const isActive = currentPage === item;
+                return (
+                    <button 
+                    key={item}
+                    onClick={() => handleNavClick(item)}
+                    className={`relative px-5 py-2 rounded-full transition-all duration-500 group overflow-hidden ${
+                        isActive 
+                            ? (scrolled || isTransparent ? 'text-white' : 'text-cc-primary') 
+                            : (scrolled || isTransparent ? 'text-white/60 hover:text-white' : 'text-cc-primary/60 hover:text-cc-primary')
+                    }`}
+                    >
+                    <span className="relative z-10 text-[10px] font-bold uppercase tracking-[0.2em] font-sans">
+                        {getMenuLabel(item)}
+                    </span>
+                    {isActive && (
+                        <span className={`absolute inset-0 rounded-full opacity-20 transition-all duration-500 ${scrolled || isTransparent ? 'bg-white' : 'bg-cc-primary'}`}></span>
+                    )}
+                    <span className={`absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full transition-all duration-300 ${isActive ? 'opacity-100 mb-1.5' : 'opacity-0 mb-0'} ${scrolled || isTransparent ? 'bg-cc-gold' : 'bg-cc-primary'}`}></span>
+                    </button>
+                );
+             })}
+          </div>
+
+          {/* Right Actions */}
+          <div className="flex items-center gap-2">
+             <button className={`hidden md:flex items-center gap-2 px-3 py-2 rounded-full border text-[10px] font-bold uppercase tracking-widest transition-colors font-sans ${
                  scrolled 
                     ? 'border-white/10 text-white hover:bg-white/10' 
                     : (isTransparent ? 'border-white/20 text-white hover:bg-white/10' : 'border-cc-primary/20 text-cc-primary hover:bg-cc-primary/5')
@@ -137,13 +140,13 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate, tradeMo
                 onClick={() => setIsCartOpen(true)}
                 className={`relative p-3 rounded-full transition-all duration-300 flex items-center gap-2 group ${
                     scrolled 
-                        ? 'text-white hover:bg-cc-gold hover:text-cc-primary' 
+                        ? 'text-white hover:bg-white/10' 
                         : (isTransparent ? 'text-white hover:bg-white/10' : 'text-cc-primary hover:bg-cc-primary/5')
                 }`}
              >
                 <ShoppingBag size={20} />
                 {cartCount > 0 && (
-                     <span className="absolute -top-0.5 -right-0.5 bg-cc-gold text-cc-primary text-[10px] font-bold font-mono w-5 h-5 flex items-center justify-center rounded-full animate-fade-in shadow-sm ring-2 ring-cc-dark">
+                     <span className="absolute top-0 right-0 bg-cc-gold text-cc-primary text-[9px] font-bold font-mono w-4 h-4 flex items-center justify-center rounded-full animate-fade-in shadow-sm ring-2 ring-cc-dark">
                        {cartCount}
                      </span>
                 )}
@@ -160,38 +163,44 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate, tradeMo
       </nav>
 
       {/* Mobile Menu Overlay */}
-      <div className={`fixed inset-0 z-40 bg-cc-dark/95 backdrop-blur-3xl transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}>
-           <div className="flex flex-col items-center justify-center h-full gap-8 text-center p-6">
-              {/* Mobile Toggle */}
-              <div className="flex items-center bg-white/5 p-1 rounded-full mb-8">
-                  <button 
-                    onClick={() => onToggleTradeMode('export')}
-                    className={`px-6 py-3 rounded-full text-xs font-bold uppercase tracking-widest transition-all ${
-                        tradeMode === 'export' ? 'bg-cc-gold text-cc-primary' : 'text-white/50'
-                    }`}
-                  >
-                    Export
-                  </button>
-                  <button 
-                    onClick={() => onToggleTradeMode('import')}
-                    className={`px-6 py-3 rounded-full text-xs font-bold uppercase tracking-widest transition-all ${
-                        tradeMode === 'import' ? 'bg-cc-gold text-cc-primary' : 'text-white/50'
-                    }`}
-                  >
-                    Import
-                  </button>
+      <div className={`fixed inset-0 z-40 bg-cc-dark/98 backdrop-blur-3xl transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+           <div className="flex flex-col items-center justify-center h-full gap-6 text-center p-6 relative">
+              
+              <div className="absolute top-6 right-6">
+                 <button onClick={() => setIsOpen(false)} className="text-white/50 hover:text-white p-2">
+                    <X size={32} />
+                 </button>
               </div>
 
-              {MENU_ITEMS.map((item) => (
+              {MENU_ITEMS.map((item, idx) => (
                 <button 
                    key={item}
                    onClick={() => handleNavClick(item)}
-                   className="text-4xl font-display text-white hover:text-cc-gold transition-colors capitalize opacity-0 animate-fade-up"
-                   style={{ animationDelay: `${MENU_ITEMS.indexOf(item) * 100}ms`, animationFillMode: 'forwards' }}
+                   className="text-5xl font-display text-white hover:text-cc-gold transition-colors capitalize opacity-0 animate-fade-up"
+                   style={{ animationDelay: `${idx * 100}ms`, animationFillMode: 'forwards' }}
                 >
                    {getMenuLabel(item)}
                 </button>
              ))}
+
+             <div className="flex items-center gap-4 mt-8 opacity-0 animate-fade-in" style={{ animationDelay: '600ms', animationFillMode: 'forwards' }}>
+                 <button 
+                    onClick={() => onToggleTradeMode('export')}
+                    className={`px-6 py-3 rounded-full text-xs font-bold uppercase tracking-widest border transition-all ${
+                        tradeMode === 'export' ? 'bg-cc-gold border-cc-gold text-cc-primary' : 'border-white/20 text-white'
+                    }`}
+                  >
+                    Export Mode
+                  </button>
+                  <button 
+                    onClick={() => onToggleTradeMode('import')}
+                    className={`px-6 py-3 rounded-full text-xs font-bold uppercase tracking-widest border transition-all ${
+                        tradeMode === 'import' ? 'bg-cc-gold border-cc-gold text-cc-primary' : 'border-white/20 text-white'
+                    }`}
+                  >
+                    Import Mode
+                  </button>
+             </div>
            </div>
       </div>
     </>

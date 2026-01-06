@@ -110,10 +110,10 @@ export const Products: React.FC = () => {
          </div>
       </div>
 
-      {/* FILTER BAR - Professional Toolbar */}
-      <div className="sticky top-20 z-40 bg-white/95 backdrop-blur-xl border-b border-gray-200 shadow-sm" ref={dropdownRef}>
-         <div className="max-w-[1800px] mx-auto px-6 md:px-12 py-4">
-            <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
+      {/* FILTER BAR - Floating Glass Bar */}
+      <div className="sticky top-24 z-30 transition-all duration-500" ref={dropdownRef}>
+         <div className="max-w-[1800px] mx-auto px-6 md:px-12">
+            <div className="bg-white/80 backdrop-blur-xl border border-white/40 shadow-[0_8px_30px_rgba(0,0,0,0.04)] rounded-2xl p-3 flex flex-col md:flex-row gap-4 items-center justify-between">
                 
                 {/* Search Input */}
                 <div className="relative w-full md:w-96 group">
@@ -123,7 +123,7 @@ export const Products: React.FC = () => {
                       placeholder="Search assets (e.g. Sugar, S-30)..." 
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
-                      className="w-full pl-12 pr-4 py-3 bg-gray-100/50 border border-gray-200 rounded-full focus:outline-none focus:bg-white focus:border-cc-primary transition-all text-sm font-medium font-sans placeholder:text-gray-400 text-cc-primary"
+                      className="w-full pl-12 pr-4 py-3 bg-gray-100/50 hover:bg-white border border-transparent hover:border-gray-200 rounded-xl focus:outline-none focus:bg-white focus:border-cc-primary transition-all text-sm font-medium font-sans placeholder:text-gray-400 text-cc-primary shadow-inner"
                     />
                     {searchQuery && (
                         <button onClick={() => setSearchQuery('')} className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-cc-primary">
@@ -133,13 +133,13 @@ export const Products: React.FC = () => {
                 </div>
 
                 {/* Filters Row */}
-                <div className="flex gap-3 w-full md:w-auto overflow-x-auto pb-1 md:pb-0 no-scrollbar items-center">
+                <div className="flex gap-2 w-full md:w-auto overflow-x-auto pb-1 md:pb-0 no-scrollbar items-center">
                    
                    {/* Category */}
                    <div className="relative">
                        <button 
                           onClick={() => setActiveDropdown(activeDropdown === 'category' ? null : 'category')}
-                          className={`flex items-center gap-2 px-6 py-3 rounded-full text-xs font-bold border transition-all whitespace-nowrap font-sans uppercase tracking-wide ${selectedCategory !== 'All' ? 'bg-cc-primary text-white border-cc-primary' : 'bg-white text-gray-600 border-gray-200 hover:border-cc-primary/30 hover:text-cc-primary'}`}
+                          className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-bold border transition-all whitespace-nowrap font-sans uppercase tracking-wide ${selectedCategory !== 'All' ? 'bg-cc-primary text-white border-cc-primary shadow-lg shadow-cc-primary/20' : 'bg-transparent text-gray-600 border-transparent hover:bg-gray-100'}`}
                        >
                            <Package size={14} />
                            {selectedCategory === 'All' ? 'Category' : selectedCategory}
@@ -148,7 +148,7 @@ export const Products: React.FC = () => {
 
                        {/* Dropdown Menu */}
                        {activeDropdown === 'category' && (
-                           <div className="absolute top-full right-0 md:left-0 mt-2 w-72 bg-white rounded-2xl shadow-xl border border-gray-100 p-2 grid gap-0.5 animate-fade-in z-50 max-h-[60vh] overflow-y-auto">
+                           <div className="absolute top-full right-0 md:left-0 mt-3 w-72 bg-white rounded-2xl shadow-xl border border-gray-100 p-2 grid gap-0.5 animate-fade-in z-50 max-h-[60vh] overflow-y-auto">
                                <button 
                                   onClick={() => { setSelectedCategory('All'); setActiveDropdown(null); }}
                                   className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm text-left transition-colors font-sans ${selectedCategory === 'All' ? 'bg-gray-100 font-bold text-cc-primary' : 'hover:bg-gray-50 text-gray-600'}`}
@@ -173,7 +173,7 @@ export const Products: React.FC = () => {
                    <div className="relative">
                        <button 
                           onClick={() => setActiveDropdown(activeDropdown === 'origin' ? null : 'origin')}
-                          className={`flex items-center gap-2 px-6 py-3 rounded-full text-xs font-bold border transition-all whitespace-nowrap font-sans uppercase tracking-wide ${selectedOrigin.length > 0 ? 'bg-cc-primary text-white border-cc-primary' : 'bg-white text-gray-600 border-gray-200 hover:border-cc-primary/30 hover:text-cc-primary'}`}
+                          className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-bold border transition-all whitespace-nowrap font-sans uppercase tracking-wide ${selectedOrigin.length > 0 ? 'bg-cc-primary text-white border-cc-primary shadow-lg shadow-cc-primary/20' : 'bg-transparent text-gray-600 border-transparent hover:bg-gray-100'}`}
                        >
                            <Globe size={14} />
                            {selectedOrigin.length > 0 ? `Origins (${selectedOrigin.length})` : 'Origin'}
@@ -181,7 +181,7 @@ export const Products: React.FC = () => {
                        </button>
 
                        {activeDropdown === 'origin' && (
-                           <div className="absolute top-full right-0 md:left-0 mt-2 w-64 bg-white rounded-2xl shadow-xl border border-gray-100 p-2 animate-fade-in z-50 max-h-[60vh] overflow-y-auto">
+                           <div className="absolute top-full right-0 md:left-0 mt-3 w-64 bg-white rounded-2xl shadow-xl border border-gray-100 p-2 animate-fade-in z-50 max-h-[60vh] overflow-y-auto">
                                {availableOrigins.map(origin => (
                                    <button 
                                       key={origin}
@@ -234,7 +234,7 @@ export const Products: React.FC = () => {
             </div>
         </div>
 
-        {/* Product Grid - Asset Style */}
+        {/* Product Grid - Minimalist Gallery Style */}
         <div className="min-h-[500px]">
             {filteredProducts.length === 0 ? (
               <div className="flex flex-col items-center justify-center py-32 text-center bg-white rounded-[2rem] border border-dashed border-gray-200">
@@ -250,11 +250,11 @@ export const Products: React.FC = () => {
                   {filteredProducts.map((product, index) => (
                       <div 
                          key={product.id} 
-                         className="group bg-white rounded-[2rem] shadow-sm hover:shadow-2xl transition-all duration-500 border border-gray-100 hover:border-cc-gold/30 flex flex-col overflow-hidden relative cursor-pointer" 
+                         className="group bg-white rounded-[2.5rem] shadow-sm hover:shadow-[0_20px_40px_rgba(0,0,0,0.08)] transition-all duration-500 flex flex-col overflow-hidden relative cursor-pointer" 
                          onClick={() => setViewProduct(product)}
                       >
                           {/* Image Header */}
-                          <div className="relative h-72 overflow-hidden bg-cc-cream">
+                          <div className="relative h-80 overflow-hidden bg-gray-100">
                               <img 
                                   src={product.image} 
                                   alt={product.name}
@@ -262,64 +262,54 @@ export const Products: React.FC = () => {
                                   onError={(e) => {
                                       e.currentTarget.src = "https://images.unsplash.com/photo-1580250642511-16609b7eb146?q=80&w=800&auto=format&fit=crop"; 
                                   }}
-                                  className="w-full h-full object-cover transition-transform duration-1000 ease-out group-hover:scale-110"
+                                  className="w-full h-full object-cover transition-transform duration-1000 ease-out group-hover:scale-105"
                               />
-                              <div className="absolute inset-0 bg-gradient-to-t from-cc-dark/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                              <div className="absolute inset-0 bg-gradient-to-t from-cc-dark/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                               
                               {/* Overlay Badges */}
-                              <div className="absolute top-4 left-4 flex gap-2">
-                                  <span className="bg-white/95 backdrop-blur-md text-cc-dark px-3 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-wide shadow-sm flex items-center gap-1.5 font-sans border border-gray-100">
+                              <div className="absolute top-5 left-5 right-5 flex justify-between items-start">
+                                  <span className="bg-white/90 backdrop-blur-md text-cc-dark px-3 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-wide shadow-sm flex items-center gap-1.5 font-sans">
                                       {getCountryFlag(product.origin)} {product.origin.split('/')[0].split('(')[0].trim()}
                                   </span>
+                                  
+                                  {/* Availability Dot */}
+                                  <div className="flex items-center gap-1.5 bg-green-500/90 backdrop-blur text-white px-2.5 py-1.5 rounded-full shadow-sm">
+                                      <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
+                                      <span className="text-[9px] font-bold uppercase tracking-wide font-mono">Live</span>
+                                  </div>
                               </div>
                               
-                              <div className="absolute bottom-5 right-5 translate-y-10 group-hover:translate-y-0 transition-transform duration-300 ease-out">
-                                  <span className="bg-cc-gold text-cc-primary px-5 py-2.5 rounded-full text-[10px] font-bold uppercase tracking-widest shadow-lg flex items-center gap-2 font-sans border border-white/20">
-                                     View Asset <ArrowUpRight size={14}/>
-                                  </span>
+                              {/* Hover Action - Replaces Bottom Content on Hover? No, overlay style */}
+                              <div className="absolute bottom-0 left-0 right-0 p-5 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out z-10">
+                                  <button 
+                                    onClick={(e) => handleInquire(product, e)}
+                                    className="w-full py-4 rounded-2xl bg-white text-cc-primary font-bold text-[10px] uppercase tracking-[0.2em] hover:bg-cc-primary hover:text-white transition-all duration-300 font-sans shadow-lg flex items-center justify-center gap-2"
+                                  >
+                                    Add to Quote <ArrowUpRight size={14}/>
+                                  </button>
                               </div>
                           </div>
 
                           {/* Data Body */}
-                          <div className="p-7 flex flex-col flex-grow">
-                              <div className="flex justify-between items-start mb-4">
-                                  <span className="text-[10px] font-bold text-cc-gold uppercase tracking-[0.2em] font-sans border border-cc-gold/20 px-2 py-1 rounded">{product.category}</span>
-                                  {/* Availability Dot */}
-                                  <div className="flex items-center gap-1.5 bg-green-50 px-2.5 py-1 rounded-full border border-green-100">
-                                      <span className="w-1.5 h-1.5 rounded-full bg-green-600 animate-pulse"></span>
-                                      <span className="text-[9px] font-bold text-green-700 uppercase tracking-wide font-mono">Live</span>
-                                  </div>
+                          <div className="p-6 flex flex-col flex-grow relative bg-white z-20 group-hover:bg-gray-50/50 transition-colors">
+                              <div className="mb-2">
+                                  <span className="text-[9px] font-bold text-cc-gold uppercase tracking-[0.2em] font-sans">{product.category}</span>
                               </div>
                               
-                              <h3 className="font-display text-2xl text-cc-primary font-medium mb-6 line-clamp-2 leading-tight min-h-[4rem] group-hover:text-cc-secondary transition-colors">
+                              <h3 className="font-display text-2xl text-cc-primary font-medium mb-4 line-clamp-2 leading-tight min-h-[3.5rem] group-hover:text-cc-secondary transition-colors">
                                   {product.name}
                               </h3>
                               
-                              {/* Spec Grid */}
-                              <div className="grid grid-cols-2 gap-y-5 gap-x-4 mb-8 py-5 border-t border-b border-gray-50">
+                              {/* Minimal Specs */}
+                              <div className="grid grid-cols-2 gap-4 pt-4 border-t border-gray-100">
                                   <div>
                                       <span className="block text-[9px] text-gray-400 uppercase font-bold mb-1 tracking-wider">MOQ</span>
                                       <span className="block text-xs font-bold text-cc-primary font-mono">{product.specs?.['MOQ'] || '1 FCL'}</span>
                                   </div>
-                                  <div>
+                                  <div className="text-right">
                                       <span className="block text-[9px] text-gray-400 uppercase font-bold mb-1 tracking-wider">Price</span>
                                       <span className="block text-xs font-bold text-cc-primary font-mono truncate">{product.price}</span>
                                   </div>
-                                  {product.specs && Object.entries(product.specs).slice(0, 2).map(([key, val]) => (
-                                     <div key={key}>
-                                          <span className="block text-[9px] text-gray-400 uppercase font-bold mb-1 tracking-wider">{key}</span>
-                                          <span className="block text-xs font-bold text-cc-primary font-mono truncate">{val}</span>
-                                     </div>
-                                  ))}
-                              </div>
-
-                              <div className="mt-auto">
-                                  <button 
-                                    onClick={(e) => handleInquire(product, e)}
-                                    className="w-full py-4 rounded-xl border border-cc-primary text-cc-primary font-bold text-[10px] uppercase tracking-[0.2em] hover:bg-cc-primary hover:text-white transition-all duration-300 font-sans shadow-sm hover:shadow-lg"
-                                  >
-                                    Add to Quote
-                                  </button>
                               </div>
                           </div>
                       </div>
