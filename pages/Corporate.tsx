@@ -1,5 +1,5 @@
 import React from 'react';
-import { Building2, Users, Target, Globe, Award, Leaf, TrendingUp, Anchor, Briefcase } from 'lucide-react';
+import { Building2, Users, Target, Globe, Award, Leaf, TrendingUp, Anchor, Briefcase, MapPin, Landmark, CheckCircle2, Copy } from 'lucide-react';
 
 export const Corporate: React.FC = () => {
   return (
@@ -101,6 +101,85 @@ export const Corporate: React.FC = () => {
          </div>
       </section>
 
+      {/* 2.5 CORPORATE REGISTRY - New Section */}
+      <section className="py-16 bg-white border-t border-gray-100">
+         <div className="max-w-[1800px] mx-auto px-6 md:px-12">
+             <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-12">
+                 <div>
+                    <h2 className="font-display text-4xl text-cc-primary">Corporate Registry</h2>
+                    <p className="text-gray-500 text-sm mt-2 font-sans">Official entity details for due diligence and compliance.</p>
+                 </div>
+                 <div className="mt-4 md:mt-0">
+                    <span className="inline-flex items-center gap-2 px-4 py-2 bg-green-50 text-green-700 text-[10px] font-bold uppercase tracking-widest rounded-full border border-green-100 font-sans shadow-sm">
+                        <CheckCircle2 size={14}/> Active Status
+                    </span>
+                 </div>
+             </div>
+
+             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                 {/* Address */}
+                 <div className="p-8 bg-cc-cream rounded-[2rem] border border-gray-100 hover:border-cc-gold/30 hover:shadow-lg transition-all duration-300 group cursor-default">
+                     <div className="flex justify-between items-start mb-4">
+                        <span className="block text-[10px] font-bold text-gray-400 uppercase tracking-widest font-sans">Registered Office</span>
+                        <Copy size={12} className="text-gray-300 opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer hover:text-cc-gold"/>
+                     </div>
+                     <div className="flex items-start gap-4">
+                         <div className="p-2.5 bg-white rounded-xl text-cc-gold shadow-sm border border-gray-100"><MapPin size={20}/></div>
+                         <address className="text-cc-primary text-sm font-medium leading-relaxed not-italic font-sans">
+                            CC Food Stuff Trading<br/>
+                            Logistics Park, Vadakara<br/>
+                            Kerala, India - 673101
+                         </address>
+                     </div>
+                 </div>
+
+                 {/* Entity Type */}
+                 <div className="p-8 bg-cc-cream rounded-[2rem] border border-gray-100 hover:border-cc-gold/30 hover:shadow-lg transition-all duration-300 group cursor-default">
+                     <div className="flex justify-between items-start mb-4">
+                        <span className="block text-[10px] font-bold text-gray-400 uppercase tracking-widest font-sans">Legal Entity</span>
+                     </div>
+                     <div className="flex items-start gap-4">
+                         <div className="p-2.5 bg-white rounded-xl text-cc-gold shadow-sm border border-gray-100"><Building2 size={20}/></div>
+                         <div>
+                            <p className="text-cc-primary text-sm font-bold font-sans">Private Limited</p>
+                            <p className="text-[10px] text-gray-500 font-sans mt-1">Companies Act, 2013</p>
+                         </div>
+                     </div>
+                 </div>
+
+                 {/* Tax ID */}
+                 <div className="p-8 bg-cc-cream rounded-[2rem] border border-gray-100 hover:border-cc-gold/30 hover:shadow-lg transition-all duration-300 group cursor-default">
+                     <div className="flex justify-between items-start mb-4">
+                        <span className="block text-[10px] font-bold text-gray-400 uppercase tracking-widest font-sans">Tax Registration</span>
+                        <Copy size={12} className="text-gray-300 opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer hover:text-cc-gold"/>
+                     </div>
+                     <div className="flex items-start gap-4">
+                         <div className="p-2.5 bg-white rounded-xl text-cc-gold shadow-sm border border-gray-100"><Landmark size={20}/></div>
+                         <div>
+                            <p className="text-cc-primary text-sm font-bold font-mono">GSTIN: 32AABCC1234K1Z5</p>
+                            <p className="text-[10px] text-gray-500 font-sans mt-1">Jurisdiction: Kerala</p>
+                         </div>
+                     </div>
+                 </div>
+
+                 {/* IEC */}
+                 <div className="p-8 bg-cc-cream rounded-[2rem] border border-gray-100 hover:border-cc-gold/30 hover:shadow-lg transition-all duration-300 group cursor-default">
+                     <div className="flex justify-between items-start mb-4">
+                        <span className="block text-[10px] font-bold text-gray-400 uppercase tracking-widest font-sans">Import Export Code</span>
+                        <Copy size={12} className="text-gray-300 opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer hover:text-cc-gold"/>
+                     </div>
+                     <div className="flex items-start gap-4">
+                         <div className="p-2.5 bg-white rounded-xl text-cc-gold shadow-sm border border-gray-100"><Globe size={20}/></div>
+                         <div>
+                            <p className="text-cc-primary text-sm font-bold font-mono">IEC: 0987654321</p>
+                            <p className="text-[10px] text-gray-500 font-sans mt-1">Issued by DGFT</p>
+                         </div>
+                     </div>
+                 </div>
+             </div>
+         </div>
+      </section>
+
       {/* 3. CHAIRMAN'S MESSAGE */}
       <section className="py-24 bg-cc-dark text-white relative overflow-hidden">
          <div className="absolute right-0 top-0 w-1/2 h-full bg-white/5 skew-x-12"></div>
@@ -196,4 +275,3 @@ const Wheat = ({size}: {size: number}) => (
 const Quote = ({size, className}: {size: number, className?: string}) => (
     <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z"/><path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z"/></svg>
 );
-

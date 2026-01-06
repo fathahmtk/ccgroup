@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, ShoppingBag, Globe } from 'lucide-react';
+import { Menu, X, ShoppingBag, Globe, ArrowRightLeft } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 import { Logo } from './Logo';
 
@@ -79,23 +79,23 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate, tradeMo
              }`}>
                  <button 
                     onClick={() => onToggleTradeMode('export')}
-                    className={`px-3 py-1 rounded-md text-[9px] font-bold uppercase tracking-wider transition-all duration-300 ${
+                    className={`px-3 py-1 rounded-md text-[9px] font-bold uppercase tracking-wider transition-all duration-300 flex items-center gap-1.5 ${
                         tradeMode === 'export' 
                             ? (scrolled || isTransparent ? 'bg-white text-cc-primary shadow-sm' : 'bg-cc-primary text-white shadow-sm') 
                             : (scrolled || isTransparent ? 'text-white/40 hover:text-white' : 'text-cc-primary/40 hover:text-cc-primary')
                     }`}
                  >
-                    Export
+                    {tradeMode === 'export' && <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></div>} Export
                  </button>
                  <button 
                     onClick={() => onToggleTradeMode('import')}
-                    className={`px-3 py-1 rounded-md text-[9px] font-bold uppercase tracking-wider transition-all duration-300 ${
+                    className={`px-3 py-1 rounded-md text-[9px] font-bold uppercase tracking-wider transition-all duration-300 flex items-center gap-1.5 ${
                         tradeMode === 'import' 
                             ? (scrolled || isTransparent ? 'bg-white text-cc-primary shadow-sm' : 'bg-cc-primary text-white shadow-sm') 
                             : (scrolled || isTransparent ? 'text-white/40 hover:text-white' : 'text-cc-primary/40 hover:text-cc-primary')
                     }`}
                  >
-                    Import
+                    {tradeMode === 'import' && <div className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse"></div>} Import
                  </button>
              </div>
           </div>
@@ -186,19 +186,19 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate, tradeMo
              <div className="flex items-center gap-4 mt-8 opacity-0 animate-fade-in" style={{ animationDelay: '600ms', animationFillMode: 'forwards' }}>
                  <button 
                     onClick={() => onToggleTradeMode('export')}
-                    className={`px-6 py-3 rounded-full text-xs font-bold uppercase tracking-widest border transition-all ${
+                    className={`px-6 py-3 rounded-full text-xs font-bold uppercase tracking-widest border flex items-center gap-2 transition-all ${
                         tradeMode === 'export' ? 'bg-cc-gold border-cc-gold text-cc-primary' : 'border-white/20 text-white'
                     }`}
                   >
-                    Export Mode
+                    {tradeMode === 'export' && <div className="w-2 h-2 rounded-full bg-cc-primary"></div>} Export Mode
                   </button>
                   <button 
                     onClick={() => onToggleTradeMode('import')}
-                    className={`px-6 py-3 rounded-full text-xs font-bold uppercase tracking-widest border transition-all ${
+                    className={`px-6 py-3 rounded-full text-xs font-bold uppercase tracking-widest border flex items-center gap-2 transition-all ${
                         tradeMode === 'import' ? 'bg-cc-gold border-cc-gold text-cc-primary' : 'border-white/20 text-white'
                     }`}
                   >
-                    Import Mode
+                    {tradeMode === 'import' && <div className="w-2 h-2 rounded-full bg-cc-primary"></div>} Import Mode
                   </button>
              </div>
            </div>
