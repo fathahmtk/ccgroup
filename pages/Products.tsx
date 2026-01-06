@@ -100,23 +100,25 @@ export const Products: React.FC = () => {
       {/* Header Section */}
       <div className="relative pt-32 pb-20 bg-cc-primary overflow-hidden">
          <div className="absolute inset-0 overflow-hidden">
-             <img src="https://images.unsplash.com/photo-1509358271058-acd22cc93898?q=80&w=2000" className="w-full h-full object-cover opacity-30 scale-105 animate-slow-zoom" />
-             <div className="absolute inset-0 bg-gradient-to-b from-cc-dark/60 to-cc-primary"></div>
+             {/* Increased opacity for better visibility */}
+             <img src="https://images.unsplash.com/photo-1509358271058-acd22cc93898?q=80&w=2000" className="w-full h-full object-cover opacity-60 scale-105 animate-slow-zoom" />
+             {/* Gradient for text readability only */}
+             <div className="absolute inset-0 bg-gradient-to-b from-cc-dark/60 via-transparent to-cc-primary"></div>
          </div>
          <div className="max-w-[1800px] mx-auto px-6 md:px-16 relative z-10 text-center">
              <div className="animate-fade-up">
-                 <h1 className="font-display text-5xl md:text-7xl text-white mb-6">
+                 <h1 className="font-display text-5xl md:text-7xl text-white mb-6 drop-shadow-xl">
                     Global Trade Catalog
                  </h1>
-                 <p className="text-white/60 text-xl font-light max-w-2xl mx-auto leading-relaxed">
+                 <p className="text-white/80 text-xl font-light max-w-2xl mx-auto leading-relaxed drop-shadow-md">
                      Explore our live inventory of certified commodities. Sourced directly from origin for industrial use.
                  </p>
              </div>
          </div>
       </div>
 
-      {/* FILTER BAR - STICKY */}
-      <div className="sticky top-20 z-40 bg-white/80 backdrop-blur-xl border-y border-gray-200/60 shadow-sm" ref={dropdownRef}>
+      {/* FILTER BAR - STICKY GLASS */}
+      <div className="sticky top-20 z-40 bg-white/70 backdrop-blur-xl border-y border-white/40 shadow-sm" ref={dropdownRef}>
          <div className="max-w-[1800px] mx-auto px-6 md:px-16 py-4">
             <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
                 
@@ -128,7 +130,7 @@ export const Products: React.FC = () => {
                       placeholder="Search commodities (e.g. Sugar, Rice)..." 
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
-                      className="w-full pl-12 pr-4 py-2.5 bg-gray-100/50 border border-gray-200 rounded-full focus:outline-none focus:ring-1 focus:ring-cc-gold focus:bg-white transition-all text-sm font-medium"
+                      className="w-full pl-12 pr-4 py-2.5 bg-gray-100/50 border border-gray-200 rounded-full focus:outline-none focus:ring-1 focus:ring-cc-gold focus:bg-white transition-all text-sm font-medium hover:bg-white"
                     />
                     {searchQuery && (
                         <button onClick={() => setSearchQuery('')} className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600">
@@ -144,7 +146,7 @@ export const Products: React.FC = () => {
                    <div className="relative">
                        <button 
                           onClick={() => setActiveDropdown(activeDropdown === 'category' ? null : 'category')}
-                          className={`flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-bold border transition-all whitespace-nowrap ${selectedCategory !== 'All' ? 'bg-cc-primary text-white border-cc-primary' : 'bg-white text-gray-600 border-gray-200 hover:border-cc-gold'}`}
+                          className={`flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-bold border transition-all whitespace-nowrap ${selectedCategory !== 'All' ? 'bg-cc-primary text-white border-cc-primary shadow-lg' : 'bg-white/80 text-gray-600 border-gray-200 hover:border-cc-gold backdrop-blur-sm'}`}
                        >
                            <Package size={16} />
                            {selectedCategory === 'All' ? 'Category' : selectedCategory}
@@ -153,7 +155,7 @@ export const Products: React.FC = () => {
 
                        {/* Dropdown Menu */}
                        {activeDropdown === 'category' && (
-                           <div className="absolute top-full right-0 md:left-0 mt-2 w-64 bg-white rounded-2xl shadow-xl border border-gray-100 p-2 grid gap-1 animate-fade-in z-50 max-h-[60vh] overflow-y-auto">
+                           <div className="absolute top-full right-0 md:left-0 mt-2 w-64 bg-white/95 backdrop-blur-xl rounded-2xl shadow-[0_10px_40px_rgba(0,0,0,0.1)] border border-gray-100 p-2 grid gap-1 animate-fade-in z-50 max-h-[60vh] overflow-y-auto">
                                <button 
                                   onClick={() => { setSelectedCategory('All'); setActiveDropdown(null); }}
                                   className={`flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-left transition-colors ${selectedCategory === 'All' ? 'bg-gray-100 font-bold' : 'hover:bg-gray-50'}`}
@@ -179,7 +181,7 @@ export const Products: React.FC = () => {
                    <div className="relative">
                        <button 
                           onClick={() => setActiveDropdown(activeDropdown === 'origin' ? null : 'origin')}
-                          className={`flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-bold border transition-all whitespace-nowrap ${selectedOrigin.length > 0 ? 'bg-cc-primary text-white border-cc-primary' : 'bg-white text-gray-600 border-gray-200 hover:border-cc-gold'}`}
+                          className={`flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-bold border transition-all whitespace-nowrap ${selectedOrigin.length > 0 ? 'bg-cc-primary text-white border-cc-primary shadow-lg' : 'bg-white/80 text-gray-600 border-gray-200 hover:border-cc-gold backdrop-blur-sm'}`}
                        >
                            <Globe size={16} />
                            {selectedOrigin.length > 0 ? `Origins (${selectedOrigin.length})` : 'Origin'}
@@ -188,7 +190,7 @@ export const Products: React.FC = () => {
 
                        {/* Dropdown Menu */}
                        {activeDropdown === 'origin' && (
-                           <div className="absolute top-full right-0 md:left-0 mt-2 w-64 bg-white rounded-2xl shadow-xl border border-gray-100 p-2 animate-fade-in z-50 max-h-[60vh] overflow-y-auto">
+                           <div className="absolute top-full right-0 md:left-0 mt-2 w-64 bg-white/95 backdrop-blur-xl rounded-2xl shadow-[0_10px_40px_rgba(0,0,0,0.1)] border border-gray-100 p-2 animate-fade-in z-50 max-h-[60vh] overflow-y-auto">
                                <div className="px-3 py-2 text-xs font-bold text-gray-400 uppercase tracking-widest border-b border-gray-100 mb-2">Select Origins</div>
                                {availableOrigins.map(origin => (
                                    <button 
@@ -218,7 +220,7 @@ export const Products: React.FC = () => {
                    {(selectedCategory !== 'All' || selectedOrigin.length > 0 || searchQuery) && (
                        <button 
                           onClick={clearFilters}
-                          className="flex items-center gap-2 px-4 py-2.5 rounded-full text-sm font-bold text-red-500 hover:bg-red-50 transition-colors whitespace-nowrap"
+                          className="flex items-center gap-2 px-4 py-2.5 rounded-full text-sm font-bold text-red-500 hover:bg-red-50 transition-colors whitespace-nowrap bg-white/50 backdrop-blur-sm"
                        >
                            <X size={14} /> Clear
                        </button>
@@ -259,17 +261,19 @@ export const Products: React.FC = () => {
                          style={{ animationDelay: `${index * 50}ms` }}
                       >
                           {/* Card Image */}
-                          <div className="relative aspect-[4/5] overflow-hidden bg-gray-100 mb-5">
+                          <div className="relative aspect-[4/5] overflow-hidden bg-gray-50 mb-5">
+                              {/* Bright Image by default, brighter on hover */}
                               <img 
                                   src={product.image} 
                                   alt={product.name}
                                   loading="lazy"
-                                  className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+                                  className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110 group-hover:brightness-110"
                               />
-                              <div className="absolute inset-0 bg-black/10 group-hover:bg-black/20 transition-colors"></div>
+                              {/* Only show slight gradient on hover for button readability, otherwise clear */}
+                              <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
                               
                               <div className="absolute top-4 left-4">
-                                  <span className="bg-white/95 backdrop-blur text-cc-primary px-3 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest shadow-sm flex items-center gap-1.5 border border-gray-100">
+                                  <span className="bg-white/70 backdrop-blur-md text-cc-primary px-3 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest shadow-sm flex items-center gap-1.5 border border-white/50">
                                       <span className="text-base leading-none">{getCountryFlag(product.origin)}</span>
                                       <span>{product.origin.split('/')[0].split('(')[0].trim()}</span>
                                   </span>
@@ -278,7 +282,7 @@ export const Products: React.FC = () => {
                               <div className="absolute bottom-0 inset-x-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
                                   <button 
                                     onClick={(e) => handleInquire(product, e)}
-                                    className="w-full bg-white text-cc-primary py-3.5 rounded-xl font-bold uppercase tracking-widest text-[10px] hover:bg-cc-gold hover:text-white transition-colors shadow-lg"
+                                    className="w-full bg-white/90 backdrop-blur-md text-cc-primary py-3.5 rounded-xl font-bold uppercase tracking-widest text-[10px] hover:bg-cc-gold hover:text-white transition-colors shadow-lg"
                                   >
                                     Add to Inquiry
                                   </button>

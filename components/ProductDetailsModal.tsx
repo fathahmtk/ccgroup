@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { X, Globe, Package, Calendar, Award, ShieldCheck, Truck, FileText, Container, Beaker, Maximize2, ArrowRight } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { X, Globe, FileText, Container, Calendar, ShieldCheck, Truck, Beaker, Maximize2, ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Product } from '../types';
 import { PRODUCTS } from '../constants';
 
@@ -12,8 +12,47 @@ interface ProductDetailsModalProps {
 
 export const ProductDetailsModal: React.FC<ProductDetailsModalProps> = ({ product, onClose, onInquire, onSelectProduct }) => {
   const [isFullImage, setIsFullImage] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-  // Filter related products: Same category, exclude current product, limit to 3
+  // Use product.images if available, otherwise fallback to [product.image]
+  const galleryImages = product.images && product.images.length > 0 ? product.images : [product.image];
+
+  // Reset index when product changes
+  useEffect(() => {
+    setCurrentImageIndex(0);
+  }, [product]);
+
+  // Handle navigation
+  const nextImage = (e?: React.MouseEvent) => {
+    e?.stopPropagation();
+    setCurrentImageIndex((prev) => (prev + 1) % galleryImages.length);
+  };
+
+  const prevImage = (e?: React.MouseEvent) => {
+    e?.stopPropagation();
+    setCurrentImageIndex((prev) => (prev - 1 + galleryImages.length) % galleryImages.length);
+  };
+
+  const selectImage = (index: number, e?: React.MouseEvent) => {
+    e?.stopPropagation();
+    setCurrentImageIndex(index);
+  };
+
+  // Keyboard navigation for carousel
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'ArrowRight') nextImage();
+      if (e.key === 'ArrowLeft') prevImage();
+      if (e.key === 'Escape') {
+        if (isFullImage) setIsFullImage(false);
+        else onClose();
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [galleryImages.length, isFullImage, onClose]);
+
+  // Filter related products
   const relatedProducts = PRODUCTS
     .filter(p => p.category === product.category && p.id !== product.id)
     .slice(0, 3);
@@ -32,16 +71,42 @@ export const ProductDetailsModal: React.FC<ProductDetailsModalProps> = ({ produc
       {isFullImage && (
         <div className="fixed inset-0 z-[60] bg-black flex items-center justify-center animate-fade-in" onClick={() => setIsFullImage(false)}>
            <button 
-             className="absolute top-6 right-6 text-white bg-white/10 p-2 rounded-full hover:bg-white/20"
-             onClick={() => setIsFullImage(false)}
+             className="absolute top-6 right-6 text-white bg-white/10 p-2 rounded-full hover:bg-white/20 transition-colors z-50"
+             onClick={(e) => { e.stopPropagation(); setIsFullImage(false); }}
            >
              <X size={32} />
            </button>
+           
+           {/* Lightbox Navigation */}
+           {galleryImages.length > 1 && (
+             <>
+                <button 
+                  className="absolute left-4 top-1/2 -translate-y-1/2 text-white bg-white/10 p-3 rounded-full hover:bg-white/20 transition-colors z-50"
+                  onClick={prevImage}
+                >
+                  <ChevronLeft size={32} />
+                </button>
+                <button 
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-white bg-white/10 p-3 rounded-full hover:bg-white/20 transition-colors z-50"
+                  onClick={nextImage}
+                >
+                  <ChevronRight size={32} />
+                </button>
+             </>
+           )}
+
            <img 
-              src={product.image} 
+              src={galleryImages[currentImageIndex]} 
               alt={product.name}
-              className="max-w-full max-h-full p-4 object-contain select-none"
+              className="max-w-full max-h-full p-4 object-contain select-none transition-opacity duration-300"
            />
+           
+           {/* Lightbox Counter */}
+           {galleryImages.length > 1 && (
+             <div className="absolute bottom-8 left-1/2 -translate-x-1/2 bg-black/50 px-4 py-1 rounded-full text-white text-xs font-bold uppercase tracking-widest">
+               {currentImageIndex + 1} / {galleryImages.length}
+             </div>
+           )}
         </div>
       )}
 
@@ -54,25 +119,59 @@ export const ProductDetailsModal: React.FC<ProductDetailsModalProps> = ({ produc
           <X size={24} className="text-gray-800" />
         </button>
 
-        {/* Image Side */}
-        <div className="w-full md:w-5/12 bg-gray-100 relative min-h-[300px] md:min-h-full flex flex-col group">
-           <div className="relative flex-grow cursor-zoom-in" onClick={() => setIsFullImage(true)}>
+        {/* Image Side (Gallery) */}
+        <div className="w-full md:w-5/12 bg-gray-100 relative min-h-[400px] md:min-h-full flex flex-col group select-none">
+           {/* Main Image Container */}
+           <div className="relative flex-grow cursor-zoom-in overflow-hidden" onClick={() => setIsFullImage(true)}>
                <img 
-                  src={product.image} 
+                  src={galleryImages[currentImageIndex]} 
                   alt={product.name}
-                  className="absolute inset-0 w-full h-full object-cover"
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 hover:scale-105"
                />
-               <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+               <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent pointer-events-none"></div>
                
                {/* Expand Button Overlay */}
-               <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/20">
-                   <div className="bg-white/20 backdrop-blur-md border border-white/30 text-white px-4 py-2 rounded-full flex items-center gap-2 text-xs font-bold uppercase tracking-widest">
+               <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/20 pointer-events-none">
+                   <div className="bg-white/20 backdrop-blur-md border border-white/30 text-white px-4 py-2 rounded-full flex items-center gap-2 text-xs font-bold uppercase tracking-widest pointer-events-auto">
                        <Maximize2 size={16} /> View Full Image
                    </div>
                </div>
+
+               {/* Carousel Navigation Arrows (visible on hover) */}
+               {galleryImages.length > 1 && (
+                 <>
+                   <button 
+                     onClick={prevImage}
+                     className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/30 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity hover:bg-black/50"
+                   >
+                     <ChevronLeft size={24} />
+                   </button>
+                   <button 
+                     onClick={nextImage}
+                     className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/30 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity hover:bg-black/50"
+                   >
+                     <ChevronRight size={24} />
+                   </button>
+                 </>
+               )}
            </div>
+
+           {/* Thumbnails Strip */}
+           {galleryImages.length > 1 && (
+             <div className="absolute bottom-32 left-0 right-0 px-4 flex justify-center gap-2 z-20 pointer-events-none">
+               {galleryImages.map((img, idx) => (
+                 <button 
+                   key={idx}
+                   onClick={(e) => selectImage(idx, e)}
+                   className={`w-12 h-12 rounded-sm border-2 overflow-hidden transition-all pointer-events-auto shadow-lg ${currentImageIndex === idx ? 'border-cc-gold scale-110' : 'border-white/50 opacity-70 hover:opacity-100'}`}
+                 >
+                   <img src={img} className="w-full h-full object-cover" alt="thumbnail" />
+                 </button>
+               ))}
+             </div>
+           )}
            
-           <div className="p-8 bg-cc-primary text-white">
+           <div className="p-8 bg-cc-primary text-white relative z-10">
               <span className="inline-block px-3 py-1 bg-cc-gold text-white text-[10px] font-bold uppercase tracking-widest rounded-sm mb-4">
                   Ready for Export
               </span>

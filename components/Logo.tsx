@@ -13,35 +13,38 @@ export const Logo: React.FC<LogoProps> = ({ variant = 'default', className = '' 
       {/* Symbol */}
       <div className="relative w-10 h-10 md:w-12 md:h-12 flex-shrink-0">
         <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full drop-shadow-sm">
-          {/* Background Shape: Organic Leaf-like Square */}
-          <path 
-            d="M20 5C11.7157 5 5 11.7157 5 20V50C5 74.8528 25.1472 95 50 95C74.8528 95 95 74.8528 95 50V20C95 11.7157 88.2843 5 80 5H20Z" 
-            fill={isDefault ? '#133E28' : '#ffffff'} 
-            className="transition-colors duration-500"
-          />
+          {/* Outer Container Ring */}
+          <circle cx="50" cy="50" r="46" fill={isDefault ? '#0F2F1E' : '#FFFFFF'} stroke={isDefault ? '#C5A065' : 'transparent'} strokeWidth="1" />
           
-          {/* Abstract Monogram / Grain Icon */}
+          {/* Abstract Monogram C (Left) - Gold */}
           <path 
-            d="M50 25C40 25 35 35 35 50C35 65 45 75 50 75" 
-            stroke={isDefault ? '#D4B886' : '#133E28'} 
-            strokeWidth="4" 
+            d="M40 32C28 36 26 64 40 68" 
+            stroke={isDefault ? '#C5A065' : '#0F2F1E'} 
+            strokeWidth="5" 
             strokeLinecap="round"
           />
+          
+          {/* Abstract Monogram C (Right) - Sage/Secondary */}
           <path 
-             d="M50 25C60 25 65 35 65 50C65 65 55 75 50 75"
-             stroke={isDefault ? '#D4B886' : '#133E28'}
-             strokeWidth="4" 
-             strokeLinecap="round" 
-             strokeOpacity="0.5"
+            d="M60 68C72 64 74 36 60 32" 
+            stroke={isDefault ? '#8FA89B' : '#0F2F1E'} 
+            strokeWidth="5" 
+            strokeLinecap="round"
+            strokeOpacity={isDefault ? "1" : "0.3"}
           />
           
-          {/* Central Stem */}
+          {/* Central Vertical Axis (Growth) */}
           <path 
-            d="M50 20L50 80" 
-            stroke={isDefault ? '#D4B886' : '#133E28'} 
-            strokeWidth="3" 
-            strokeLinecap="round"
+            d="M50 22V78" 
+            stroke={isDefault ? '#FFFFFF' : '#0F2F1E'} 
+            strokeWidth="1" 
+            strokeOpacity="0.15"
           />
+          
+          {/* Three Seeds representing core values */}
+          <circle cx="50" cy="35" r="3" fill={isDefault ? '#C5A065' : '#0F2F1E'} />
+          <circle cx="50" cy="50" r="3" fill={isDefault ? '#C5A065' : '#0F2F1E'} />
+          <circle cx="50" cy="65" r="3" fill={isDefault ? '#C5A065' : '#0F2F1E'} />
         </svg>
       </div>
 

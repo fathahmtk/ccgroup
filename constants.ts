@@ -1,3 +1,4 @@
+
 import { Product, Testimonial, BuyingRequest } from './types';
 
 export const CATEGORIES = [
@@ -21,7 +22,7 @@ export const CATEGORIES = [
   },
   { 
     id: 'grains', 
-    name: 'Grains & Cereals', 
+    name: 'Grains & Millets', 
     icon: '🌾',
     image: 'https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?q=80&w=400&auto=format&fit=crop'
   },
@@ -77,6 +78,11 @@ export const PRODUCTS: Product[] = [
     category: 'Fresh Fruits',
     price: 'Market Rate',
     image: 'https://images.unsplash.com/photo-1571771896612-61871f0ee6bd?q=80&w=800&auto=format&fit=crop',
+    images: [
+      'https://images.unsplash.com/photo-1571771896612-61871f0ee6bd?q=80&w=800&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1603833665858-e61d17a86224?q=80&w=800&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1528825871115-3581a5387919?q=80&w=800&auto=format&fit=crop'
+    ],
     description: 'Robusta / G9 varieties. Also sourcing Nendran and Poovan. Uniform hands, spot-free yellow ripening.',
     origin: 'India',
     nutrition: { servingSize: '100g', calories: 89, protein: '1.1g', carbs: '22.8g', fat: '0.3g' },
@@ -189,6 +195,11 @@ export const PRODUCTS: Product[] = [
     category: 'Rice',
     price: '₹85-95 / kg (Bulk)',
     image: 'https://images.unsplash.com/photo-1586201375761-83865001e31c?q=80&w=800&auto=format&fit=crop',
+    images: [
+      'https://images.unsplash.com/photo-1586201375761-83865001e31c?q=80&w=800&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1536304993881-ffc028db696f?q=80&w=800&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1516684732162-798a0062be99?q=80&w=800&auto=format&fit=crop'
+    ],
     description: 'Extra Long Grain (8.35mm avg). Available in Steam, White Sella, and Golden Sella. 95% Purity.',
     origin: 'India',
     nutrition: { servingSize: '100g', calories: 130, protein: '2.7g', carbs: '28g', fat: '0.3g' },
@@ -232,11 +243,11 @@ export const PRODUCTS: Product[] = [
     reviews: []
   },
 
-  // --- 4. GRAINS & CEREALS ---
+  // --- 4. GRAINS & MILLETS (Expanded) ---
   {
     id: 'g1',
     name: 'Milling Wheat (Lokwan/Sharbati)',
-    category: 'Grains & Cereals',
+    category: 'Grains & Millets',
     price: 'Market Rate',
     image: 'https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?q=80&w=800&auto=format&fit=crop',
     description: 'Premium Indian Wheat. High gluten (12-13%). Machine cleaned. Suitable for Bakery & Chakki Atta.',
@@ -248,7 +259,7 @@ export const PRODUCTS: Product[] = [
   {
     id: 'g2',
     name: 'Yellow Maize (Corn)',
-    category: 'Grains & Cereals',
+    category: 'Grains & Millets',
     price: 'Market Rate',
     image: 'https://images.unsplash.com/photo-1551754655-cd27e38d2076?q=80&w=800&auto=format&fit=crop',
     description: 'For Animal Feed or Starch Industry. High carbohydrate content. Low Aflatoxin.',
@@ -259,14 +270,50 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: 'g3',
-    name: 'Millets (Ragi/Bajra/Jowar)',
-    category: 'Grains & Cereals',
+    name: 'Pearl Millet (Bajra)',
+    category: 'Grains & Millets',
     price: 'Market Rate',
     image: 'https://images.unsplash.com/photo-1621817292275-52f205a22c57?q=80&w=800&auto=format&fit=crop',
-    description: 'Superfoods. Finger Millet (Ragi), Pearl Millet (Bajra), Sorghum (Jowar). Whole grains.',
+    description: 'Major Millet. Highly nutritious, gluten-free, and rich in iron. Used for flatbreads (Rotla) and porridge.',
     origin: 'India',
     nutrition: { servingSize: '100g', calories: 378, protein: '11g', carbs: '72g', fat: '4g' },
-    specs: { 'Purity': '99%', 'Packaging': '25kg/50kg', 'Form': 'Whole Grain' },
+    specs: { 'Purity': '99%', 'Color': 'Grey/Green', 'Packaging': '25kg/50kg PP Bag' },
+    reviews: []
+  },
+  {
+    id: 'g4',
+    name: 'Sorghum (Jowar)',
+    category: 'Grains & Millets',
+    price: 'Market Rate',
+    image: 'https://images.unsplash.com/photo-1518567709337-37dfd0800c7e?q=80&w=800&auto=format&fit=crop',
+    description: 'White Sorghum. Ancient grain, high in fiber and antioxidants. Staple for Bhakri/Roti and Animal Feed.',
+    origin: 'India',
+    nutrition: { servingSize: '100g', calories: 339, protein: '11.3g', carbs: '74.6g', fat: '3.3g' },
+    specs: { 'Type': 'White/Red', 'Moisture': '12% Max', 'Packaging': '50kg Bag' },
+    reviews: []
+  },
+  {
+    id: 'g5',
+    name: 'Finger Millet (Ragi)',
+    category: 'Grains & Millets',
+    price: 'Market Rate',
+    image: 'https://images.unsplash.com/photo-1647420959325-a131804f8615?q=80&w=800&auto=format&fit=crop',
+    description: 'Red Millet. Exceptional calcium content. Used for Malt, Dosa, and Porridge. Deep red colour.',
+    origin: 'India',
+    nutrition: { servingSize: '100g', calories: 328, protein: '7.3g', carbs: '72g', fat: '1.3g' },
+    specs: { 'Cleaning': 'Machine Cleaned', 'Packaging': '25kg/50kg', 'Grade': 'A' },
+    reviews: []
+  },
+  {
+    id: 'g6',
+    name: 'Quinoa (White/Red/Tricolor)',
+    category: 'Grains & Millets',
+    price: 'Premium Rate',
+    image: 'https://images.unsplash.com/photo-1586259074092-2637a85de9e0?q=80&w=800&auto=format&fit=crop',
+    description: 'Pseudo-millet. Complete protein containing all 9 essential amino acids. Saponin-free/Washed.',
+    origin: 'India / Peru',
+    nutrition: { servingSize: '100g', calories: 368, protein: '14g', carbs: '64g', fat: '6g' },
+    specs: { 'Type': 'White/Red/Black', 'Purity': '99.9%', 'Packaging': '25kg Paper Bag' },
     reviews: []
   },
 
@@ -514,5 +561,4 @@ export const MARKET_DATA = [
   { name: 'Sugar', value: 350 },
   { name: 'Oils', value: 300 },
   { name: 'Spices', value: 200 },
-  { name: 'Frozen', value: 150 },
-];
+  { name: 'Frozen',

@@ -11,6 +11,15 @@ interface HomeProps {
 
 const HERO_SLIDES = [
   {
+    id: 0,
+    image: "https://images.unsplash.com/photo-1466637574441-749b8f19452f?q=80&w=2600&auto=format&fit=crop",
+    category: "Ancient Grains & Millets",
+    titleLine1: "Cultivating",
+    titleHighlight: "Vitality.",
+    description: "Reintroducing the power of Millets and Heritage Grains. Sustainable, nutrient-dense superfoods sourced directly from dedicated farming collectives.",
+    ctaText: "Explore Grains"
+  },
+  {
     id: 1,
     image: "https://images.unsplash.com/photo-1528659556828-569d6c4e0f47?q=80&w=2600&auto=format&fit=crop",
     category: "Global Supply Chain",
@@ -85,43 +94,43 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
              >
                  <img 
                     src={slide.image}
-                    className={`w-full h-full object-cover transition-transform duration-[20s] ease-linear ${index === currentSlide ? 'scale-110' : 'scale-100'}`}
+                    className={`w-full h-full object-cover transition-transform duration-[20s] ease-linear brightness-110 ${index === currentSlide ? 'scale-110' : 'scale-100'}`}
                     alt={slide.titleHighlight}
                  />
-                 {/* Sophisticated Gradients */}
-                 <div className="absolute inset-0 bg-gradient-to-r from-cc-dark/95 via-cc-dark/50 to-transparent"></div>
-                 <div className="absolute inset-0 bg-gradient-to-t from-cc-dark/90 via-transparent to-transparent"></div>
+                 {/* Sophisticated Gradients - Reduced Opacity for Clearer Photos */}
+                 <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/10 to-transparent"></div>
+                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent"></div>
              </div>
          ))}
 
          <div className="max-w-[1800px] mx-auto px-6 md:px-16 relative z-10 w-full mb-8">
              {/* Key on the wrapper forces re-animation when slide changes */}
              <div key={currentSlide} className="max-w-6xl animate-fade-up">
-                 <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-white/5 backdrop-blur-md border border-white/10 mb-10">
-                    <span className="w-1.5 h-1.5 rounded-full bg-cc-gold animate-pulse"></span>
-                    <span className="text-white text-[10px] font-bold uppercase tracking-[0.2em]">{HERO_SLIDES[currentSlide].category}</span>
+                 <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-white/10 backdrop-blur-xl border border-white/20 shadow-[0_4px_20px_rgba(0,0,0,0.1)] mb-10">
+                    <span className="w-1.5 h-1.5 rounded-full bg-cc-gold animate-pulse shadow-[0_0_10px_#C5A065]"></span>
+                    <span className="text-white text-[11px] font-bold uppercase tracking-[0.2em] shadow-black drop-shadow-sm">{HERO_SLIDES[currentSlide].category}</span>
                  </div>
                  
-                 <h1 className="font-display text-7xl md:text-9xl text-white leading-[0.85] mb-8 tracking-tight">
+                 <h1 className="font-display text-7xl md:text-9xl text-white leading-[0.85] mb-8 tracking-tight drop-shadow-2xl">
                      {HERO_SLIDES[currentSlide].titleLine1} <br/>
-                     <span className="text-transparent bg-clip-text bg-gradient-to-r from-cc-gold to-white/80 italic font-serif pr-4">{HERO_SLIDES[currentSlide].titleHighlight}</span>
+                     <span className="text-transparent bg-clip-text bg-gradient-to-r from-cc-gold via-yellow-200 to-white italic font-serif pr-4">{HERO_SLIDES[currentSlide].titleHighlight}</span>
                  </h1>
                  
                  <div className="flex flex-col md:flex-row gap-12 items-start md:items-end">
-                    <p className="text-gray-300 text-lg md:text-xl font-light max-w-lg leading-relaxed border-l border-cc-gold/30 pl-8">
+                    <p className="text-gray-100 text-lg md:text-xl font-light max-w-lg leading-relaxed border-l border-cc-gold/50 pl-8 drop-shadow-md">
                         {HERO_SLIDES[currentSlide].description}
                     </p>
                     
                     <div className="flex gap-4">
                         <button 
                             onClick={() => onNavigate('products')}
-                            className="bg-white text-cc-primary px-10 py-5 rounded-full font-bold uppercase tracking-widest text-xs hover:bg-cc-gold hover:text-white transition-all duration-300 flex items-center gap-3 shadow-[0_0_20px_rgba(255,255,255,0.1)] group"
+                            className="bg-white/90 backdrop-blur-md text-cc-primary px-10 py-5 rounded-full font-bold uppercase tracking-widest text-xs hover:bg-cc-gold hover:text-white transition-all duration-300 flex items-center gap-3 shadow-[0_0_30px_rgba(255,255,255,0.2)] group hover:scale-105"
                         >
                             {HERO_SLIDES[currentSlide].ctaText} <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
                         </button>
                         <button 
                             onClick={() => onNavigate('contact')}
-                            className="px-10 py-5 rounded-full font-bold uppercase tracking-widest text-xs text-white border border-white/20 hover:bg-white/10 transition-all duration-300 backdrop-blur-sm"
+                            className="px-10 py-5 rounded-full font-bold uppercase tracking-widest text-xs text-white border border-white/30 hover:bg-white/10 hover:border-white transition-all duration-300 backdrop-blur-md"
                         >
                             Trade Inquiry
                         </button>
@@ -135,7 +144,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
                      <button 
                         key={index} 
                         onClick={() => setCurrentSlide(index)}
-                        className={`h-1 transition-all duration-500 rounded-full ${index === currentSlide ? 'w-16 bg-cc-gold' : 'w-12 bg-white/10 hover:bg-white/30'}`}
+                        className={`h-1.5 transition-all duration-500 rounded-full backdrop-blur-sm ${index === currentSlide ? 'w-16 bg-cc-gold shadow-[0_0_15px_#C5A065]' : 'w-12 bg-white/20 hover:bg-white/40'}`}
                         aria-label={`Go to slide ${index + 1}`}
                      />
                  ))}
@@ -143,20 +152,20 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
          </div>
 
          {/* Scroll Indicator */}
-         <div className="absolute bottom-8 left-1/2 -translate-x-1/2 text-white/30 animate-bounce flex flex-col items-center gap-2">
-            <span className="text-[9px] uppercase tracking-widest">Scroll</span>
-            <ChevronDown size={20} />
+         <div className="absolute bottom-8 left-1/2 -translate-x-1/2 text-white/50 animate-bounce flex flex-col items-center gap-2">
+            <span className="text-[9px] uppercase tracking-widest drop-shadow-md">Scroll</span>
+            <ChevronDown size={20} className="drop-shadow-md" />
          </div>
 
-         {/* Floating Stats Strip */}
-         <div className="hidden lg:flex absolute bottom-0 right-0 bg-white/5 backdrop-blur-2xl border-t border-l border-white/10 rounded-tl-[3rem] p-12 z-20 gap-16 animate-fade-in pl-16">
+         {/* Floating Stats Strip - Glass Effect */}
+         <div className="hidden lg:flex absolute bottom-0 right-0 bg-white/5 backdrop-blur-3xl border-t border-l border-white/10 rounded-tl-[3rem] p-12 z-20 gap-16 animate-fade-in pl-16 shadow-[-10px_-10px_30px_rgba(0,0,0,0.2)]">
              <div>
-                 <h4 className="text-4xl font-display text-white">50k+</h4>
-                 <p className="text-[9px] text-white/50 uppercase tracking-[0.2em] mt-2">MT Annually</p>
+                 <h4 className="text-4xl font-display text-white drop-shadow-md">50k+</h4>
+                 <p className="text-[9px] text-white/60 uppercase tracking-[0.2em] mt-2">MT Annually</p>
              </div>
              <div>
-                 <h4 className="text-4xl font-display text-white">35+</h4>
-                 <p className="text-[9px] text-white/50 uppercase tracking-[0.2em] mt-2">Countries</p>
+                 <h4 className="text-4xl font-display text-white drop-shadow-md">35+</h4>
+                 <p className="text-[9px] text-white/60 uppercase tracking-[0.2em] mt-2">Countries</p>
              </div>
          </div>
       </section>
@@ -182,17 +191,19 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
                     onClick={() => onNavigate('products')}
                     className="md:col-span-2 md:row-span-2 relative group rounded-[2.5rem] overflow-hidden cursor-pointer shadow-sm hover:shadow-2xl transition-all duration-500"
                 >
-                    <img src="https://images.unsplash.com/photo-1536304993881-ffc028db696f?q=80&w=1200" className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" alt="Rice Fields" />
-                    <div className="absolute inset-0 bg-black/20 group-hover:bg-black/30 transition-colors"></div>
-                    <div className="absolute top-8 right-8 bg-white/20 backdrop-blur-md border border-white/20 p-3 rounded-full opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500">
+                    <img src="https://images.unsplash.com/photo-1536304993881-ffc028db696f?q=80&w=1200" className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105 brightness-105" alt="Rice Fields" />
+                    {/* Clear overlay gradient */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                    
+                    <div className="absolute top-8 right-8 bg-white/10 backdrop-blur-xl border border-white/20 p-4 rounded-full opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500 shadow-lg">
                         <ArrowRight className="text-white" size={24} />
                     </div>
-                    <div className="absolute bottom-0 left-0 p-12 w-full bg-gradient-to-t from-black/80 to-transparent">
-                        <div className="bg-white/10 backdrop-blur border border-white/10 text-white p-3 rounded-xl w-fit mb-6">
+                    <div className="absolute bottom-0 left-0 p-12 w-full">
+                        <div className="bg-white/10 backdrop-blur-xl border border-white/20 text-white p-3 rounded-xl w-fit mb-6 shadow-lg">
                             <Wheat size={24} />
                         </div>
-                        <h3 className="text-5xl text-white font-display mb-4">Rice & Grains</h3>
-                        <p className="text-white/80 font-light max-w-sm text-lg leading-relaxed">Premium Basmati, Non-Basmati, and Milling Wheat sourced from the heart of India.</p>
+                        <h3 className="text-5xl text-white font-display mb-4 drop-shadow-lg">Rice & Grains</h3>
+                        <p className="text-white font-medium max-w-sm text-lg leading-relaxed drop-shadow-md">Premium Basmati, Non-Basmati, and Milling Wheat sourced from the heart of India.</p>
                     </div>
                 </div>
 
@@ -201,15 +212,16 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
                     onClick={() => onNavigate('products')}
                     className="md:col-span-1 md:row-span-2 relative group rounded-[2.5rem] overflow-hidden cursor-pointer shadow-sm hover:shadow-2xl transition-all duration-500"
                 >
-                    <img src="https://images.unsplash.com/photo-1596040033229-a9821ebd058d?q=80&w=800" className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" alt="Spices" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-80"></div>
-                    <div className="absolute top-8 right-8 bg-white/20 backdrop-blur-md border border-white/20 p-3 rounded-full opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500">
+                    <img src="https://images.unsplash.com/photo-1596040033229-a9821ebd058d?q=80&w=800" className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105 brightness-105" alt="Spices" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                    
+                    <div className="absolute top-8 right-8 bg-white/10 backdrop-blur-xl border border-white/20 p-3 rounded-full opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500 shadow-lg">
                         <ArrowRight className="text-white" size={20} />
                     </div>
                     <div className="absolute bottom-0 left-0 p-10">
-                        <Sun size={24} className="text-cc-gold mb-4" />
-                        <h3 className="text-4xl text-white font-display mb-3">Spices</h3>
-                        <p className="text-white/70 text-sm font-light">Cardamom, Pepper, Turmeric.</p>
+                        <Sun size={24} className="text-cc-gold mb-4 drop-shadow-md" />
+                        <h3 className="text-4xl text-white font-display mb-3 drop-shadow-lg">Spices</h3>
+                        <p className="text-white text-sm font-medium drop-shadow-md">Cardamom, Pepper, Turmeric.</p>
                     </div>
                 </div>
 
@@ -246,7 +258,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
          </div>
       </section>
 
-      {/* 3. FEATURED INVENTORY */}
+      {/* 3. FEATURED INVENTORY - BRIGHT & VISIBLE */}
       <section className="py-32 bg-white relative">
          <div className="absolute top-0 left-0 w-full h-[500px] bg-cc-cream rounded-b-[4rem] -z-10"></div>
          
@@ -275,17 +287,19 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
                         onClick={() => setViewProduct(product)}
                         style={{ animationDelay: `${index * 100}ms` }}
                      >
-                         <div className="relative aspect-[4/5] overflow-hidden bg-gray-100 mb-5">
+                         <div className="relative aspect-[4/5] overflow-hidden bg-gray-50 mb-5">
+                             {/* Brighter Image */}
                              <img 
                                  src={product.image} 
                                  alt={product.name}
-                                 className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+                                 className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110 group-hover:brightness-110"
                                  loading="lazy"
                              />
-                             <div className="absolute inset-0 bg-black/10 group-hover:bg-black/20 transition-colors"></div>
+                             {/* Subtle hover gradient, not darkening */}
+                             <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
                              
                              <div className="absolute top-4 left-4 flex gap-2">
-                                 <span className="bg-white/95 backdrop-blur text-cc-primary px-3 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest shadow-sm flex items-center gap-1.5">
+                                 <span className="bg-white/70 backdrop-blur-md text-cc-primary px-3 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest shadow-sm flex items-center gap-1.5 border border-white/50">
                                      <span className="text-base">{getCountryFlag(product.origin)}</span>
                                      {product.origin.split('/')[0].trim()}
                                  </span>
@@ -294,7 +308,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
                              <div className="absolute bottom-0 inset-x-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
                                 <button 
                                     onClick={(e) => handleInquire(product, e)}
-                                    className="w-full bg-white text-cc-primary py-3.5 rounded-xl font-bold uppercase tracking-widest text-[10px] hover:bg-cc-gold hover:text-white transition-colors shadow-lg"
+                                    className="w-full bg-white/90 backdrop-blur-md text-cc-primary py-3.5 rounded-xl font-bold uppercase tracking-widest text-[10px] hover:bg-cc-gold hover:text-white transition-colors shadow-lg"
                                 >
                                     Add to Inquiry
                                 </button>
@@ -323,10 +337,10 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
          </div>
       </section>
 
-      {/* 4. WHY CHOOSE US - MODERN GRID */}
+      {/* 4. WHY CHOOSE US - GLASS & BLUR */}
       <section className="py-32 px-6 bg-cc-primary text-white overflow-hidden">
           <div className="max-w-[1800px] mx-auto relative">
-              <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-cc-gold/5 rounded-full blur-[120px] -z-10"></div>
+              <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-cc-gold/10 rounded-full blur-[120px] -z-10"></div>
               
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
                   <div>
@@ -347,7 +361,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
                               { title: 'Logistics Precision', desc: 'Real-time tracking of every container.' }
                           ].map((item, i) => (
                               <div key={i} className="flex gap-8 items-start group">
-                                  <div className="w-14 h-14 rounded-full border border-white/10 bg-white/5 flex items-center justify-center text-cc-gold group-hover:bg-cc-gold group-hover:text-cc-primary transition-all duration-300 flex-shrink-0">
+                                  <div className="w-14 h-14 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm flex items-center justify-center text-cc-gold group-hover:bg-cc-gold group-hover:text-cc-primary transition-all duration-300 flex-shrink-0">
                                       <span className="font-display text-xl">{i + 1}</span>
                                   </div>
                                   <div className="pt-2">
@@ -362,9 +376,9 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
                   <div className="relative">
                       <div className="relative z-10 rounded-[3rem] overflow-hidden border border-white/10 shadow-2xl">
                           <img src="https://images.unsplash.com/photo-1594220029367-a2f1c8496812?q=80&w=1200" alt="Inspection" className="w-full h-full object-cover scale-110" />
-                          <div className="absolute inset-0 bg-gradient-to-t from-cc-primary via-transparent to-transparent"></div>
+                          <div className="absolute inset-0 bg-gradient-to-t from-cc-primary/80 via-transparent to-transparent"></div>
                           
-                          <div className="absolute bottom-12 left-12 right-12 bg-white/10 backdrop-blur-md p-8 rounded-2xl border border-white/10">
+                          <div className="absolute bottom-12 left-12 right-12 bg-white/10 backdrop-blur-xl p-8 rounded-2xl border border-white/20 shadow-xl">
                               <div className="flex items-center gap-6 mb-6">
                                   <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=100" className="w-16 h-16 rounded-full border-2 border-white object-cover" alt="Quality Officer"/>
                                   <div>

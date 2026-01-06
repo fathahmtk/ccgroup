@@ -22,6 +22,8 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
   // Make navbar transparent on all main pages when at the top
   const isTransparent = !scrolled;
 
+  const MENU_ITEMS = ['home', 'products', 'services', 'contact'];
+
   return (
     <>
       <nav 
@@ -34,7 +36,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
         <div 
             className={`transition-all duration-500 ease-out flex items-center justify-between pointer-events-auto ${
                 scrolled 
-                    ? 'w-[90%] md:w-auto md:min-w-[800px] bg-cc-primary/95 backdrop-blur-md shadow-2xl py-3 px-6 md:px-8 rounded-full border border-white/10' 
+                    ? 'w-[90%] md:w-auto md:min-w-[800px] bg-cc-dark/70 backdrop-blur-2xl shadow-[0_8px_32px_0_rgba(0,0,0,0.36)] py-3 px-6 md:px-8 rounded-full border border-white/10' 
                     : 'w-full max-w-[1800px] px-6 md:px-12 bg-transparent'
             }`}
         >
@@ -49,15 +51,15 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
 
           {/* Desktop Nav */}
           <div className={`hidden md:flex items-center gap-1 ${scrolled ? 'mx-8' : 'gap-8'}`}>
-             {['home', 'products', 'services', 'contact'].map((item) => (
+             {MENU_ITEMS.map((item) => (
                 <button 
                    key={item}
                    onClick={() => onNavigate(item)}
                    className={`text-[11px] font-bold uppercase tracking-[0.2em] transition-all duration-300 relative group px-4 py-2 rounded-full ${
                        scrolled 
-                        ? 'text-white/70 hover:text-white hover:bg-white/10' 
+                        ? 'text-white/80 hover:text-white hover:bg-white/10' 
                         : (isTransparent ? 'text-white hover:text-cc-gold' : 'text-cc-primary hover:text-cc-gold')
-                   } ${currentPage === item && scrolled ? 'bg-white/10 text-white' : ''}`}
+                   } ${currentPage === item && scrolled ? 'bg-white/10 text-white shadow-[inset_0_0_20px_rgba(255,255,255,0.05)] border border-white/5' : ''}`}
                 >
                    {item}
                    {!scrolled && (
@@ -71,9 +73,9 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
           <div className="flex items-center gap-3">
              <button 
                 onClick={() => setIsCartOpen(true)}
-                className={`relative p-2.5 rounded-full transition-colors flex items-center gap-2 group ${
+                className={`relative p-2.5 rounded-full transition-all duration-300 flex items-center gap-2 group ${
                     scrolled 
-                        ? 'text-white hover:bg-white/20' 
+                        ? 'text-white hover:bg-white/20 hover:shadow-[0_0_15px_rgba(255,255,255,0.3)]' 
                         : (isTransparent ? 'text-white hover:bg-white/10' : 'text-cc-primary hover:bg-gray-100')
                 }`}
              >
@@ -96,14 +98,14 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
       </nav>
 
       {/* Mobile Menu Overlay */}
-      <div className={`fixed inset-0 z-40 bg-cc-dark/95 backdrop-blur-xl transition-transform duration-500 ease-in-out ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+      <div className={`fixed inset-0 z-40 bg-cc-dark/95 backdrop-blur-3xl transition-transform duration-500 ease-in-out ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}>
            <div className="flex flex-col items-center justify-center h-full gap-8 text-center p-6">
-              {['home', 'products', 'services', 'contact'].map((item) => (
+              {MENU_ITEMS.map((item) => (
                 <button 
                    key={item}
                    onClick={() => { onNavigate(item); setIsOpen(false); }}
                    className="text-5xl font-display text-white hover:text-cc-gold transition-colors capitalize opacity-0 animate-fade-up"
-                   style={{ animationDelay: `${['home', 'products', 'services', 'contact'].indexOf(item) * 100}ms`, animationFillMode: 'forwards' }}
+                   style={{ animationDelay: `${MENU_ITEMS.indexOf(item) * 100}ms`, animationFillMode: 'forwards' }}
                 >
                    {item}
                 </button>

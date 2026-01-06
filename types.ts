@@ -21,6 +21,7 @@ export interface Product {
   category: string;
   price: string;
   image: string;
+  images?: string[]; // Gallery images
   description: string;
   origin: string;
   nutrition: NutritionalInfo;
